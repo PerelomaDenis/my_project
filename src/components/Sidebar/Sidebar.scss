@@ -1,0 +1,21 @@
+.sidebar__content {
+  height: 100%;
+
+  .sidebar__links-list {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    hr {
+      margin: 0 40px;
+      border-color: rgba(60, 78, 96, 0.08);
+    }
+
+    ul {
+      padding: 0;
+    }
+  }
+}
+

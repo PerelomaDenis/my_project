@@ -15,33 +15,20 @@ const MyModal = (props) => {
 		>
 			<Modal.Header closeButton>
 				<Modal.Title id="contained-modal-title-vcenter">
-					Create a product
+					{props.info.title}
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<div>
-					<input type="text" className="modal__input" value="" placeholder="Store"/>
-				</div>
-				<div>
-					<input type="text" className="modal__input" value="" placeholder="Price"/>
-				</div>
-				<div>
-					<input type="text" className="modal__input" value="" placeholder="Product name"/>
-				</div>
-				<div>
-					<input type="text" className="modal__input" value="" placeholder="Product Category"/>
-				</div>
-				<div>
-					<input type="text" className="modal__input" value="" placeholder="Quantity of goods"/>
-				</div>
-				<div>
-					<input type="text" className="modal__input" value="" placeholder="Weight / Volume of one item"/>
-				</div>
+				{props.info.inputs.map((input) => (
+					<div>
+						<input type={input.type} className="modal__input" value="" placeholder={input.placeholder}/>
+					</div>
+				))}
 			</Modal.Body>
 			<Modal.Footer>
 				<Button className="modal__btn" onClick={props.onHide}>
-					<span className="modal__btn-text">Add product</span>
-					<ReactSVG className="modal__btn-icon" src={plus} />
+					<span className="modal__btn-text">{props.info.buttonText}</span>
+					<ReactSVG className="modal__btn-icon" src={props.info.buttonIcon} />
 				</Button>
 			</Modal.Footer>
 		</Modal>

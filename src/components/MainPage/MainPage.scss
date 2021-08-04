@@ -13,9 +13,6 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 50px;
-
-
-
   }
 
   .wrap__content {
@@ -52,97 +49,3 @@
   }
 }
 
-.modal-window {
-  .modal-dialog {
-    justify-content: center;
-
-    .modal-content {
-      width: 428px;
-      height: 676px;
-      border-radius: 3px;
-
-      .modal-body {
-        padding: 0 64px;
-        position: relative;
-
-        .modal__input {
-          opacity: 0.25;
-          border: 1px solid #2B3844;
-          box-sizing: border-box;
-          border-radius: 3px;
-          font-family: Inter;
-          font-size: 14px;
-          line-height: 14px;
-          color: #2B3844;
-          margin-bottom: 24px;
-          height: 46px;
-          width: 100%;
-          padding: 0 16px;
-        }
-
-        .modal__close {
-          position: absolute;
-          right: -28px;
-          top: 0;
-          cursor: pointer;
-        }
-      }
-
-      .modal-header {
-        padding: 64px 64px 0;
-        border: none;
-        margin-bottom: 40px;
-        position: relative;
-
-        .modal-title {
-          font-family: Inter-Bold;
-          font-size: 28px;
-          line-height: 28px;
-          color: #2B3844;
-          text-align: center;
-          width: 100%;
-        }
-
-        .btn-close {
-          position: absolute;
-          right: -28px;
-          top: 0;
-        }
-      }
-
-      .modal-footer {
-        padding: 0 64px 64px;
-        border: none;
-        margin-top: 8px;
-
-        .modal__btn {
-          background: #5382E7;
-          border-radius: 3px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border: none;
-          height: 52px;
-          width: 100%;
-          cursor: pointer;
-          margin: 0;
-
-          .modal__btn-text {
-            font-family: Inter-Medium;
-            font-size: 14px;
-            line-height: 14px;
-            color: #FFFFFF;
-          }
-
-          .modal__btn-icon {
-            margin-left: 16px;
-          }
-        }
-
-        .modal__btn:hover {
-          background: #1b4e9d;
-        }
-      }
-    }
-  }
-}

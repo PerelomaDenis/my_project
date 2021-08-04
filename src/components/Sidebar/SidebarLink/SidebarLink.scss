@@ -1,33 +1,50 @@
-.sidebar__links-item {
-  display: flex;
-  align-items: center;
-  padding: 17px 40px;
+.sidebar__link {
+  text-decoration: none;
 
-  opacity: 0.4;
+  .sidebar__links-item {
+    display: flex;
+    align-items: center;
+    padding: 17px 40px;
 
-  .sidebar__links-icon {
-    //width: 20px;
+    opacity: 0.4;
+
+    .sidebar__links-icon {
+      //width: 20px;
+    }
+
+    .sidebar__links-icon path {
+      stroke: #2B3844;
+    }
+
+    .sidebar__links-text {
+      margin-left: 10px;
+      font-family: Inter-Medium;
+      font-size: 14px;
+      line-height: 14px;
+      color: #2B3844;
+      text-decoration: none;
+    }
   }
 
-  .sidebar__links-icon path {
-    stroke: #2B3844;
-  }
+  .sidebar__links-item:hover, {
+    border-right: 2px solid #5382E7;
+    opacity: 1;
 
-  .sidebar__links-text {
-    margin-left: 10px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 14px;
-    color: #2B3844;
-    text-decoration: none;
+    .sidebar__links-icon path {
+      stroke: #5382E7;
+    }
+
+    .sidebar__links-text {
+      color: #5382E7;
+    }
   }
 }
 
-.sidebar__links-item:hover {
-  border-right: 2px solid #5382E7;
-  opacity: 1;
+.sidebar__link.selected {
+  .sidebar__links-item {
+    border-right: 2px solid #5382E7;
+    opacity: 1;
+  }
 
   .sidebar__links-icon path {
     stroke: #5382E7;
@@ -37,4 +54,6 @@
     color: #5382E7;
   }
 }
+
+
 

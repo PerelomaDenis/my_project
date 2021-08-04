@@ -1,14 +1,16 @@
 import './Logout.scss';
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {ReactSVG} from "react-svg";
 import log from '../../../assets/images/log.svg';
 
 const Logout = (props) => {
 	return (
-		<li className="sidebar__links-item">
-			<ReactSVG className="sidebar__links-icon" src={log} />
-			<Link className="sidebar__links-text" to="/">Logout</Link>
-		</li>
+		<NavLink className="sidebar__link" to="/">
+			<li className="sidebar__links-item">
+				<ReactSVG className="sidebar__links-icon" src={log} />
+				<span className="sidebar__links-text">Logout</span>
+			</li>
+		</NavLink>
 	)
 }
 

@@ -14,41 +14,29 @@
     justify-content: space-between;
     margin-bottom: 50px;
 
+    .title {
+      .title__text {
+        font-family: Inter-Bold;
+        font-size: 36px;
+        line-height: 36px;
+        color: #2B3844;
+      }
 
-
+      .title__desc {
+        font-family: Inter;
+        font-size: 14px;
+        line-height: 14px;
+        color: #2B3844;
+        opacity: 0.7;
+        margin-top: 7px;
+      }
+    }
   }
 
   .wrap__content {
     margin-top: 50px;
 
-    .graphs {
-      display: grid;
-      grid-template-areas:
-        'graph-1 graph-3'
-        'graph-2 graph-3';
-      grid-template-columns: 1.85fr 3fr;
-      grid-template-rows: 3fr 2fr;
-      height: 570px;
-      grid-column-gap: 24px;
-      grid-row-gap: 24px;
 
-      .graph {
-        background: #FFFFFF;
-        border-radius: 3px;
-      }
-
-      .graph-1 {
-        grid-area: graph-1;
-      }
-
-      .graph-2 {
-        grid-area: graph-2;
-      }
-
-      .graph-3 {
-        grid-area: graph-3;
-      }
-    }
   }
 }
 

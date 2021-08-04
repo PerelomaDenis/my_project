@@ -12,30 +12,36 @@ const Sidebar = (props) => {
 	const links = [
 		{
 			name: 'Main page',
-			icon: home
+			icon: home,
+			url: '/'
 		},
 		{
 			name: 'My Products',
-			icon: doc
+			icon: doc,
+			url: '/my-products'
 		},
 		{
 			name: 'My sales',
-			icon: sales
+			icon: sales,
+			url: '/my-sales'
 		},
 		{
 			name: 'Personal Cabinet',
-			icon: user
+			icon: user,
+			url: '/personal'
 		},
 	];
 
 	return (
 		<div className="sidebar__content">
-			<Logo />
+			<a href="/">
+				<Logo />
+			</a>
 			<ul className="sidebar__links-list">
 				<li>
 					<ul>
 						{links.map((link) => (
-							<SidebarLink icon={link.icon} name={link.name}/>
+							<SidebarLink icon={link.icon} name={link.name} url={link.url}/>
 						))}
 					</ul>
 				</li>

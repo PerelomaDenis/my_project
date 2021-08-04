@@ -1,0 +1,35 @@
+.wrap {
+  .wrap__top {
+    .button {
+      padding: 0;
+      border: none;
+
+      .button__wrap {
+        background: #5382E7;
+        border-radius: 3px;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 32px;
+        cursor: pointer;
+
+        .button__icon {
+
+        }
+
+        .button__text {
+          font-family: Inter-Medium;
+          font-size: 14px;
+          line-height: 14px;
+          color: #FFFFFF;
+          margin-left: 8px;
+        }
+      }
+
+      .button__wrap:hover {
+        background: #1b4e9d;
+      }
+    }
+  }
+}

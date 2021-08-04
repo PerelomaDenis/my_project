@@ -24,6 +24,18 @@ const MyProducts = (props) => {
 		description: "Product table"
 	}
 
+	const tableTitles = [
+		'Product name',
+		'Store',
+		'Address',
+		'Category',
+		'Creation date',
+		'Price',
+		'Remains',
+		'Weight / Volume',
+		'Actions'
+	]
+
 	const products = [
 		{
 			productName: 'Sneakers',
@@ -155,15 +167,9 @@ const MyProducts = (props) => {
 				<Table striped borderless>
 					<thead>
 						<tr>
-							<th>Product name</th>
-							<th>Store</th>
-							<th>Address</th>
-							<th>Category</th>
-							<th>Creation date</th>
-							<th>Price</th>
-							<th>Remains</th>
-							<th>Weight / Volume</th>
-							<th>Actions</th>
+							{tableTitles.map((title) => (
+								<th>{title}</th>
+							))}
 						</tr>
 					</thead>
 					<tbody>

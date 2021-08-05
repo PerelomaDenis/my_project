@@ -4,12 +4,9 @@ import ButtonCreate from "../ButtonCreate";
 import MyModal from "../MyModal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MySales.scss';
-import {ReactSVG} from "react-svg";
-import buttonIcon from "../../assets/images/button-icon.svg";
 import plus from "../../assets/images/plus.svg";
 import MainTitle from "../MainTitle";
-import edit from "../../assets/images/edit.svg";
-import del from "../../assets/images/Delete.svg";
+
 
 
 

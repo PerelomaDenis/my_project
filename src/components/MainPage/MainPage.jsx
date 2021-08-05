@@ -1,11 +1,14 @@
 import React, {useState} from "react";
 import {Button, Modal} from "react-bootstrap";
+
 import ButtonCreate from "../ButtonCreate";
 import MyModal from "../MyModal";
+import MainTitle from "../MainTitle";
+
+import plus from "../../assets/images/plus.svg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MainPage.scss';
-import MainTitle from "../MainTitle";
-import plus from "../../assets/images/plus.svg";
+
 
 const MainPage = (props) => {
 	const [modalShow, setModalShow] = React.useState(false);

@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {Button, Modal, Table} from "react-bootstrap";
+
 import ButtonCreate from "../ButtonCreate";
 import MyModal from "../MyModal";
+import MainTitle from "../MainTitle";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MySales.scss';
 import plus from "../../assets/images/plus.svg";
-import MainTitle from "../MainTitle";
-
-
 
 
 const MySales = (props) => {

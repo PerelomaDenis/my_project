@@ -1,9 +1,11 @@
-import './SidebarLink.scss';
+import React from "react";
 import {NavLink} from "react-router-dom";
 import {ReactSVG} from "react-svg";
 
-const SidebarLink = (props) => {
+import './SidebarLink.scss';
 
+
+const SidebarLink = (props) => {
 	return (
 		<NavLink exact activeClassName="selected" className="sidebar__link" to={props.url}>
 			<li className="sidebar__links-item">

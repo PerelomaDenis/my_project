@@ -1,22 +1,18 @@
-import './App.scss';
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+
 import {routes} from "./routes/routes";
 import Sidebar from "./components/Sidebar";
-import "./assets/fonts/fonts.css";
 import Register from "./components/Register";
+
+import './App.scss';
+import "./assets/fonts/fonts.css";
 
 const App = () => {
 	const isLogin = false;
-	const products = [
-    {
-      name: 123,
-    },
-  ]
+	const products = JSON.parse(localStorage.products || []);
 
 	localStorage.setItem('products', JSON.stringify(products))
-  const getProd = JSON.parse(localStorage.getItem('products'))
-  console.log('========>getProd', getProd);
 
 	return (
 		<BrowserRouter>

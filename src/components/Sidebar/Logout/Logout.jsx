@@ -1,6 +1,8 @@
-import './Logout.scss';
-import {Link, NavLink} from "react-router-dom";
+import React from "react";
+import {NavLink} from "react-router-dom";
 import {ReactSVG} from "react-svg";
+
+import './Logout.scss';
 import log from '../../../assets/images/log.svg';
 
 const Logout = (props) => {

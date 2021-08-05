@@ -1,36 +1,72 @@
-import './MyModal.scss';
+import React, {useState} from "react";
 import {ReactSVG} from "react-svg";
-import plus from '../../assets/images/plus.svg';
 import {Button, Modal} from "react-bootstrap";
-import React from "react";
 
-const MyModal = (props) => {
+import './MyModal.scss';
+
+const MyModal = (
+	{
+		info,
+		onHide,
+		show,
+	}) => {
+	const [form, setFrom] = useState({
+		id: Date.now(),
+		createDate: new Date(),
+	});
+
+	const handleChange = (e, type) => {
+		const {value} = e.target
+		setFrom((prevForm) => ({
+			...prevForm,
+			[type]: value,
+		}))
+	}
+
+	console.log('========>form', form);
+
 	return (
 		<Modal
-			{...props}
+			onHide={onHide}
+			show={show}
 			size="lg"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
 			className="modal-window"
 		>
-			<Modal.Header closeButton>
-				<Modal.Title id="contained-modal-title-vcenter">
-					{props.info.title}
-				</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
-				{props.info.inputs.map((input) => (
-					<div>
-						<input type={input.type} className="modal__input" value="" placeholder={input.placeholder}/>
-					</div>
-				))}
-			</Modal.Body>
-			<Modal.Footer>
-				<Button className="modal__btn" onClick={props.onHide}>
-					<span className="modal__btn-text">{props.info.buttonText}</span>
-					<ReactSVG className="modal__btn-icon" src={props.info.buttonIcon} />
-				</Button>
-			</Modal.Footer>
+			<form className="modal-form">
+				<Modal.Header closeButton>
+					<Modal.Title id="contained-modal-title-vcenter">
+						{info.title}
+					</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					{info.inputs.map((input) => (
+						<div>
+							<input
+								name={input.name}
+								type={input.type}
+								onChange={(e) => handleChange(e, input.name)}
+								className="modal__input"
+								placeholder={input.placeholder}
+								value={form[input.name]}
+							/>
+						</div>
+					))}
+				</Modal.Body>
+				<Modal.Footer>
+					<Button type="submit" className="modal__btn" onClick={(e) => {
+						e.preventDefault();
+						onHide()
+						const getProd = JSON.parse(localStorage.getItem('products'))
+						getProd.push(form);
+						localStorage.setItem('products', JSON.stringify(getProd))
+					}}>
+						<span className="modal__btn-text">{info.buttonText}</span>
+						<ReactSVG className="modal__btn-icon" src={info.buttonIcon}/>
+					</Button>
+				</Modal.Footer>
+			</form>
 		</Modal>
 	)
 }

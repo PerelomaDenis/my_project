@@ -1,12 +1,15 @@
-import './Sidebar.scss';
-import {Link} from "react-router-dom";
+import React from "react";
+
+import SidebarLink from "./SidebarLink";
+import Logout from "./Logout";
 import Logo from "./Logo";
+
 import doc from '../../assets/images/doc.svg';
 import home from '../../assets/images/home.svg';
 import sales from '../../assets/images/perc.svg';
 import user from '../../assets/images/user.svg';
-import SidebarLink from "./SidebarLink";
-import Logout from "./Logout";
+import './Sidebar.scss';
+
 
 const Sidebar = (props) => {
 	const links = [

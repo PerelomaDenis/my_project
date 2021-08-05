@@ -1,10 +1,9 @@
 import React, {useState} from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Register.scss';
-import img from "../../assets/images/img.png";
-import {ReactSVG} from "react-svg";
 import {Button} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Register.scss';
 
 
 const Register = (props) => {
@@ -65,7 +64,6 @@ const Register = (props) => {
 				</div>
 			</div>
 			<div className="wrap-right">
-				{/*<img src={img}/>*/}
 			</div>
 		</div>
 	)

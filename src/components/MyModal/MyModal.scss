@@ -12,8 +12,7 @@
         position: relative;
 
         .modal__input {
-          opacity: 0.25;
-          border: 1px solid #2B3844;
+          border: 1px solid rgba(43, 56, 68, .25);
           box-sizing: border-box;
           border-radius: 3px;
           font-family: Inter;
@@ -24,6 +23,19 @@
           height: 46px;
           width: 100%;
           padding: 0 16px;
+
+          ::-webkit-input-placeholder {
+            color: rgba(43, 56, 68, .25);
+          }
+          ::-moz-placeholder {
+            color: rgba(43, 56, 68, .25);
+          }
+          :-ms-input-placeholder {
+            color: rgba(43, 56, 68, .25);
+          }
+          :-moz-placeholder {
+            color: rgba(43, 56, 68, .25);
+          }
         }
 
         .modal__close {

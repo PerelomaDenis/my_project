@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {Button, Modal} from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Personal.scss';
+
 import MainTitle from "../MainTitle";
 import ButtonCreate from "../ButtonCreate";
 import MyModal from "../MyModal";
+
 import plus from "../../assets/images/plus.svg";
-import {ReactSVG} from "react-svg";
-import buttonIcon from "../../assets/images/button-icon.svg";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Personal.scss';
 
 
 const Personal = (props) => {

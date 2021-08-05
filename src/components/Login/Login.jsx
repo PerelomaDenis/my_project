@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Login.scss';
-import img from "../../assets/images/img.png";
-import {ReactSVG} from "react-svg";
+
 import {Button} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Login.scss';
 
 
 const Login = (props) => {

@@ -9,7 +9,7 @@ import {NavLink} from "react-router-dom";
 
 const Register = (props) => {
 	return (
-		<div className="wrap">
+		<div className="wraps">
 			<div className="wrap-left">
 				<h1>Create an account</h1>
 				<form className="register-form">

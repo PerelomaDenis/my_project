@@ -1,0 +1,40 @@
+.personal-form__item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+
+  .personal-form__item-title {
+    font-family: Inter;
+    font-size: 12px;
+    line-height: 12px;
+    color: #354352;
+  }
+
+  .personal-form__item-input {
+    border: 1px solid rgba(43, 56, 68, .25);
+    box-sizing: border-box;
+    border-radius: 3px;
+    height: 46px;
+    padding: 0 15px;
+    margin-top: 8px;
+    background: #F8F8F8;
+    font-family: Inter;
+    font-size: 14px;
+    line-height: 14px;
+    color: #2B3844;
+  }
+
+  ::-webkit-input-placeholder {
+    color: rgba(43, 56, 68, .25);
+  }
+  ::-moz-placeholder {
+    color: rgba(43, 56, 68, .25);
+  }
+  :-ms-input-placeholder {
+    color: rgba(43, 56, 68, .25);
+  }
+  :-moz-placeholder {
+    color: rgba(43, 56, 68, .25);
+  }
+}

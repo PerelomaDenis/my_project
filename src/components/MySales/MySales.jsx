@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button, Modal, Table} from "react-bootstrap";
 
 import ButtonCreate from "../ButtonCreate";
@@ -7,23 +7,11 @@ import MainTitle from "../MainTitle";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MySales.scss';
-import plus from "../../assets/images/plus.svg";
+import {modalCreate, mySalesProps, tableMySalesTitles} from "../../services/mock";
 
 
 const MySales = (props) => {
 	const [modalShow, setModalShow] = React.useState(false);
-
-	const tableTitles = [
-		'Product name',
-		'Store',
-		'Address',
-		'Category',
-		'Creation date',
-		'Price',
-		'Remains',
-		'Weight / Volume',
-		'Last sale'
-	]
 
 	const products = [
 		{
@@ -61,43 +49,6 @@ const MySales = (props) => {
 		}
 	]
 
-	const mySalesProps = {
-		title: "My sales",
-		description: "Sales table"
-	}
-
-	const modalCreate = {
-		title: 'Create a product',
-		buttonIcon: {plus},
-		buttonText: 'Add product',
-		inputs: [
-			{
-				type: 'text',
-				placeholder: 'Store'
-			},
-			{
-				type: 'text',
-				placeholder: 'Price'
-			},
-			{
-				type: 'text',
-				placeholder: 'Product name'
-			},
-			{
-				type: 'text',
-				placeholder: 'Product Category'
-			},
-			{
-				type: 'text',
-				placeholder: 'Quantity of goods'
-			},
-			{
-				type: 'text',
-				placeholder: 'Weight / Volume of one item'
-			},
-		]
-	}
-
 	return (
 		<div className="wrap">
 			<div className="wrap__top">
@@ -116,7 +67,7 @@ const MySales = (props) => {
 				<Table striped borderless>
 					<thead>
 					<tr>
-						{tableTitles.map((title) => (
+						{tableMySalesTitles.map((title) => (
 							<th>{title}</th>
 						))}
 					</tr>

@@ -22,11 +22,15 @@
         display: flex;
         justify-content: space-between;
 
+        .register-form__el {
+          margin: 0 0 24px 0;
+          width: 100%;
+        }
+
         .register-form__item {
           display: flex;
           flex-direction: column;
           width: 100%;
-          margin: 0 0 24px 0;
 
 
           .register-form__item-title {

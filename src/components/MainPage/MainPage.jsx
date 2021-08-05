@@ -1,54 +1,17 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button, Modal} from "react-bootstrap";
 
 import ButtonCreate from "../ButtonCreate";
 import MyModal from "../MyModal";
 import MainTitle from "../MainTitle";
 
-import plus from "../../assets/images/plus.svg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MainPage.scss';
+import {mainPageProps, modalCreate} from "../../services/mock";
 
 
 const MainPage = (props) => {
 	const [modalShow, setModalShow] = React.useState(false);
-
-	const mainPageProps = {
-		title: "Sales statistics",
-		description: "Welcome to CRM dashboard"
-	}
-
-	const modalCreate = {
-		title: 'Create a product',
-		buttonIcon: {plus},
-		buttonText: 'Add product',
-		inputs: [
-			{
-				type: 'text',
-				placeholder: 'Store'
-			},
-			{
-				type: 'text',
-				placeholder: 'Price'
-			},
-			{
-				type: 'text',
-				placeholder: 'Product name'
-			},
-			{
-				type: 'text',
-				placeholder: 'Product Category'
-			},
-			{
-				type: 'text',
-				placeholder: 'Quantity of goods'
-			},
-			{
-				type: 'text',
-				placeholder: 'Weight / Volume of one item'
-			},
-		]
-	}
 
 	return (
 		<div className="wrap">

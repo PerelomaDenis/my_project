@@ -4,36 +4,12 @@ import SidebarLink from "./SidebarLink";
 import Logout from "./Logout";
 import Logo from "./Logo";
 
-import doc from '../../assets/images/doc.svg';
-import home from '../../assets/images/home.svg';
-import sales from '../../assets/images/perc.svg';
-import user from '../../assets/images/user.svg';
 import './Sidebar.scss';
+import {links} from "../../services/mock";
 
 
 const Sidebar = (props) => {
-	const links = [
-		{
-			name: 'Main page',
-			icon: home,
-			url: '/'
-		},
-		{
-			name: 'My Products',
-			icon: doc,
-			url: '/my-products'
-		},
-		{
-			name: 'My sales',
-			icon: sales,
-			url: '/my-sales'
-		},
-		{
-			name: 'Personal Cabinet',
-			icon: user,
-			url: '/personal'
-		},
-	];
+
 
 	return (
 		<div className="sidebar__content">

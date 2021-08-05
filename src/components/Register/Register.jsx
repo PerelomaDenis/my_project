@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Register.scss';
+import FormInput from "../FormInput";
 
 
 const Register = (props) => {
@@ -13,43 +14,59 @@ const Register = (props) => {
 				<h1>Create an account</h1>
 				<form className="register-form">
 					<div className="register-form__row">
-						<div className="register-form__item register-form__item-small">
-							<label className="register-form__item-title" htmlFor="firstName">First name</label>
-							<input className="register-form__item-input" type="text" id="firstName" name="firstName"
-										 placeholder="First name"/>
+						<div className="register-form__item-small">
+							<div className="register-form__el">
+								<FormInput id="firstName"
+													 type="text"
+													 label="First name"
+													 placeholder="First name"
+								/>
+							</div>
 						</div>
-						<div className="register-form__item register-form__item-small">
-							<label className="register-form__item-title" htmlFor="lastName">Last name</label>
-							<input className="register-form__item-input" type="text" id="lastName" name="lastName"
-										 placeholder="Last name"/>
-						</div>
-					</div>
-					<div className="register-form__row">
-						<div className="register-form__item">
-							<label className="register-form__item-title" htmlFor="company">Company name</label>
-							<input className="register-form__item-input" type="text" id="company" name="company"
-										 placeholder="Company name"/>
-						</div>
-					</div>
-					<div className="register-form__row">
-						<div className="register-form__item">
-							<label className="register-form__item-title" htmlFor="email">Email</label>
-							<input className="register-form__item-input" type="email" id="email" name="email"
-										 placeholder="Email"/>
+						<div className="register-form__item-small">
+							<div className="register-form__el">
+								<FormInput id="lastName"
+													 type="text"
+													 label="Last name"
+													 placeholder="Last name"
+								/>
+							</div>
 						</div>
 					</div>
 					<div className="register-form__row">
-						<div className="register-form__item">
-							<label className="register-form__item-title" htmlFor="password">Password</label>
-							<input className="register-form__item-input" type="password" id="password" name="password"
-										 placeholder="Enter password"/>
+						<div className="register-form__el">
+							<FormInput id="company"
+												 type="text"
+												 label="Company name"
+												 placeholder="Enter your address"
+							/>
 						</div>
 					</div>
 					<div className="register-form__row">
-						<div className="register-form__item">
-							<label className="register-form__item-title" htmlFor="repeatPassword">Repeat password</label>
-							<input className="register-form__item-input" type="password" id="repeatPassword" name="repeatPassword"
-										 placeholder="Repeat password"/>
+						<div className="register-form__el">
+							<FormInput id="email"
+												 type="email"
+												 label="Email"
+												 placeholder="Email"
+							/>
+						</div>
+					</div>
+					<div className="register-form__row">
+						<div className="register-form__el">
+							<FormInput id="password"
+												 type="password"
+												 label="Password"
+												 placeholder="Enter password"
+							/>
+						</div>
+					</div>
+					<div className="register-form__row">
+						<div className="register-form__el">
+							<FormInput id="repeatPassword"
+												 type="password"
+												 label="Repeat password"
+												 placeholder="Repeat password"
+							/>
 						</div>
 					</div>
 					<Button className="register-form__btn">

@@ -5,6 +5,7 @@ import MyModal from "../MyModal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MainPage.scss';
 import MainTitle from "../MainTitle";
+import plus from "../../assets/images/plus.svg";
 
 const MainPage = (props) => {
 	const [modalShow, setModalShow] = React.useState(false);
@@ -12,6 +13,38 @@ const MainPage = (props) => {
 	const mainPageProps = {
 		title: "Sales statistics",
 		description: "Welcome to CRM dashboard"
+	}
+
+	const modalCreate = {
+		title: 'Create a product',
+		buttonIcon: {plus},
+		buttonText: 'Add product',
+		inputs: [
+			{
+				type: 'text',
+				placeholder: 'Store'
+			},
+			{
+				type: 'text',
+				placeholder: 'Price'
+			},
+			{
+				type: 'text',
+				placeholder: 'Product name'
+			},
+			{
+				type: 'text',
+				placeholder: 'Product Category'
+			},
+			{
+				type: 'text',
+				placeholder: 'Quantity of goods'
+			},
+			{
+				type: 'text',
+				placeholder: 'Weight / Volume of one item'
+			},
+		]
 	}
 
 	return (
@@ -22,6 +55,7 @@ const MainPage = (props) => {
 					<ButtonCreate />
 				</Button>
 				<MyModal
+					info={modalCreate}
 					show={modalShow}
 					onHide={() => setModalShow(false)}
 				/>

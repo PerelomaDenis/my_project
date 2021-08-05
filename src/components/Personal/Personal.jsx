@@ -6,6 +6,8 @@ import MainTitle from "../MainTitle";
 import ButtonCreate from "../ButtonCreate";
 import MyModal from "../MyModal";
 import plus from "../../assets/images/plus.svg";
+import {ReactSVG} from "react-svg";
+import buttonIcon from "../../assets/images/button-icon.svg";
 
 
 const Personal = (props) => {
@@ -48,51 +50,6 @@ const Personal = (props) => {
 		]
 	}
 
-	const formFields = [
-		{
-			id: 'firstName',
-			label: 'First name',
-			type: 'text',
-			placeholder: 'Enter your first name'
-		},
-		{
-			id: 'lastName',
-			label: 'Last name',
-			type: 'text',
-			placeholder: 'Enter your last name'
-		},
-		{
-			id: 'companyName',
-			label: 'Company name',
-			type: 'text',
-			placeholder: 'Enter your company name'
-		},
-		{
-			id: 'productCategory',
-			label: 'Product Category',
-			type: 'text',
-			placeholder: 'Enter product category'
-		},
-		{
-			id: 'address',
-			label: 'Address',
-			type: 'text',
-			placeholder: 'Enter your address'
-		},
-		{
-			id: 'oldPassword',
-			label: 'Enter old password',
-			type: 'password',
-			placeholder: 'Enter password'
-		},
-		{
-			id: 'newPassword',
-			label: 'Enter a new password',
-			type: 'password',
-			placeholder: 'Enter your new password'
-		},
-	]
-
 	return (
 		<div className="wrap">
 			<div className="wrap__top">
@@ -109,13 +66,55 @@ const Personal = (props) => {
 			<hr/>
 			<div className="wrap__content">
 				<form className="personal-form">
-					{formFields.map((field) => (
+					<div className="personal-form__row">
 						<div className="personal-form__item">
-							<label className="personal-form__item-title" htmlFor={field.id}>{field.label}</label>
-							<input className="personal-form__item-input" type={field.id} id={field.id} name={field.id}
-										 placeholder={field.placeholder}/>
+							<label className="personal-form__item-title" htmlFor="firstName">First name</label>
+							<input className="personal-form__item-input" type="text" id="firstName" name="firstName"
+										 placeholder="Enter your first name"/>
 						</div>
-					))}
+						<div className="personal-form__item">
+							<label className="personal-form__item-title" htmlFor="lastName">Last name</label>
+							<input className="personal-form__item-input" type="text" id="lastName" name="lastName"
+										 placeholder="Enter your last name"/>
+						</div>
+					</div>
+					<div className="personal-form__row">
+						<div className="personal-form__item">
+							<label className="personal-form__item-title" htmlFor="companyName">Company name</label>
+							<input className="personal-form__item-input" type="text" id="companyName" name="companyName"
+										 placeholder="Enter your company name"/>
+						</div>
+						<div className="personal-form__item">
+							<label className="personal-form__item-title" htmlFor="productCategory">Product Category</label>
+							<input className="personal-form__item-input" type="text" id="productCategory" name="productCategory"
+										 placeholder="Enter product category"/>
+						</div>
+					</div>
+					<div className="personal-form__row">
+						<div className="personal-form__item">
+							<label className="personal-form__item-title" htmlFor="address">Address</label>
+							<input className="personal-form__item-input" type="text" id="address" name="address"
+										 placeholder="Enter your address"/>
+						</div>
+					</div>
+					<div className="personal-form__row">
+						<div className="personal-form__item">
+							<label className="personal-form__item-title" htmlFor="oldPassword">Enter old password</label>
+							<input className="personal-form__item-input" type="password" id="oldPassword" name="oldPassword"
+										 placeholder="Enter password"/>
+						</div>
+						<div className="personal-form__item">
+							<label className="personal-form__item-title" htmlFor="newPassword">Enter a new password</label>
+							<input className="personal-form__item-input" type="password" id="newPassword" name="newPassword"
+										 placeholder="Enter your new password"/>
+						</div>
+					</div>
+					<Button className="button" variant="primary" onClick={() => setModalShow(true)}>
+						<div className="personal-form__button">
+							<span className="personal-form__button-text">Save changes</span>
+						</div>
+					</Button>
+
 				</form>
 			</div>
 		</div>

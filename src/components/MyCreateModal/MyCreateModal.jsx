@@ -25,7 +25,6 @@ const MyCreateModal = (
 	}
 
 	console.log('========>form', form);
-
 	return (
 		<Modal
 			onHide={onHide}

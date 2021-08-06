@@ -12,43 +12,34 @@ const App = () => {
 	const isLogin = false;
 	const products = JSON.parse(localStorage.products || []);
 	const sellProducts = JSON.parse(localStorage.sellProducts || []);
-	// const sellProducts = [
+	const users = JSON.parse(localStorage.users || []);
+
+	// const users = [
 	// 	{
-	// 		productName: 'Sneakers',
-	// 		store: 'Adidas',
+	// 		id: '0',
+	// 		firstName: 'Denis',
+	// 		lastName: 'Pereloma',
+	// 		companyName: 'Justice',
+	// 		productCategory: 'IT',
 	// 		address: 'Taganrog',
-	// 		category: 'Sportswear',
-	// 		createDate: '04.08.2021',
-	// 		price: '$1 000',
-	// 		remains: '40',
-	// 		weight: '5kg',
-	// 		lastSale: '03.08.2021'
+	// 		email: 'qqq@mail.ru',
+	// 		password: 'qwerty'
 	// 	},
 	// 	{
-	// 		productName: 'Mars',
-	// 		store: 'Nike',
-	// 		address: 'Moscow',
-	// 		category: 'Food',
-	// 		createDate: '03.08.2021',
-	// 		price: '$ 100',
-	// 		remains: '30',
-	// 		weight: '4kg',
-	// 		lastSale: '03.08.2021'
-	// 	},
-	// 	{
-	// 		productName: 'Twix',
-	// 		store: 'Reebok',
-	// 		address: 'Rostov',
-	// 		category: 'Sportswear',
-	// 		createDate: '02.08.2021',
-	// 		price: '$ 10',
-	// 		remains: '20',
-	// 		weight: '3kg',
-	// 		lastSale: '03.08.2021'
+	// 		id: '1',
+	// 		firstName: 'D',
+	// 		lastName: 'P',
+	// 		companyName: 'J',
+	// 		productCategory: 'IT',
+	// 		address: 'T',
+	// 		email: 'q@mail.ru',
+	// 		password: 'qwerty'
 	// 	}
 	// ]
+
 	localStorage.setItem('products', JSON.stringify(products))
 	localStorage.setItem('sellProducts', JSON.stringify(sellProducts))
+	localStorage.setItem('users', JSON.stringify(users))
 
 	return (
 		<BrowserRouter>

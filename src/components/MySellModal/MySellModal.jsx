@@ -24,6 +24,7 @@ const MySellModal = (
 			[type]: value,
 		}))
 	}
+	console.log('========>sellForm', sellForm);
 
 	return (
 		<Modal
@@ -60,9 +61,22 @@ const MySellModal = (
 						onHide()
 						getSellProd.push(sellForm);
 						localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
-						const newProd = getProd.filter(el => el.id !== productId.productId)
-						setGetProd(newProd)
-						localStorage.setItem('products', JSON.stringify(newProd))
+						sellForm.quantity = sellForm.quantity - sellForm.sellQuantity;
+						if(sellForm.quantity === 0) {
+							const newProd = getProd.filter(el => el.id !== productId.productId)
+							setGetProd(newProd)
+							localStorage.setItem('products', JSON.stringify(newProd))
+						} else {
+							const newChangedProd = getProd.map((prod) => {
+								if(prod.id === productId.productId) {
+									prod = {...sellForm}
+									return prod
+								}
+								return prod
+							})
+							setGetProd(newChangedProd)
+							localStorage.setItem('products', JSON.stringify(newChangedProd))
+						}
 					}}>
 						<span className="modal__btn-text">{info.buttonText}</span>
 						<ReactSVG className="modal__btn-icon" src={info.buttonIcon}/>

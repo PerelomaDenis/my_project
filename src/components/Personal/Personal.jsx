@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button} from "react-bootstrap";
 
 import MainTitle from "../MainTitle";
@@ -12,7 +12,29 @@ import FormInput from "../FormInput";
 
 
 const Personal = (props) => {
+	const [newPassword, setNewPassword] = useState({})
+	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
+	const getUser = getUsers.filter((user) => user.email === 'qqq@mail.ru')[0]
+	const [personalForm, setPersonalForm] = useState(getUser);
+	console.log('========>personalForm', personalForm);
+	console.log('========>newPassword', newPassword);
+
+	const handleChange = (e, type) => {
+		const {value} = e.target
+		setPersonalForm((prevForm) => ({
+			...prevForm,
+			[type]: value,
+		}))
+	}
+
+	const handleChangePassword = (e, type) => {
+		const {value} = e.target
+		setNewPassword((prevForm) => ({
+			...prevForm,
+			[type]: value,
+		}))
+	}
 
 	return (
 		<div className="wrap">
@@ -21,69 +43,126 @@ const Personal = (props) => {
 				<Button className="button" variant="primary" onClick={() => setModalCreateShow(true)}>
 					<ButtonCreate />
 				</Button>
-
 			</div>
 			<hr/>
 			<div className="wrap__content">
 				<form className="personal-form">
 					<div className="personal-form__row">
 						<div className="personal-form__el">
-							<FormInput id="firstName"
+							<div className="personal-form__item">
+								<label className="personal-form__item-title" htmlFor="firstName">First name</label>
+								<input className="personal-form__item-input"
 											 type="text"
-											 label="First name"
+											 id="firstName"
+											 name="firstName"
 											 placeholder="Enter your first name"
-							/>
+											 value={personalForm.firstName}
+											 onChange={(e) => handleChange(e, "firstName")}
+								/>
+							</div>
 						</div>
 						<div className="personal-form__el">
-							<FormInput id="lastName"
+							<div className="personal-form__item">
+								<label className="personal-form__item-title" htmlFor="lastName">Last name</label>
+								<input className="personal-form__item-input"
 											 type="text"
-											 label="Last name"
+											 id="lastName"
+											 name="lastName"
 											 placeholder="Enter your last name"
-							/>
+											 value={personalForm["lastName"]}
+											 onChange={(e) => handleChange(e, "lastName")}
+								/>
+							</div>
 						</div>
 					</div>
 					<div className="personal-form__row">
 						<div className="personal-form__el">
-							<FormInput id="companyName"
+							<div className="personal-form__item">
+								<label className="personal-form__item-title" htmlFor="companyName">Company name</label>
+								<input className="personal-form__item-input"
 											 type="text"
-											 label="Company name"
+											 id="companyName"
+											 name="companyName"
 											 placeholder="Enter your company name"
-							/>
+											 value={personalForm["companyName"]}
+											 onChange={(e) => handleChange(e, "companyName")}
+								/>
+							</div>
 						</div>
 						<div className="personal-form__el">
-							<FormInput id="productCategory"
+							<div className="personal-form__item">
+								<label className="personal-form__item-title" htmlFor="productCategory">Product Category</label>
+								<input className="personal-form__item-input"
 											 type="text"
-											 label="Product Category"
+											 id="productCategory"
+											 name="productCategory"
 											 placeholder="Enter product category"
-							/>
+											 value={personalForm["productCategory"]}
+											 onChange={(e) => handleChange(e, "productCategory")}
+								/>
+							</div>
 						</div>
 					</div>
 					<div className="personal-form__row">
 						<div className="personal-form__el">
-							<FormInput id="address"
+							<div className="personal-form__item">
+								<label className="personal-form__item-title" htmlFor="address">Address</label>
+								<input className="personal-form__item-input"
 											 type="text"
-											 label="Address"
+											 id="address"
+											 name="address"
 											 placeholder="Enter your address"
-							/>
+											 value={personalForm["address"]}
+											 onChange={(e) => handleChange(e, "address")}
+								/>
+							</div>
 						</div>
 					</div>
 					<div className="personal-form__row">
 						<div className="personal-form__el">
-							<FormInput id="oldPassword"
+							<div className="personal-form__item">
+								<label className="personal-form__item-title" htmlFor="oldPassword">Enter old password</label>
+								<input className="personal-form__item-input"
 											 type="password"
-											 label="Enter old password"
+											 id="oldPassword"
+											 name="oldPassword"
 											 placeholder="Enter password"
-							/>
+											 value={newPassword["oldPassword"]}
+											 onChange={(e) => handleChangePassword(e, "oldPassword")}
+								/>
+							</div>
 						</div>
 						<div className="personal-form__el">
-							<FormInput id="newPassword"
+							<div className="personal-form__item">
+								<label className="personal-form__item-title" htmlFor="newPassword">Enter a new password</label>
+								<input className="personal-form__item-input"
 											 type="password"
-											 label="Enter a new password"
+											 id="newPassword"
+											 name="newPassword"
 											 placeholder="Enter your new password"
-							/>
+											 value={newPassword["newPassword"]}
+											 onChange={(e) => handleChangePassword(e, "newPassword")}
+								/>
+							</div>
 						</div>
 					</div>
-					<Button className="button" variant="primary">
+					<Button className="button" variant="primary" onClick={(e) => {
+						e.preventDefault();
+						if(personalForm.password === newPassword.oldPassword
+							&& newPassword.oldPassword !== newPassword.newPassword) {
+							personalForm.password = newPassword.newPassword
+						}
+						const newUsers = getUsers.map((user) => {
+							if(user.email === getUser.email) {
+								user = {...personalForm}
+								return user
+							}
+							return user
+						})
+						setGetUsers(newUsers)
+						localStorage.setItem('users', JSON.stringify(newUsers))
+						setNewPassword({oldPassword: '', newPassword: ''})
+					}}>
 						<div className="personal-form__button">
 							<span className="personal-form__button-text">Save changes</span>
 						</div>

@@ -11,6 +11,8 @@ const FormInput = (props) => {
 						 id={props.id}
 						 name={props.id}
 						 placeholder={props.placeholder}/>
+						 value={props.value}
+			 			 onChange={props.onChange}
 		</div>
 	)
 }

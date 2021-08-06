@@ -11,8 +11,44 @@ import "./assets/fonts/fonts.css";
 const App = () => {
 	const isLogin = false;
 	const products = JSON.parse(localStorage.products || []);
-
+	const sellProducts = JSON.parse(localStorage.sellProducts || []);
+	// const sellProducts = [
+	// 	{
+	// 		productName: 'Sneakers',
+	// 		store: 'Adidas',
+	// 		address: 'Taganrog',
+	// 		category: 'Sportswear',
+	// 		createDate: '04.08.2021',
+	// 		price: '$1 000',
+	// 		remains: '40',
+	// 		weight: '5kg',
+	// 		lastSale: '03.08.2021'
+	// 	},
+	// 	{
+	// 		productName: 'Mars',
+	// 		store: 'Nike',
+	// 		address: 'Moscow',
+	// 		category: 'Food',
+	// 		createDate: '03.08.2021',
+	// 		price: '$ 100',
+	// 		remains: '30',
+	// 		weight: '4kg',
+	// 		lastSale: '03.08.2021'
+	// 	},
+	// 	{
+	// 		productName: 'Twix',
+	// 		store: 'Reebok',
+	// 		address: 'Rostov',
+	// 		category: 'Sportswear',
+	// 		createDate: '02.08.2021',
+	// 		price: '$ 10',
+	// 		remains: '20',
+	// 		weight: '3kg',
+	// 		lastSale: '03.08.2021'
+	// 	}
+	// ]
 	localStorage.setItem('products', JSON.stringify(products))
+	localStorage.setItem('sellProducts', JSON.stringify(sellProducts))
 
 	return (
 		<BrowserRouter>

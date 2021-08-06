@@ -2,28 +2,28 @@ import React, {useState} from "react";
 import {ReactSVG} from "react-svg";
 import {Button, Modal} from "react-bootstrap";
 
-import './MyModal.scss';
+import './MyEditModal.scss';
 
-const MyModal = (
+const MyEditModal = (
 	{
 		info,
 		onHide,
 		show,
+		productId,
+		getProd,
+		setGetProd
 	}) => {
-	const [form, setFrom] = useState({
-		id: Date.now(),
-		createDate: new Date(),
-	});
-
+	const newGetProd = getProd.filter((el) => el.id === productId.productId)[0]
+	const [editForm, setEditFrom] = useState(newGetProd);
+	
+	console.log('========>editForm', editForm);
 	const handleChange = (e, type) => {
 		const {value} = e.target
-		setFrom((prevForm) => ({
+		setEditFrom((prevForm) => ({
 			...prevForm,
 			[type]: value,
 		}))
 	}
-
-	console.log('========>form', form);
 
 	return (
 		<Modal
@@ -49,7 +49,7 @@ const MyModal = (
 								onChange={(e) => handleChange(e, input.name)}
 								className="modal__input"
 								placeholder={input.placeholder}
-								value={form[input.name]}
+								value={editForm[input.name]}
 							/>
 						</div>
 					))}
@@ -58,9 +58,15 @@ const MyModal = (
 					<Button type="submit" className="modal__btn" onClick={(e) => {
 						e.preventDefault();
 						onHide()
-						const getProd = JSON.parse(localStorage.getItem('products'))
-						getProd.push(form);
-						localStorage.setItem('products', JSON.stringify(getProd))
+						const newChangedProd = getProd.map((prod) => {
+							if(prod.id === productId.productId) {
+								prod = {...editForm}
+								return prod
+							}
+							return prod
+						})
+						setGetProd(newChangedProd)
+						localStorage.setItem('products', JSON.stringify(newChangedProd))
 					}}>
 						<span className="modal__btn-text">{info.buttonText}</span>
 						<ReactSVG className="modal__btn-icon" src={info.buttonIcon}/>
@@ -71,4 +77,4 @@ const MyModal = (
 	)
 }
 
-export default MyModal;
+export default MyEditModal;

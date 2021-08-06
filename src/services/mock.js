@@ -54,12 +54,16 @@ export const modalSell = {
 	buttonText: 'Sell product',
 	inputs: [
 		{
+			value: '',
 			type: 'text',
-			placeholder: 'Numbers of product'
+			placeholder: 'Numbers of product',
+			name: 'sellQuantity',
 		},
 		{
+			value: '',
 			type: 'text',
-			placeholder: 'Date of sale'
+			placeholder: 'Date of sale',
+			name: 'saleDate',
 		},
 	]
 }
@@ -147,7 +151,7 @@ export const tableMySalesTitles = [
 	'Category',
 	'Creation date',
 	'Price',
-	'Remains',
+	'Sold items',
 	'Weight / Volume',
 	'Last sale'
 ]

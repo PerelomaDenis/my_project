@@ -1,38 +1,43 @@
-import React from "react";
-import {Button, Modal, Table} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Button, Table} from "react-bootstrap";
 import {ReactSVG} from "react-svg";
 
 import ButtonCreate from "../ButtonCreate";
-import MyModal from "../MyModal";
+import MyCreateModal from "../MyCreateModal";
 import MainTitle from "../MainTitle";
+import MySellModal from "../MySellModal";
+import MyEditModal from "../MyEditModal";
 
 import del from "../../assets/images/Delete.svg";
 import edit from "../../assets/images/edit.svg";
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MyProducts.scss';
 import {modalCreate, modalEdit, modalSell, myProductsProps, tableMyProductTitles} from "../../services/mock";
 
+export const getCurrentDate = (date) => {
+	const newDate = new Date(date);
+	let day = newDate.getDay() + 1;
+	let month = newDate.getMonth() + 1;
+	let year = newDate.getFullYear();
+	if(day < 10) day = '0' + day;
+	if(month < 10) month = '0' + month;
+	return `${day}.${month}.${year}`
+}
 
-const MyProducts = (props) => {
-	const [modalCreateShow, setModalCreateShow] = React.useState(false);
-	const [modalShow, setModalShow] = React.useState(false);
-	const [modalEditShow, setModalEditShow] = React.useState(false);
+const MyProducts = () => {
+	const [modalCreateShow, setModalCreateShow] = useState(false);
+	const [modalShow, setModalShow] = useState(false);
+	const [modalId, setModalId] = useState({productId: ''});
+	const [modalEditShow, setModalEditShow] = useState(false);
+	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
 
-	const getProd = JSON.parse(localStorage.getItem('products'))
 
-	const getCurrentDate = (date) => {
-		const newDate = new Date(date);
-		let day = newDate.getDay() + 1;
-		let month = newDate.getMonth() + 1;
-		let year = newDate.getFullYear();
-		if(day < 10) day = '0' + day;
-		if(month < 10) month = '0' + month;
-		return `${day}.${month}.${year}`
-	}
 
-	const editValuesGood = () => {
-		console.log(123)
+
+	const removeProduct = (id) => {
+		const newProd = getProd.filter(el => el.id !== id)
+		setGetProd(newProd)
+		localStorage.setItem('products', JSON.stringify(newProd))
 	}
 
 	return (
@@ -54,7 +59,8 @@ const MyProducts = (props) => {
 					</tr>
 					</thead>
 					<tbody>
-					{getProd.map((product, index) => (
+					{
+						getProd.map((product, index) => (
 						<tr id={product.id}>
 							<td>{product.productName}</td>
 							<td>{product.storeName}</td>
@@ -67,18 +73,16 @@ const MyProducts = (props) => {
 							<td>
 								<div className="table__actions">
 									<button className="table__actions-sell" onClick={() => {
-											setModalShow(true)
-										}
-									}>Sell</button>
-
+										setModalShow(true)
+										setModalId({productId: product.id})
+									}}>Sell</button>
 									<button className="table__actions-edit" onClick={() => {
-											setModalEditShow(true)
-											editValuesGood()
-										}
-									}>
+										setModalEditShow(true)
+										setModalId({productId: product.id})
+									}}>
 										<ReactSVG className="" src={edit}/>
 									</button>
-									<ReactSVG className="table__actions-del" src={del}/>
+									<ReactSVG className="table__actions-del" src={del} onClick={(e) => {removeProduct(product.id)}}/>
 								</div>
 							</td>
 						</tr>
@@ -87,26 +91,33 @@ const MyProducts = (props) => {
 				</Table>
 
 				{modalShow && (
-					<MyModal
+					<MySellModal
 						info={modalSell}
 						show={modalShow}
 						onHide={() => setModalShow(false)}
+						productId={modalId}
+						setGetProd={setGetProd}
+						getProd={getProd}
 					/>
 				)}
 
 				{modalEditShow && (
-					<MyModal
+					<MyEditModal
 						info={modalEdit}
 						show={modalEditShow}
 						onHide={() => setModalEditShow(false)}
+						productId={modalId}
+						setGetProd={setGetProd}
+						getProd={getProd}
 					/>
 				)}
 
 				{modalCreateShow && (
-					<MyModal
+					<MyCreateModal
 						info={modalCreate}
 						show={modalCreateShow}
 						onHide={() => setModalCreateShow(false)}
+						getProd={getProd}
 					/>
 				)}
 			</div>

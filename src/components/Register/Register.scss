@@ -23,7 +23,6 @@
         justify-content: space-between;
 
         .register-form__el {
-          margin: 0 0 24px 0;
           width: 100%;
         }
 
@@ -31,7 +30,6 @@
           display: flex;
           flex-direction: column;
           width: 100%;
-
 
           .register-form__item-title {
             font-family: Inter;
@@ -66,9 +64,23 @@
           :-moz-placeholder {
             color: rgba(43, 56, 68, .25);
           }
+
+          .has-error,
+          .has-error:focus-visible,
+          .has-error:active {
+            border: 3px solid #D12323;
+            outline: none;
+          }
         }
 
         .register-form__item-small {
+          width: 48%;
+        }
+      }
+
+
+      .register-form__row:first-child {
+        .register-form__el {
           width: 48%;
         }
       }

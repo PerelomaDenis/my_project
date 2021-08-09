@@ -2,6 +2,8 @@ import MainPage from "../components/MainPage";
 import MyProducts from "../components/MyProducts";
 import MySales from "../components/MySales";
 import Personal from "../components/Personal";
+import Login from "../components/Login";
+import Register from "../components/Register";
 
 export const routes = [
 	{
@@ -24,4 +26,14 @@ export const routes = [
 		exact: true,
 		component: Personal,
 	},
+	{
+		path: '/login',
+		exact: true,
+		component: Login,
+	},
+	{
+		path: '/reg',
+		exact: true,
+		component: Register,
+	}
 ]

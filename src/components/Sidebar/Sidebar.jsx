@@ -8,9 +8,7 @@ import './Sidebar.scss';
 import {links} from "../../services/mock";
 
 
-const Sidebar = (props) => {
-
-
+const Sidebar = ({changeIsReg, changeIsLoin}) => {
 	return (
 		<div className="sidebar__content">
 			<a href="/">
@@ -26,7 +24,7 @@ const Sidebar = (props) => {
 				</li>
 				<li>
 					<hr/>
-					<Logout />
+					<Logout changeIsReg={changeIsReg} changeIsLoin={changeIsLoin}/>
 				</li>
 			</ul>
 

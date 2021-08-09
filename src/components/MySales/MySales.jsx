@@ -11,7 +11,7 @@ import {modalCreate, mySalesProps, tableMySalesTitles} from "../../services/mock
 import {getCurrentDate} from "../MyProducts/MyProducts";
 
 
-const MySales = (props) => {
+const MySales = () => {
 	const [modalCreateShow, setModalCreateShow] = useState(false);
 
 	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
@@ -27,6 +27,11 @@ const MySales = (props) => {
 			</div>
 			<hr/>
 			<div className="wrap__content">
+				{getSellProd.length === 0 ? (
+					<div className="no-data">
+						<p>No data</p>
+					</div>
+				) : (
 				<Table striped borderless>
 					<thead>
 					<tr>
@@ -52,6 +57,7 @@ const MySales = (props) => {
 
 					</tbody>
 				</Table>
+				)}
 				{modalCreateShow && (
 					<MyCreateModal
 						info={modalCreate}

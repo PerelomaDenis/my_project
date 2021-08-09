@@ -2,11 +2,11 @@ import React from "react";
 
 import './MainTitle.scss';
 
-const MainTitle = (props) => {
+const MainTitle = ({title, description}) => {
 	return (
 		<div className="title">
-			<div className="title__text">{props.title}</div>
-			<div className="title__desc">{props.description}</div>
+			<div className="title__text">{title}</div>
+			<div className="title__desc">{description}</div>
 		</div>
 	)
 }

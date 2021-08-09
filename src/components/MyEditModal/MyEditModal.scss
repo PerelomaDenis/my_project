@@ -11,6 +11,13 @@
         padding: 0 64px;
         position: relative;
 
+        .modal__label {
+          font-family: Inter;
+          font-size: 12px;
+          line-height: 12px;
+          color: #2B3844;
+        }
+
         .modal__input {
           border: 1px solid rgba(43, 56, 68, .25);
           box-sizing: border-box;

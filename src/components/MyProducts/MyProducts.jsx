@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Button, Table} from "react-bootstrap";
 import {ReactSVG} from "react-svg";
 
@@ -31,9 +31,6 @@ const MyProducts = () => {
 	const [modalEditShow, setModalEditShow] = useState(false);
 	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
 
-
-
-
 	const removeProduct = (id) => {
 		const newProd = getProd.filter(el => el.id !== id)
 		setGetProd(newProd)
@@ -50,7 +47,12 @@ const MyProducts = () => {
 			</div>
 			<hr/>
 			<div className="wrap__content">
-				<Table striped borderless>
+				{getProd.length === 0 ? (
+					<div className="no-data">
+						<p>No data</p>
+					</div>
+				) : (
+					<Table striped borderless>
 					<thead>
 					<tr>
 						{tableMyProductTitles.map((title) => (
@@ -60,36 +62,36 @@ const MyProducts = () => {
 					</thead>
 					<tbody>
 					{
-						getProd.map((product, index) => (
-						<tr id={product.id}>
-							<td>{product.productName}</td>
-							<td>{product.storeName}</td>
-							<td>{product.address}</td>
-							<td>{product.productCategory}</td>
-							<td>{getCurrentDate(product.createDate)}</td>
-							<td>{product.price}</td>
-							<td>{product.quantity}</td>
-							<td>{product.weight}</td>
-							<td>
-								<div className="table__actions">
-									<button className="table__actions-sell" onClick={() => {
-										setModalShow(true)
-										setModalId({productId: product.id})
-									}}>Sell</button>
-									<button className="table__actions-edit" onClick={() => {
-										setModalEditShow(true)
-										setModalId({productId: product.id})
-									}}>
-										<ReactSVG className="" src={edit}/>
-									</button>
-									<ReactSVG className="table__actions-del" src={del} onClick={(e) => {removeProduct(product.id)}}/>
-								</div>
-							</td>
-						</tr>
-					))}
+						getProd.map((product) => (
+							<tr id={product.id}>
+								<td>{product.productName}</td>
+								<td>{product.storeName}</td>
+								<td>{product.address}</td>
+								<td>{product.productCategory}</td>
+								<td>{getCurrentDate(product.createDate)}</td>
+								<td>{product.price}</td>
+								<td>{product.quantity}</td>
+								<td>{product.weight}</td>
+								<td>
+									<div className="table__actions">
+										<button className="table__actions-sell" onClick={() => {
+											setModalShow(true)
+											setModalId({productId: product.id})
+										}}>Sell</button>
+										<button className="table__actions-edit" onClick={() => {
+											setModalEditShow(true)
+											setModalId({productId: product.id})
+										}}>
+											<ReactSVG className="" src={edit}/>
+										</button>
+										<ReactSVG className="table__actions-del" src={del} onClick={(e) => {removeProduct(product.id)}}/>
+									</div>
+								</td>
+							</tr>
+						))}
 					</tbody>
 				</Table>
-
+				)}
 				{modalShow && (
 					<MySellModal
 						info={modalSell}

@@ -15,8 +15,7 @@ const MyEditModal = (
 	}) => {
 	const newGetProd = getProd.filter((el) => el.id === productId.productId)[0]
 	const [editForm, setEditFrom] = useState(newGetProd);
-	
-	console.log('========>editForm', editForm);
+
 	const handleChange = (e, type) => {
 		const {value} = e.target
 		setEditFrom((prevForm) => ({
@@ -43,8 +42,10 @@ const MyEditModal = (
 				<Modal.Body>
 					{info.inputs.map((input) => (
 						<div>
+							<label className="modal__label" htmlFor={input.name}>{input.placeholder}</label>
 							<input
 								name={input.name}
+								id={input.name}
 								type={input.type}
 								onChange={(e) => handleChange(e, input.name)}
 								className="modal__input"

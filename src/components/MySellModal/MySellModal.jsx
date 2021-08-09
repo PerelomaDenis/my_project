@@ -44,8 +44,10 @@ const MySellModal = (
 				<Modal.Body>
 					{info.inputs.map((input) => (
 						<div>
+							<label className="modal__label" htmlFor={input.name}>{input.placeholder}</label>
 							<input
 								name={input.name}
+								id={input.name}
 								type={input.type}
 								onChange={(e) => handleChange(e, input.name)}
 								className="modal__input"
@@ -66,6 +68,8 @@ const MySellModal = (
 							const newProd = getProd.filter(el => el.id !== productId.productId)
 							setGetProd(newProd)
 							localStorage.setItem('products', JSON.stringify(newProd))
+						} else if (sellForm.quantity < 0) {
+							alert("Введенное кол-во товаров выше, чем остаток на складе")
 						} else {
 							const newChangedProd = getProd.map((prod) => {
 								if(prod.id === productId.productId) {

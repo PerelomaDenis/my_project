@@ -5,12 +5,17 @@ import {ReactSVG} from "react-svg";
 import './SidebarLink.scss';
 
 
-const SidebarLink = (props) => {
+const SidebarLink = (
+	{
+		url,
+		icon,
+		name
+	}) => {
 	return (
-		<NavLink exact activeClassName="selected" className="sidebar__link" to={props.url}>
+		<NavLink exact activeClassName="selected" className="sidebar__link" to={url}>
 			<li className="sidebar__links-item">
-				<ReactSVG className="sidebar__links-icon" src={props.icon} />
-				<span className="sidebar__links-text">{props.name}</span>
+				<ReactSVG className="sidebar__links-icon" src={icon} />
+				<span className="sidebar__links-text">{name}</span>
 			</li>
 		</NavLink>
 	)

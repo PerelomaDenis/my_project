@@ -1,54 +1,54 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import {routes} from "./routes/routes";
 import Sidebar from "./components/Sidebar";
 import Register from "./components/Register";
+import Login from "./components/Login";
 
 import './App.scss';
 import "./assets/fonts/fonts.css";
 
+
 const App = () => {
-	const isLogin = false;
 	const products = JSON.parse(localStorage.products || []);
 	const sellProducts = JSON.parse(localStorage.sellProducts || []);
 	const users = JSON.parse(localStorage.users || []);
+	const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem('isLogin')) || false)
+	const [isReg, setIsReg] = useState(JSON.parse(localStorage.getItem('isReg')) || false)
+	const [userId, setUserId] = useState(JSON.parse(localStorage.getItem('userId')) || '')
 
-	// const users = [
-	// 	{
-	// 		id: '0',
-	// 		firstName: 'Denis',
-	// 		lastName: 'Pereloma',
-	// 		companyName: 'Justice',
-	// 		productCategory: 'IT',
-	// 		address: 'Taganrog',
-	// 		email: 'qqq@mail.ru',
-	// 		password: 'qwerty'
-	// 	},
-	// 	{
-	// 		id: '1',
-	// 		firstName: 'D',
-	// 		lastName: 'P',
-	// 		companyName: 'J',
-	// 		productCategory: 'IT',
-	// 		address: 'T',
-	// 		email: 'q@mail.ru',
-	// 		password: 'qwerty'
-	// 	}
-	// ]
 
-	localStorage.setItem('products', JSON.stringify(products))
-	localStorage.setItem('sellProducts', JSON.stringify(sellProducts))
-	localStorage.setItem('users', JSON.stringify(users))
+	useEffect(() => {
+		localStorage.setItem('products', JSON.stringify(products))
+		localStorage.setItem('sellProducts', JSON.stringify(sellProducts))
+		localStorage.setItem('users', JSON.stringify(users))
+		localStorage.setItem('isReg', JSON.stringify(isReg));
+		localStorage.setItem('isLogin', JSON.stringify(isLogin));
+		localStorage.setItem('userId', JSON.stringify(userId));
+	}, [])
+
+	const changeIsLoin = (value) => {
+		setIsLogin(value)
+	}
+
+	const changeIsReg = (value) => {
+		setIsReg(value)
+	}
+
+	const changeUserId = (value) => {
+		setUserId(value)
+	}
 
 	return (
 		<BrowserRouter>
-			{isLogin ? (
-				<Register/>
-			) : (
-				<div className="page">
+			{!isReg
+				? <Register changeIsReg={changeIsReg}/>
+				: !isLogin
+					? <Login changeIsLoin={changeIsLoin} changeUserId={changeUserId}/>
+				: <div className="page">
 					<div className="sidebar">
-						<Sidebar/>
+						<Sidebar changeIsReg={changeIsReg} changeIsLoin={changeIsLoin} />
 					</div>
 					<div className="main">
 						<Switch>
@@ -61,8 +61,8 @@ const App = () => {
 							))}
 						</Switch>
 					</div>
-				</div>
-			)}
+				</div>}
+			)
 		</BrowserRouter>
 	);
 }

@@ -24,7 +24,6 @@ const MyCreateModal = (
 		}))
 	}
 
-	console.log('========>form', form);
 	return (
 		<Modal
 			onHide={onHide}
@@ -43,7 +42,9 @@ const MyCreateModal = (
 				<Modal.Body>
 					{info.inputs.map((input) => (
 						<div>
+							<label className="modal__label" htmlFor={input.name}>{input.placeholder}</label>
 							<input
+								id={input.name}
 								name={input.name}
 								type={input.type}
 								onChange={(e) => handleChange(e, input.name)}

@@ -11,14 +11,13 @@ import {modalCreate, personalProps} from "../../services/mock";
 import FormInput from "../FormInput";
 
 
-const Personal = (props) => {
+const Personal = () => {
+	const userId = JSON.parse(localStorage.getItem('userId'));
 	const [newPassword, setNewPassword] = useState({})
 	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
-	const getUser = getUsers.filter((user) => user.email === 'qqq@mail.ru')[0]
+	const getUser = getUsers.filter((user) => user.id === userId)[0]
 	const [personalForm, setPersonalForm] = useState(getUser);
-	console.log('========>personalForm', personalForm);
-	console.log('========>newPassword', newPassword);
 
 	const handleChange = (e, type) => {
 		const {value} = e.target
@@ -51,26 +50,28 @@ const Personal = (props) => {
 						<div className="personal-form__el">
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="firstName">First name</label>
-								<input className="personal-form__item-input"
-											 type="text"
-											 id="firstName"
-											 name="firstName"
-											 placeholder="Enter your first name"
-											 value={personalForm.firstName}
-											 onChange={(e) => handleChange(e, "firstName")}
+								<input
+									 className="personal-form__item-input"
+									 type="text"
+									 id="firstName"
+									 name="firstName"
+									 placeholder="Enter your first name"
+									 value={personalForm.firstName}
+									 onChange={(e) => handleChange(e, "firstName")}
 								/>
 							</div>
 						</div>
 						<div className="personal-form__el">
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="lastName">Last name</label>
-								<input className="personal-form__item-input"
-											 type="text"
-											 id="lastName"
-											 name="lastName"
-											 placeholder="Enter your last name"
-											 value={personalForm["lastName"]}
-											 onChange={(e) => handleChange(e, "lastName")}
+								<input
+									 className="personal-form__item-input"
+									 type="text"
+									 id="lastName"
+									 name="lastName"
+									 placeholder="Enter your last name"
+									 value={personalForm.lastName}
+									 onChange={(e) => handleChange(e, "lastName")}
 								/>
 							</div>
 						</div>
@@ -79,26 +80,28 @@ const Personal = (props) => {
 						<div className="personal-form__el">
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="companyName">Company name</label>
-								<input className="personal-form__item-input"
-											 type="text"
-											 id="companyName"
-											 name="companyName"
-											 placeholder="Enter your company name"
-											 value={personalForm["companyName"]}
-											 onChange={(e) => handleChange(e, "companyName")}
+								<input
+									 className="personal-form__item-input"
+									 type="text"
+									 id="companyName"
+									 name="companyName"
+									 placeholder="Enter your company name"
+									 value={personalForm.company}
+									 onChange={(e) => handleChange(e, "companyName")}
 								/>
 							</div>
 						</div>
 						<div className="personal-form__el">
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="productCategory">Product Category</label>
-								<input className="personal-form__item-input"
-											 type="text"
-											 id="productCategory"
-											 name="productCategory"
-											 placeholder="Enter product category"
-											 value={personalForm["productCategory"]}
-											 onChange={(e) => handleChange(e, "productCategory")}
+								<input
+									 className="personal-form__item-input"
+									 type="text"
+									 id="productCategory"
+									 name="productCategory"
+									 placeholder="Enter product category"
+									 value={personalForm.productCategory}
+									 onChange={(e) => handleChange(e, "productCategory")}
 								/>
 							</div>
 						</div>
@@ -107,13 +110,14 @@ const Personal = (props) => {
 						<div className="personal-form__el">
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="address">Address</label>
-								<input className="personal-form__item-input"
-											 type="text"
-											 id="address"
-											 name="address"
-											 placeholder="Enter your address"
-											 value={personalForm["address"]}
-											 onChange={(e) => handleChange(e, "address")}
+								<input
+									 className="personal-form__item-input"
+									 type="text"
+									 id="address"
+									 name="address"
+									 placeholder="Enter your address"
+									 value={personalForm.address}
+									 onChange={(e) => handleChange(e, "address")}
 								/>
 							</div>
 						</div>
@@ -122,26 +126,28 @@ const Personal = (props) => {
 						<div className="personal-form__el">
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="oldPassword">Enter old password</label>
-								<input className="personal-form__item-input"
-											 type="password"
-											 id="oldPassword"
-											 name="oldPassword"
-											 placeholder="Enter password"
-											 value={newPassword["oldPassword"]}
-											 onChange={(e) => handleChangePassword(e, "oldPassword")}
+								<input
+									 className="personal-form__item-input"
+									 type="password"
+									 id="oldPassword"
+									 name="oldPassword"
+									 placeholder="Enter password"
+									 value={newPassword.oldPassword}
+									 onChange={(e) => handleChangePassword(e, "oldPassword")}
 								/>
 							</div>
 						</div>
 						<div className="personal-form__el">
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="newPassword">Enter a new password</label>
-								<input className="personal-form__item-input"
-											 type="password"
-											 id="newPassword"
-											 name="newPassword"
-											 placeholder="Enter your new password"
-											 value={newPassword["newPassword"]}
-											 onChange={(e) => handleChangePassword(e, "newPassword")}
+								<input
+									 className="personal-form__item-input"
+									 type="password"
+									 id="newPassword"
+									 name="newPassword"
+									 placeholder="Enter your new password"
+									 value={newPassword.newPassword}
+									 onChange={(e) => handleChangePassword(e, "newPassword")}
 								/>
 							</div>
 						</div>

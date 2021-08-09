@@ -32,6 +32,22 @@
       .graph {
         background: #FFFFFF;
         border-radius: 3px;
+
+        .no-data {
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: .7;
+
+          p {
+            font-family: Inter-Bold;
+            color: #2B3844;
+            font-size: 70px;
+            text-align: center;
+
+          }
+        }
       }
 
       .graph-1 {

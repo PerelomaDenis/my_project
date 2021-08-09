@@ -10,7 +10,7 @@ import './MainPage.scss';
 import {mainPageProps, modalCreate} from "../../services/mock";
 
 
-const MainPage = (props) => {
+const MainPage = () => {
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
 
 	return (
@@ -26,13 +26,19 @@ const MainPage = (props) => {
 			<div className="wrap__content">
 				<div className="graphs">
 					<div className="graph-1 graph">
-
+						<div className="no-data">
+							<p>No data</p>
+						</div>
 					</div>
 					<div className="graph-2 graph">
-
+						<div className="no-data">
+							<p>No data</p>
+						</div>
 					</div>
 					<div className="graph-3 graph">
-
+						<div className="no-data">
+							<p>No data</p>
+						</div>
 					</div>
 				</div>
 				{modalCreateShow && (

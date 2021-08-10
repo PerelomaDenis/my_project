@@ -9,10 +9,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Personal.scss';
 import {modalCreate, personalProps} from "../../services/mock";
 import FormInput from "../FormInput";
+import {errorClass, validateField} from "../../services/valid";
 
 
 const Personal = () => {
 	const userId = JSON.parse(localStorage.getItem('userId'));
+	const [isValid, setIsValid] = useState({
+		productCategoryValid: '',
+		firstNameValid: '',
+		lastNameValid: '',
+		companyValid: '',
+		addressValid: '',
+		oldPasswordValid: '',
+		newPasswordValid: '',
+	})
 	const [newPassword, setNewPassword] = useState({})
 	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
@@ -25,6 +35,7 @@ const Personal = () => {
 			...prevForm,
 			[type]: value,
 		}))
+		validateField(type, value, isValid, setIsValid, personalForm)
 	}
 
 	const handleChangePassword = (e, type) => {
@@ -33,6 +44,7 @@ const Personal = () => {
 			...prevForm,
 			[type]: value,
 		}))
+		validateField(type, value, isValid, setIsValid, newPassword)
 	}
 
 	return (
@@ -51,7 +63,7 @@ const Personal = () => {
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="firstName">First name</label>
 								<input
-									 className="personal-form__item-input"
+									 className={`personal-form__item-input ${errorClass(isValid.firstNameValid)}`}
 									 type="text"
 									 id="firstName"
 									 name="firstName"
@@ -65,7 +77,7 @@ const Personal = () => {
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="lastName">Last name</label>
 								<input
-									 className="personal-form__item-input"
+									 className={`personal-form__item-input ${errorClass(isValid.lastNameValid)}`}
 									 type="text"
 									 id="lastName"
 									 name="lastName"
@@ -79,15 +91,15 @@ const Personal = () => {
 					<div className="personal-form__row">
 						<div className="personal-form__el">
 							<div className="personal-form__item">
-								<label className="personal-form__item-title" htmlFor="companyName">Company name</label>
+								<label className="personal-form__item-title" htmlFor="company">Company name</label>
 								<input
-									 className="personal-form__item-input"
+									 className={`personal-form__item-input ${errorClass(isValid.companyValid)}`}
 									 type="text"
-									 id="companyName"
-									 name="companyName"
+									 id="company"
+									 name="company"
 									 placeholder="Enter your company name"
 									 value={personalForm.company}
-									 onChange={(e) => handleChange(e, "companyName")}
+									 onChange={(e) => handleChange(e, "company")}
 								/>
 							</div>
 						</div>
@@ -95,7 +107,7 @@ const Personal = () => {
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="productCategory">Product Category</label>
 								<input
-									 className="personal-form__item-input"
+									 className={`personal-form__item-input ${errorClass(isValid.productCategoryValid)}`}
 									 type="text"
 									 id="productCategory"
 									 name="productCategory"
@@ -111,7 +123,7 @@ const Personal = () => {
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="address">Address</label>
 								<input
-									 className="personal-form__item-input"
+									 className={`personal-form__item-input ${errorClass(isValid.addressValid)}`}
 									 type="text"
 									 id="address"
 									 name="address"
@@ -127,7 +139,7 @@ const Personal = () => {
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="oldPassword">Enter old password</label>
 								<input
-									 className="personal-form__item-input"
+									 className={`personal-form__item-input ${errorClass(isValid.oldPasswordValid)}`}
 									 type="password"
 									 id="oldPassword"
 									 name="oldPassword"
@@ -141,7 +153,7 @@ const Personal = () => {
 							<div className="personal-form__item">
 								<label className="personal-form__item-title" htmlFor="newPassword">Enter a new password</label>
 								<input
-									 className="personal-form__item-input"
+									 className={`personal-form__item-input ${errorClass(isValid.newPasswordValid)}`}
 									 type="password"
 									 id="newPassword"
 									 name="newPassword"
@@ -165,9 +177,14 @@ const Personal = () => {
 							}
 							return user
 						})
-						setGetUsers(newUsers)
-						localStorage.setItem('users', JSON.stringify(newUsers))
-						setNewPassword({oldPassword: '', newPassword: ''})
+						let values = Object.values((isValid));
+						if(values.includes(false) || values.includes('')) {
+							alert('Неверно введена информация')
+						} else {
+							setGetUsers(newUsers)
+							localStorage.setItem('users', JSON.stringify(newUsers))
+							setNewPassword({oldPassword: '', newPassword: ''})
+						}
 					}}>
 						<div className="personal-form__button">
 							<span className="personal-form__button-text">Save changes</span>

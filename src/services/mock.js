@@ -14,36 +14,42 @@ export const modalCreate = {
 			type: 'text',
 			placeholder: 'Store',
 			name: 'storeName',
+			errorValid: 'storeNameValid'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Price',
 			name: 'price',
+			errorValid: 'priceValid'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Product name',
 			name: 'productName',
+			errorValid: 'productNameValid'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Product Category',
 			name: 'productCategory',
+			errorValid: 'productCategoryValid'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Quantity of goods',
 			name: 'quantity',
+			errorValid: 'quantityValid'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Weight / Volume of one item',
 			name: 'weight',
+			errorValid: 'weightValid'
 		},
 	]
 }
@@ -58,12 +64,14 @@ export const modalSell = {
 			type: 'text',
 			placeholder: 'Numbers of product',
 			name: 'sellQuantity',
+			errorValid: 'sellQuantityValid'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Date of sale',
 			name: 'saleDate',
+			errorValid: 'saleDateValid'
 		},
 	]
 }
@@ -78,36 +86,42 @@ export const modalEdit = {
 			type: 'text',
 			placeholder: 'Store',
 			name: 'storeName',
+			errorValid: 'storeNameValid'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Price',
 			name: 'price',
+			errorValid: 'priceValid'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Product name',
 			name: 'productName',
+			errorValid: 'productNameValid'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Product Category',
 			name: 'productCategory',
+			errorValid: 'productCategoryValid'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Quantity of goods',
 			name: 'quantity',
+			errorValid: 'quantityValid'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Weight / Volume of one item',
 			name: 'weight',
+			errorValid: 'weightValid'
 		},
 	]
 }

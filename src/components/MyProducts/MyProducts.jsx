@@ -30,6 +30,9 @@ const MyProducts = () => {
 	const [modalId, setModalId] = useState({productId: ''});
 	const [modalEditShow, setModalEditShow] = useState(false);
 	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
+	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
+	const userId = JSON.parse(localStorage.getItem('userId'));
+	const getUser = getUsers.filter((user) => user.id === userId)[0]
 
 	const removeProduct = (id) => {
 		const newProd = getProd.filter(el => el.id !== id)
@@ -66,7 +69,7 @@ const MyProducts = () => {
 							<tr id={product.id}>
 								<td>{product.productName}</td>
 								<td>{product.storeName}</td>
-								<td>{product.address}</td>
+								<td>{getUser.address}</td>
 								<td>{product.productCategory}</td>
 								<td>{getCurrentDate(product.createDate)}</td>
 								<td>{product.price}</td>

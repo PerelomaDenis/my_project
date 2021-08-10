@@ -4,6 +4,8 @@ import {NavLink, Redirect} from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Register.scss';
+import {errorClass, validateField} from "../../services/valid";
+
 
 
 const Register = ({changeIsReg}) => {
@@ -23,85 +25,15 @@ const Register = ({changeIsReg}) => {
 		id: Date.now(),
 	});
 
-
 	const handleChange = (e, type) => {
 		const {value} = e.target
 		setRegisterForm((prevForm) => ({
 			...prevForm,
 			[type]: value,
 		}))
-		validateField(type, value)
+		validateField(type, value, isValid, setIsValid, registerForm)
 	}
 
-	const errorClass = (n) => {
-		return (n === false ? 'has-error' : '')
-	}
-
-	const validateField = (fieldName, value) => {
-		let emailValid = isValid.emailValid;
-		let companyValid = isValid.companyValid;
-		let firstNameValid = isValid.firstNameValid;
-		let lastNameValid = isValid.lastNameValid;
-		let passwordValid = isValid.passwordValid;
-		let confirmPasswordValid = isValid.confirmPasswordValid;
-
-		switch(fieldName) {
-			case 'email':
-				const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-				reg.test(value) ? emailValid = true : emailValid = false;
-				if(value === '') emailValid = '';
-				setIsValid((prevForm) => ({
-					...prevForm,
-					emailValid: emailValid
-				}))
-				break;
-			case 'firstName':
-				value.length > 5 ? firstNameValid = true : firstNameValid = false;
-				if(value === '') firstNameValid = '';
-				setIsValid((prevForm) => ({
-					...prevForm,
-					firstNameValid: firstNameValid
-				}))
-				break;
-			case 'lastName':
-				value.length > 5 ? lastNameValid = true : lastNameValid = false;
-				if(value === '') lastNameValid = '';
-				setIsValid((prevForm) => ({
-					...prevForm,
-					lastNameValid: lastNameValid
-				}))
-				break;
-			case 'company':
-				value.length > 5 ? companyValid = true : companyValid = false;
-				if(value === '') companyValid = '';
-				setIsValid((prevForm) => ({
-					...prevForm,
-					companyValid: companyValid
-				}))
-				break;
-			case 'password':
-				value.length > 5 ? passwordValid = true : passwordValid = false;
-				if(value === '') passwordValid = '';
-				setIsValid((prevForm) => ({
-					...prevForm,
-					passwordValid: passwordValid
-				}))
-				break;
-			case 'repeatPassword':
-				value.length > 5 && registerForm.password === value ? confirmPasswordValid = true : confirmPasswordValid = false;
-				if(value === '') confirmPasswordValid = '';
-				setIsValid((prevForm) => ({
-					...prevForm,
-					confirmPasswordValid: confirmPasswordValid
-				}))
-				break;
-		}
-
- 
-	}
-
-	console.log('========>isValid', isValid);
-	
 		return (
 		<div className="wraps">
 			{isReg && <Redirect to={'/login'}/>}

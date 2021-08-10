@@ -3,6 +3,7 @@ import {ReactSVG} from "react-svg";
 import {Button, Modal} from "react-bootstrap";
 
 import './MyCreateModal.scss';
+import {errorClass, validateField} from "../../services/valid";
 
 const MyCreateModal = (
 	{
@@ -11,10 +12,20 @@ const MyCreateModal = (
 		show,
 		getProd
 	}) => {
+	const [isValid, setIsValid] = useState({
+		storeNameValid: '',
+		priceValid: '',
+		productNameValid: '',
+		productCategoryValid: '',
+		quantityValid: '',
+		weightValid: '',
+	})
 	const [form, setFrom] = useState({
 		id: Date.now(),
 		createDate: new Date(),
 	});
+	
+	console.log('========>isValid', isValid);
 
 	const handleChange = (e, type) => {
 		const {value} = e.target
@@ -22,6 +33,7 @@ const MyCreateModal = (
 			...prevForm,
 			[type]: value,
 		}))
+		validateField(type, value, isValid, setIsValid, form)
 	}
 
 	return (
@@ -48,7 +60,7 @@ const MyCreateModal = (
 								name={input.name}
 								type={input.type}
 								onChange={(e) => handleChange(e, input.name)}
-								className="modal__input"
+								className={`modal__input ${errorClass(isValid[input.errorValid])}`}
 								placeholder={input.placeholder}
 								value={form[input.name]}
 							/>
@@ -58,9 +70,15 @@ const MyCreateModal = (
 				<Modal.Footer>
 					<Button type="submit" className="modal__btn" onClick={(e) => {
 						e.preventDefault();
-						onHide()
-						getProd.push(form);
-						localStorage.setItem('products', JSON.stringify(getProd))
+
+						let values = Object.values((isValid));
+						if(values.includes(false) || values.includes('')) {
+							alert('Неверно введена информация')
+						} else {
+							onHide()
+							getProd.push(form);
+							localStorage.setItem('products', JSON.stringify(getProd))
+						}
 					}}>
 						<span className="modal__btn-text">{info.buttonText}</span>
 						<ReactSVG className="modal__btn-icon" src={info.buttonIcon}/>

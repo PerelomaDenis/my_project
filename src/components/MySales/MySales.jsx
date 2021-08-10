@@ -13,6 +13,9 @@ import {getCurrentDate} from "../MyProducts/MyProducts";
 
 const MySales = () => {
 	const [modalCreateShow, setModalCreateShow] = useState(false);
+	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
+	const userId = JSON.parse(localStorage.getItem('userId'));
+	const getUser = getUsers.filter((user) => user.id === userId)[0]
 
 	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
 	
@@ -45,7 +48,7 @@ const MySales = () => {
 						<tr>
 							<td>{product.productName}</td>
 							<td>{product.storeName}</td>
-							<td>{product.address}</td>
+							<td>{getUser.address}</td>
 							<td>{product.productCategory}</td>
 							<td>{getCurrentDate(product.createDate)}</td>
 							<td>{product.price}</td>

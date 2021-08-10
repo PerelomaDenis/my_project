@@ -26,6 +26,13 @@
           width: 32%;
           min-width: 380px;
           margin: 0 33px 33px 0;
+
+          .has-error,
+          .has-error:focus-visible,
+          .has-error:active {
+            border: 3px solid #D12323;
+            outline: none;
+          }
         }
       }
 

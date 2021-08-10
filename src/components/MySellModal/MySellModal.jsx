@@ -3,6 +3,7 @@ import {ReactSVG} from "react-svg";
 import {Button, Modal} from "react-bootstrap";
 
 import './MySellModal.scss';
+import {errorClass, validateField} from "../../services/valid";
 
 const MySellModal = (
 	{
@@ -13,6 +14,10 @@ const MySellModal = (
 		getProd,
 		setGetProd
 	}) => {
+	const [isValid, setIsValid] = useState({
+		saleDateValid: '',
+		sellQuantityValid: ''
+	})
 	const newGetProd = getProd.filter((el) => el.id === productId.productId)[0]
 	const [sellForm, setSellFrom] = useState(newGetProd);
 	const [getSellProd, setGetSellProd] = useState(JSON.parse(localStorage.getItem('sellProducts')))
@@ -23,8 +28,8 @@ const MySellModal = (
 			...prevForm,
 			[type]: value,
 		}))
+		validateField(type, value, isValid, setIsValid, sellForm)
 	}
-	console.log('========>sellForm', sellForm);
 
 	return (
 		<Modal
@@ -50,7 +55,7 @@ const MySellModal = (
 								id={input.name}
 								type={input.type}
 								onChange={(e) => handleChange(e, input.name)}
-								className="modal__input"
+								className={`modal__input ${errorClass(isValid[input.errorValid])}`}
 								placeholder={input.placeholder}
 								value={sellForm[input.name]}
 							/>
@@ -60,7 +65,7 @@ const MySellModal = (
 				<Modal.Footer>
 					<Button type="submit" className="modal__btn" onClick={(e) => {
 						e.preventDefault();
-						onHide()
+
 						getSellProd.push(sellForm);
 						localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
 						sellForm.quantity = sellForm.quantity - sellForm.sellQuantity;
@@ -78,9 +83,16 @@ const MySellModal = (
 								}
 								return prod
 							})
-							setGetProd(newChangedProd)
-							localStorage.setItem('products', JSON.stringify(newChangedProd))
+							let values = Object.values((isValid));
+							if(values.includes(false) || values.includes('')) {
+								alert('Неверно введена информация')
+							} else {
+								onHide()
+								setGetProd(newChangedProd)
+								localStorage.setItem('products', JSON.stringify(newChangedProd))
+							}
 						}
+
 					}}>
 						<span className="modal__btn-text">{info.buttonText}</span>
 						<ReactSVG className="modal__btn-icon" src={info.buttonIcon}/>

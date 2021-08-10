@@ -5,20 +5,27 @@ import {NavLink, Redirect} from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.scss';
+import {errorClass, validateField} from "../../services/valid";
 
 
 const Login = ({changeIsLoin, changeUserId}) => {
+	const [isValid, setIsValid] = useState({
+		emailValid: '',
+		passwordValid: '',
+	})
 	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
 	const [loginForm, setLoginForm] = useState({});
 	const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem('isLogin')));
+
 	const handleChange = (e, type) => {
 		const {value} = e.target
 		setLoginForm((prevForm) => ({
 			...prevForm,
 			[type]: value,
 		}))
+		validateField(type, value, isValid, setIsValid, loginForm)
 	}
-
+console.log('========>isValid', isValid);
 	return (
 		<div className="wraps">
 			{isLogin && <Redirect to={'/'}/>}
@@ -29,7 +36,7 @@ const Login = ({changeIsLoin, changeUserId}) => {
 							<div className="register-form__item">
 								<label className="register-form__item-title" htmlFor="email">Email</label>
 								<input
-									 className="register-form__item-input"
+									 className={`register-form__item-input ${errorClass(isValid.emailValid)}`}
 									 type="email"
 									 id="email"
 									 name="email"
@@ -43,7 +50,7 @@ const Login = ({changeIsLoin, changeUserId}) => {
 							<div className="register-form__item">
 								<label className="register-form__item-title" htmlFor="password">Password</label>
 								<input
-									 className="register-form__item-input"
+									 className={`register-form__item-input ${errorClass(isValid.passwordValid)}`}
 									 type="password"
 									 id="password"
 									 name="password"
@@ -76,12 +83,16 @@ const Login = ({changeIsLoin, changeUserId}) => {
 						}
 
 						if(isPassword && isEmail) {
-							console.log('========>userId', userId);
-							setIsLogin(true);
-							localStorage.setItem('isLogin', JSON.stringify(true));
-							changeIsLoin(true);
-							changeUserId(userId);
-							localStorage.setItem('userId', JSON.stringify(userId));
+							let values = Object.values((isValid));
+							if(values.includes(false) || values.includes('')) {
+								alert('Неверно введена информация')
+							} else {
+								setIsLogin(true);
+								localStorage.setItem('isLogin', JSON.stringify(true));
+								changeIsLoin(true);
+								changeUserId(userId);
+								localStorage.setItem('userId', JSON.stringify(userId));
+							}
 						} else {
 							alert('Email или пароль введены неверно')
 						}

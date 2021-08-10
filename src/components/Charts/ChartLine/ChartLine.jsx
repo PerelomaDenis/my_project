@@ -118,6 +118,7 @@ const ChartBar = () => {
 						labelComponent={ValueLabel}
 					/>
 
+
 					<LineSeries
 						valueField="totalQuantity"
 						argumentField="id"

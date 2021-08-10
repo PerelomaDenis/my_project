@@ -2,6 +2,8 @@ export const errorClass = (n) => {
 	return (n === false ? 'has-error' : '')
 }
 
+const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
 export const validateField = (fieldName, value, isValid, setIsValid, form) => {
 	let emailValid = isValid.emailValid;
 	let companyValid = isValid.companyValid;
@@ -90,7 +92,7 @@ export const validateField = (fieldName, value, isValid, setIsValid, form) => {
 			}))
 			break;
 		case 'saleDate':
-			dateReg.test(value) ? saleDateValid = true : saleDateValid = false;
+			days.includes(value) ? saleDateValid = true : saleDateValid = false;
 			if(value === '') saleDateValid = '';
 			setIsValid((prevForm) => ({
 				...prevForm,

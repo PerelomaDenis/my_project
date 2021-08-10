@@ -15,13 +15,12 @@ const MySellModal = (
 		setGetProd
 	}) => {
 	const [isValid, setIsValid] = useState({
-		saleDateValid: '',
-		sellQuantityValid: ''
+		saleDateValid: true,
+		sellQuantityValid: true
 	})
 	const newGetProd = getProd.filter((el) => el.id === productId.productId)[0]
 	const [sellForm, setSellFrom] = useState(newGetProd);
 	const [getSellProd, setGetSellProd] = useState(JSON.parse(localStorage.getItem('sellProducts')))
-
 	const handleChange = (e, type) => {
 		const {value} = e.target
 		setSellFrom((prevForm) => ({
@@ -30,7 +29,7 @@ const MySellModal = (
 		}))
 		validateField(type, value, isValid, setIsValid, sellForm)
 	}
-
+console.log('========>sellForm', sellForm);
 	return (
 		<Modal
 			onHide={onHide}
@@ -65,7 +64,10 @@ const MySellModal = (
 				<Modal.Footer>
 					<Button type="submit" className="modal__btn" onClick={(e) => {
 						e.preventDefault();
-
+						let values = Object.values((isValid));
+						if(values.includes(false) || values.includes('')) {
+							alert('Неверно введена информация')
+						} else {
 						getSellProd.push(sellForm);
 						localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
 						sellForm.quantity = sellForm.quantity - sellForm.sellQuantity;
@@ -83,10 +85,7 @@ const MySellModal = (
 								}
 								return prod
 							})
-							let values = Object.values((isValid));
-							if(values.includes(false) || values.includes('')) {
-								alert('Неверно введена информация')
-							} else {
+
 								onHide()
 								setGetProd(newChangedProd)
 								localStorage.setItem('products', JSON.stringify(newChangedProd))

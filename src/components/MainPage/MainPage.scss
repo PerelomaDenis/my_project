@@ -32,6 +32,21 @@
       .graph {
         background: #FFFFFF;
         border-radius: 3px;
+        padding: 32px;
+
+        .graph__title {
+          font-family: Inter-SemiBold;
+          font-size: 18px;
+          line-height: 18px;
+          color: #2B3844;
+        }
+
+        .graph__subtitle {
+          font-family: Inter;
+          font-size: 12px;
+          line-height: 12px;
+          color: #2B3844;
+        }
 
         .no-data {
           height: 100%;

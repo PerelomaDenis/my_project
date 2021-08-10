@@ -18,7 +18,6 @@ const App = () => {
 	const [isReg, setIsReg] = useState(JSON.parse(localStorage.getItem('isReg')) || false)
 	const [userId, setUserId] = useState(JSON.parse(localStorage.getItem('userId')) || '')
 
-
 	useEffect(() => {
 		localStorage.setItem('products', JSON.stringify(products))
 		localStorage.setItem('sellProducts', JSON.stringify(sellProducts))

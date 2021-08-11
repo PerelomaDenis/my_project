@@ -33,7 +33,7 @@ const MyEditModal = (
 		}))
 		validateField(type, value, isValid, setIsValid, editForm)
 	}
-console.log('========>isValid', isValid);
+
 	return (
 		<Modal
 			onHide={onHide}
@@ -62,6 +62,7 @@ console.log('========>isValid', isValid);
 								placeholder={input.placeholder}
 								value={editForm[input.name]}
 							/>
+							{errorClass(isValid[input.errorValid]) && (<div className="error-text">{input.errorText}</div>)}
 						</div>
 					))}
 				</Modal.Body>
@@ -78,7 +79,7 @@ console.log('========>isValid', isValid);
 						})
 						let values = Object.values((isValid));
 						if(values.includes(false) || values.includes('')) {
-							alert('Неверно введена информация')
+
 						} else {
 							onHide()
 							setGetProd(newChangedProd)

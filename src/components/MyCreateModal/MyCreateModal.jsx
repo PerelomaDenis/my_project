@@ -64,16 +64,16 @@ const MyCreateModal = (
 								placeholder={input.placeholder}
 								value={form[input.name]}
 							/>
+							{errorClass(isValid[input.errorValid]) && (<div className="error-text">{input.errorText}</div>)}
 						</div>
 					))}
 				</Modal.Body>
 				<Modal.Footer>
 					<Button type="submit" className="modal__btn" onClick={(e) => {
 						e.preventDefault();
-
 						let values = Object.values((isValid));
 						if(values.includes(false) || values.includes('')) {
-							alert('Неверно введена информация')
+
 						} else {
 							onHide()
 							getProd.push(form);

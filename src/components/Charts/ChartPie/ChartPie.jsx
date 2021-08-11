@@ -6,15 +6,10 @@ import {
 	Legend,
 	Title,
 } from '@devexpress/dx-react-chart-material-ui';
-import { Animation } from '@devexpress/dx-react-chart';
+import {Animation} from '@devexpress/dx-react-chart';
+
 import './ChartPie.scss';
 
-const data = [
-	{ country: 'Russia', area: 12 },
-	{ country: 'Canada', area: 7 },
-	{ country: 'USA', area: 7 },
-	{ country: 'Others', area: 55 },
-];
 
 const ChartLine = () => {
 	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
@@ -27,21 +22,24 @@ const ChartLine = () => {
 
 
 	return (
-		<Paper>
-			<Chart
-				data={getChartPieData}
-				width="200"
-				height="200"
-				rotated='true'
-			>
-				<PieSeries
-					valueField="sellQuantity"
-					argumentField="productName"
-				/>
-				<Legend />
-				<Animation/>
-			</Chart>
-		</Paper>
+		<>
+			<p className="graph__title">Sales schedule by day</p>
+			<Paper>
+				<Chart
+					data={getChartPieData}
+					width="200"
+					height="200"
+					rotated='true'
+				>
+					<PieSeries
+						valueField="sellQuantity"
+						argumentField="productName"
+					/>
+					<Legend/>
+					<Animation/>
+				</Chart>
+			</Paper>
+		</>
 	)
 }
 

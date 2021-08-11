@@ -13,18 +13,16 @@ import ChartBar from "../Charts/ChartBar";
 import ChartLine from "../Charts/ChartLine/ChartLine";
 
 
-
-
 const MainPage = () => {
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
-
+	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
 
 	return (
 		<div className="wrap">
 			<div className="wrap__top">
 				<MainTitle title={mainPageProps.title} description={mainPageProps.description}/>
 				<Button className="button" variant="primary" onClick={() => setModalCreateShow(true)}>
-					<ButtonCreate />
+					<ButtonCreate/>
 				</Button>
 
 			</div>
@@ -32,26 +30,31 @@ const MainPage = () => {
 			<div className="wrap__content">
 				<div className="graphs">
 					<div className="graph-1 graph">
-						{/*<div className="no-data">*/}
-						{/*	<p>No data</p>*/}
-						{/*</div>*/}
-						<p className="graph__title">Sales schedule by day</p>
-						<ChartPie />
+						{getSellProd.length === 0 ? (
+							<div className="no-data">
+								<p>No data</p>
+							</div>
+						) : (
+							<ChartPie/>
+						)}
 					</div>
 					<div className="graph-2 graph">
-						{/*<div className="no-data">*/}
-						{/*	<p>No data</p>*/}
-						{/*</div>*/}
-						<p className="graph__title">Total earned</p>
-						<ChartLine />
+						{getSellProd.length === 0 ? (
+							<div className="no-data">
+								<p>No data</p>
+							</div>
+						) : (
+							<ChartLine/>
+						)}
 					</div>
 					<div className="graph-3 graph">
-						{/*<div className="no-data">*/}
-						{/*	<p>No data</p>*/}
-						{/*</div>*/}
-						<p className="graph__title">Sales Overview</p>
-						<p className="graph__subtitle">Graph sales for all days</p>
-						<ChartBar />
+						{getSellProd.length === 0 ? (
+							<div className="no-data">
+								<p>No data</p>
+							</div>
+						) : (
+							<ChartBar/>
+						)}
 					</div>
 				</div>
 				{modalCreateShow && (

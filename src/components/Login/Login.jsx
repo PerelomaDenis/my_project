@@ -25,7 +25,7 @@ const Login = ({changeIsLoin, changeUserId}) => {
 		}))
 		validateField(type, value, isValid, setIsValid, loginForm)
 	}
-console.log('========>isValid', isValid);
+
 	return (
 		<div className="wraps">
 			{isLogin && <Redirect to={'/'}/>}

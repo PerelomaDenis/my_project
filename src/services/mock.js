@@ -14,42 +14,48 @@ export const modalCreate = {
 			type: 'text',
 			placeholder: 'Store',
 			name: 'storeName',
-			errorValid: 'storeNameValid'
+			errorValid: 'storeNameValid',
+			errorText: 'Min 3'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Price',
 			name: 'price',
-			errorValid: 'priceValid'
+			errorValid: 'priceValid',
+			errorText: 'Only number'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Product name',
 			name: 'productName',
-			errorValid: 'productNameValid'
+			errorValid: 'productNameValid',
+			errorText: 'Min 2'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Product Category',
 			name: 'productCategory',
-			errorValid: 'productCategoryValid'
+			errorValid: 'productCategoryValid',
+			errorText: 'Min 2'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Quantity of goods',
 			name: 'quantity',
-			errorValid: 'quantityValid'
+			errorValid: 'quantityValid',
+			errorText: 'Only number'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Weight / Volume of one item',
 			name: 'weight',
-			errorValid: 'weightValid'
+			errorValid: 'weightValid',
+			errorText: 'Only number'
 		},
 	]
 }
@@ -64,14 +70,16 @@ export const modalSell = {
 			type: 'text',
 			placeholder: 'Numbers of product',
 			name: 'sellQuantity',
-			errorValid: 'sellQuantityValid'
+			errorValid: 'sellQuantityValid',
+			errorText: 'Only number'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Date of sale',
 			name: 'saleDate',
-			errorValid: 'saleDateValid'
+			errorValid: 'saleDateValid',
+			errorText: 'Enter Mon, Tue, Wed, Thu, Fri, Sat or Sun'
 		},
 	]
 }
@@ -86,42 +94,48 @@ export const modalEdit = {
 			type: 'text',
 			placeholder: 'Store',
 			name: 'storeName',
-			errorValid: 'storeNameValid'
+			errorValid: 'storeNameValid',
+			errorText: 'Min 3'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Price',
 			name: 'price',
-			errorValid: 'priceValid'
+			errorValid: 'priceValid',
+			errorText: 'Only number'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Product name',
 			name: 'productName',
-			errorValid: 'productNameValid'
+			errorValid: 'productNameValid',
+			errorText: 'Min 2'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Product Category',
 			name: 'productCategory',
-			errorValid: 'productCategoryValid'
+			errorValid: 'productCategoryValid',
+			errorText: 'Min 2'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Quantity of goods',
 			name: 'quantity',
-			errorValid: 'quantityValid'
+			errorValid: 'quantityValid',
+			errorText: 'Only number'
 		},
 		{
 			value: '',
 			type: 'text',
 			placeholder: 'Weight / Volume of one item',
 			name: 'weight',
-			errorValid: 'weightValid'
+			errorValid: 'weightValid',
+			errorText: 'Only number'
 		},
 	]
 }

@@ -7,7 +7,6 @@ import './Register.scss';
 import {errorClass, validateField} from "../../services/valid";
 
 
-
 const Register = ({changeIsReg}) => {
 	const [isValid, setIsValid] = useState({
 		emailValid: '',

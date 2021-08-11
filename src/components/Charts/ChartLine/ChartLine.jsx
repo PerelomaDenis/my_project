@@ -64,42 +64,15 @@ const ValueLabel = (props) => {
 	);
 };
 
-const titleStyles = {
-	title: {
-		whiteSpace: 'pre',
-	},
-};
-const TitleText = withStyles(titleStyles)(({classes, ...props}) => (
-	<Title.Text {...props} className={classes.title}/>
-));
-
 const ChartBar = () => {
-	const mock = [
-		{
-			year: 20, tvNews: 50,
-		}, {
-			year: 22, tvNews: 13,
-		}, {
-			year: 24, tvNews: 1,
-		},
-		{
-			year: 26, tvNews: 3,
-		},
-		{
-			year: 28, tvNews: 50,
-		},
-	]
-
 	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
-	const getChartLineData = getSellProd.map((prod) => {
+	const getChartLineData = getSellProd.map((prod, index) => {
 		return {
-			id: prod.id,
+			index: index,
 			productName: prod.productName,
 			totalQuantity: +prod.sellQuantity,
 		}
 	})
-	
-	console.log('========>getChartLineData', getChartLineData);
 
 	const getTotalPrice = getSellProd.reduce((prev, current) => {
 		return prev + +current.price * +current.sellQuantity
@@ -107,6 +80,7 @@ const ChartBar = () => {
 
 	return (
 		<>
+			<p className="graph__title">Total earned</p>
 			<Paper>
 				<Chart
 					data={getChartLineData}
@@ -117,11 +91,9 @@ const ChartBar = () => {
 						max={50}
 						labelComponent={ValueLabel}
 					/>
-
-
 					<LineSeries
 						valueField="totalQuantity"
-						argumentField="id"
+						argumentField="index"
 					/>
 					<Animation/>
 				</Chart>

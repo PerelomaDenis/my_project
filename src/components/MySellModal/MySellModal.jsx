@@ -29,7 +29,7 @@ const MySellModal = (
 		}))
 		validateField(type, value, isValid, setIsValid, sellForm)
 	}
-console.log('========>sellForm', sellForm);
+
 	return (
 		<Modal
 			onHide={onHide}
@@ -58,6 +58,7 @@ console.log('========>sellForm', sellForm);
 								placeholder={input.placeholder}
 								value={sellForm[input.name]}
 							/>
+							{errorClass(isValid[input.errorValid]) && (<div className="error-text">{input.errorText}</div>)}
 						</div>
 					))}
 				</Modal.Body>
@@ -66,7 +67,7 @@ console.log('========>sellForm', sellForm);
 						e.preventDefault();
 						let values = Object.values((isValid));
 						if(values.includes(false) || values.includes('')) {
-							alert('Неверно введена информация')
+
 						} else {
 						getSellProd.push(sellForm);
 						localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
@@ -85,7 +86,6 @@ console.log('========>sellForm', sellForm);
 								}
 								return prod
 							})
-
 								onHide()
 								setGetProd(newChangedProd)
 								localStorage.setItem('products', JSON.stringify(newChangedProd))

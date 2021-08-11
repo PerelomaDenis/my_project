@@ -6,7 +6,7 @@ import buttonIcon from '../../assets/images/button-icon.svg';
 import './ButtonCreate.scss';
 
 
-const ButtonCreate = (props) => {
+const ButtonCreate = () => {
 	return (
 		<div className="button__wrap">
 				<ReactSVG className="button__icon" src={buttonIcon} />

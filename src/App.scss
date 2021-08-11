@@ -6,6 +6,7 @@
 .page {
   .sidebar {
     width: 274px;
+    min-width: 274px;
     background: #FFFFFF;
     padding: 50px 0 30px 0;
   }
@@ -19,6 +20,9 @@
 
 .error-text {
   margin-top: -20px;
+  color: #D12323;
+}
+.error__text {
   color: #D12323;
 }
 

@@ -21,6 +21,11 @@
     .personal-form {
       .personal-form__row {
         display: flex;
+        flex-wrap: wrap;
+
+        .personal-form__el:nth-child(5) {
+          margin-right: 40%;
+        }
 
         .personal-form__el {
           width: 32%;

@@ -140,6 +140,65 @@ export const modalEdit = {
 	]
 }
 
+export const personalFormFields = [
+	{
+		label: 'First name',
+		id: 'firstName',
+		placeholder: 'Enter your first name',
+		type: 'text',
+		valid: 'firstNameValid',
+		errorText: 'Min 4'
+	},
+	{
+		label: 'Last name',
+		id: 'lastName',
+		placeholder: 'Enter your last name',
+		type: 'text',
+		valid: 'lastNameValid',
+		errorText: 'Min 6'
+	},
+	{
+		label: 'Company name',
+		id: 'company',
+		placeholder: 'Enter your company name',
+		type: 'text',
+		valid: 'companyValid',
+		errorText: 'Min 6'
+	},
+	{
+		label: 'Product Category',
+		id: 'productCategory',
+		placeholder: 'Enter product category',
+		type: 'text',
+		valid: 'productCategoryValid',
+		errorText: 'Min 2'
+	},
+	{
+		label: 'Address',
+		id: 'address',
+		placeholder: 'Enter your address',
+		type: 'text',
+		valid: 'addressValid',
+		errorText: 'Min 6'
+	},
+	{
+		label: 'Enter old password',
+		id: 'oldPassword',
+		placeholder: 'Enter password',
+		type: 'password',
+		valid: 'oldPasswordValid',
+		errorText: 'Min 6'
+	},
+	{
+		label: 'Enter a new password',
+		id: 'newPassword',
+		placeholder: 'Enter your new password',
+		type: 'password',
+		valid: 'newPasswordValid',
+		errorText: 'Min 6'
+	}
+]
+
 export const mainPageProps = {
 	title: "Sales statistics",
 	description: "Welcome to CRM dashboard"

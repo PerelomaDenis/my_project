@@ -1,16 +1,17 @@
 import React from "react";
-import {Button, Modal} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 
 import ButtonCreate from "../ButtonCreate";
 import MyCreateModal from "../MyCreateModal";
 import MainTitle from "../MainTitle";
+import ChartPie from "../Charts/ChartPie";
+import ChartBar from "../Charts/ChartBar";
+import ChartLine from "../Charts/ChartLine/ChartLine";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MainPage.scss';
 import {mainPageProps, modalCreate} from "../../services/mock";
-import ChartPie from "../Charts/ChartPie";
-import ChartBar from "../Charts/ChartBar";
-import ChartLine from "../Charts/ChartLine/ChartLine";
+
 
 
 const MainPage = () => {

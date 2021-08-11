@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button} from "react-bootstrap";
+import {Button, Offcanvas} from "react-bootstrap";
 
 import MainTitle from "../MainTitle";
 import ButtonCreate from "../ButtonCreate";
@@ -10,6 +10,9 @@ import './Personal.scss';
 import {modalCreate, personalFormFields, personalProps} from "../../services/mock";
 import FormInput from "../FormInput";
 import {errorClass, validateField} from "../../services/valid";
+import {ReactSVG} from "react-svg";
+import menu from "../../assets/images/menu.svg";
+import Sidebar from "../Sidebar";
 
 
 const Personal = () => {
@@ -29,6 +32,8 @@ const Personal = () => {
 	const getUser = getUsers.filter((user) => user.id === userId)[0]
 	const [personalForm, setPersonalForm] = useState(getUser);
 
+	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
+
 	const handleChange = (e, type) => {
 		const {value} = e.target
 		setPersonalForm((prevForm) => ({
@@ -47,12 +52,30 @@ const Personal = () => {
 		validateField(type, value, isValid, setIsValid, newPassword)
 	}
 
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = (e) => {
+		e.preventDefault();
+		setShow(true);
+	}
+
 	return (
 		<div className="wrap">
 			<div className="wrap__top">
+				<div className="wrap__top-mobile">
+					<ReactSVG className="" src={menu} onClick={handleShow}/>
+					<Offcanvas show={show} onHide={handleClose}>
+						<Offcanvas.Header closeButton>
+						</Offcanvas.Header>
+						<Offcanvas.Body>
+							<Sidebar/>
+						</Offcanvas.Body>
+					</Offcanvas>
+				</div>
 				<MainTitle title={personalProps.title} description={personalProps.description}/>
 				<Button className="button" variant="primary" onClick={() => setModalCreateShow(true)}>
-					<ButtonCreate />
+					<ButtonCreate/>
 				</Button>
 			</div>
 			<hr/>
@@ -77,39 +100,41 @@ const Personal = () => {
 							</div>
 						))}
 					</div>
-					<Button className="button" variant="primary" onClick={(e) => {
-						e.preventDefault();
-						if(personalForm.password === newPassword.oldPassword
-							&& newPassword.oldPassword !== newPassword.newPassword) {
-							personalForm.password = newPassword.newPassword
-						}
-						const newUsers = getUsers.map((user) => {
-							if(user.email === getUser.email) {
-								user = {...personalForm}
-								return user
+					<div>
+						<Button className="button" variant="primary" onClick={(e) => {
+							e.preventDefault();
+							if (personalForm.password === newPassword.oldPassword
+								&& newPassword.oldPassword !== newPassword.newPassword) {
+								personalForm.password = newPassword.newPassword
 							}
-							return user
-						})
-						let values = Object.values((isValid));
-						if(values.includes(false) || values.includes('')) {
-							alert('Неверно введена информация')
-						} else {
-							setGetUsers(newUsers)
-							localStorage.setItem('users', JSON.stringify(newUsers))
-							setNewPassword({oldPassword: '', newPassword: ''})
-						}
-					}}>
-						<div className="personal-form__button">
-							<span className="personal-form__button-text">Save changes</span>
-						</div>
-					</Button>
-
+							const newUsers = getUsers.map((user) => {
+								if (user.email === getUser.email) {
+									user = {...personalForm}
+									return user
+								}
+								return user
+							})
+							let values = Object.values((isValid));
+							if (values.includes(false) || values.includes('')) {
+								alert('Неверно введена информация')
+							} else {
+								setGetUsers(newUsers)
+								localStorage.setItem('users', JSON.stringify(newUsers))
+								setNewPassword({oldPassword: '', newPassword: ''})
+							}
+						}}>
+							<div className="personal-form__button">
+								<span className="personal-form__button-text">Save changes</span>
+							</div>
+						</Button>
+					</div>
 				</form>
 				{modalCreateShow && (
 					<MyCreateModal
 						info={modalCreate}
 						show={modalCreateShow}
 						onHide={() => setModalCreateShow(false)}
+						getProd={getProd}
 					/>
 				)}
 			</div>

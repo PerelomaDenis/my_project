@@ -17,13 +17,16 @@
 
     .register-form {
       width: 380px;
+      display: flex;
+      flex-wrap: wrap;
 
       .register-form__row {
         display: flex;
-        justify-content: space-between;
+        width: 100%;
 
         .register-form__el {
           width: 100%;
+          margin-bottom: 20px;
         }
 
         .register-form__item {
@@ -80,9 +83,12 @@
 
 
       .register-form__row:first-child {
-        .register-form__el {
-          width: 48%;
-        }
+        width: 48%;
+        margin-right: 4%;
+      }
+
+      .register-form__row:nth-child(2) {
+        width: 48%;
       }
 
       .register-form__btn {
@@ -139,5 +145,19 @@
     background-size: cover;
     height: auto;
     min-height: 100vh;
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .wraps {
+    height: 100vh;
+  }
+
+  .wraps .wrap-left {
+    width: 100%;
+  }
+
+  .wraps .wrap-right {
+    display: none;
   }
 }

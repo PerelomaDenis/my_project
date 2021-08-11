@@ -12,6 +12,7 @@ const MyCreateModal = (
 		show,
 		getProd
 	}) => {
+
 	const [isValid, setIsValid] = useState({
 		storeNameValid: '',
 		priceValid: '',
@@ -24,8 +25,6 @@ const MyCreateModal = (
 		id: Date.now(),
 		createDate: new Date(),
 	});
-	
-	console.log('========>isValid', isValid);
 
 	const handleChange = (e, type) => {
 		const {value} = e.target

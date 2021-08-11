@@ -18,9 +18,8 @@
     .register-form {
       width: 380px;
 
-      .register-form__row {
-        display: flex;
-        justify-content: space-between;
+      .login-form__row {
+        width: 100%;
 
         .register-form__item {
           display: flex;
@@ -64,9 +63,13 @@
           }
         }
 
-        .register-form__item-small {
-          width: 48%;
+        .has-error,
+        .has-error:focus-visible,
+        .has-error:active {
+          border: 3px solid #D12323;
+          outline: none;
         }
+
       }
 
       .register-form__btn {

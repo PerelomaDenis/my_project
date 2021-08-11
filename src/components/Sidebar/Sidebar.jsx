@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import SidebarLink from "./SidebarLink";
 import Logout from "./Logout";
@@ -9,11 +9,19 @@ import {links} from "../../services/mock";
 
 
 const Sidebar = ({changeIsReg, changeIsLoin}) => {
+	// const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem('isLogin')) || false)
+	// const [isReg, setIsReg] = useState(JSON.parse(localStorage.getItem('isReg')) || false)
+	// const changeIsLoin = (value) => {
+	// 	setIsLogin(value)
+	// }
+	//
+	// const changeIsReg = (value) => {
+	// 	setIsReg(value)
+	// }
+
 	return (
 		<div className="sidebar__content">
-			<a href="/">
-				<Logo />
-			</a>
+			<Logo />
 			<ul className="sidebar__links-list">
 				<li>
 					<ul>

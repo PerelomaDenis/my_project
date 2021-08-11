@@ -6,6 +6,7 @@ import {NavLink, Redirect} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.scss';
 import {errorClass, validateField} from "../../services/valid";
+import {loginFormFields, registerFormFields} from "../../services/mock";
 
 
 const Login = ({changeIsLoin, changeUserId}) => {
@@ -32,34 +33,26 @@ const Login = ({changeIsLoin, changeUserId}) => {
 			<div className="wrap-left">
 				<h1>Sign in</h1>
 				<form className="register-form">
-					<div className="register-form__row">
-							<div className="register-form__item">
-								<label className="register-form__item-title" htmlFor="email">Email</label>
-								<input
-									 className={`register-form__item-input ${errorClass(isValid.emailValid)}`}
-									 type="email"
-									 id="email"
-									 name="email"
-									 placeholder="Email"
-									 value={loginForm.email}
-									 onChange={(e) => handleChange(e, "email")}
-								/>
+					{loginFormFields.map((field) => (
+						<div className="login-form__row">
+							<div className="register-form__el">
+								<div className="register-form__item">
+									<label className="register-form__item-title" htmlFor={field.id}>{field.label}</label>
+									<input
+										className="register-form__item-input"
+										type={field.type}
+										id={field.id}
+										name={field.id}
+										placeholder={field.placeholder}
+										value={loginForm[field.id]}
+										onChange={(e) => handleChange(e, field.id)
+										}
+									/>
+								</div>
 							</div>
-					</div>
-					<div className="register-form__row">
-							<div className="register-form__item">
-								<label className="register-form__item-title" htmlFor="password">Password</label>
-								<input
-									 className={`register-form__item-input ${errorClass(isValid.passwordValid)}`}
-									 type="password"
-									 id="password"
-									 name="password"
-									 placeholder="Enter password"
-									 value={loginForm.password}
-									 onChange={(e) => handleChange(e, "password")}
-								/>
-							</div>
-					</div>
+						</div>
+					))}
+
 					<Button className="register-form__btn" onClick={(e) => {
 						let isEmail = false;
 						let isPassword = false;

@@ -1,22 +1,27 @@
 import React, {useState} from "react";
-import {Button, Table} from "react-bootstrap";
+import {Button, Offcanvas, Table} from "react-bootstrap";
 import {ReactSVG} from "react-svg";
+
 
 import ButtonCreate from "../ButtonCreate";
 import MyCreateModal from "../MyCreateModal";
 import MainTitle from "../MainTitle";
 import MySellModal from "../MySellModal";
 import MyEditModal from "../MyEditModal";
+import Logo from "../Sidebar/Logo";
+import Sidebar from "../Sidebar";
 
 import del from "../../assets/images/Delete.svg";
 import edit from "../../assets/images/edit.svg";
+import menu from "../../assets/images/menu.svg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MyProducts.scss';
 import {modalCreate, modalEdit, modalSell, myProductsProps, tableMyProductTitles} from "../../services/mock";
 
+
 export const getCurrentDate = (date) => {
 	const newDate = new Date(date);
-	let day = newDate.getDay() + 1;
+	let day = newDate.getDate();
 	let month = newDate.getMonth() + 1;
 	let year = newDate.getFullYear();
 	if(day < 10) day = '0' + day;
@@ -40,9 +45,27 @@ const MyProducts = () => {
 		localStorage.setItem('products', JSON.stringify(newProd))
 	}
 
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = (e) => {
+		e.preventDefault();
+		setShow(true);
+	}
+
 	return (
 		<div className="wrap">
 			<div className="wrap__top">
+				<div className="wrap__top-mobile">
+					<ReactSVG className="" src={menu} onClick={handleShow}/>
+					<Offcanvas show={show} onHide={handleClose}>
+						<Offcanvas.Header closeButton>
+						</Offcanvas.Header>
+						<Offcanvas.Body>
+							<Sidebar />
+						</Offcanvas.Body>
+					</Offcanvas>
+				</div>
 				<MainTitle title={myProductsProps.title} description={myProductsProps.description}/>
 				<Button className="button" variant="primary" onClick={() => setModalCreateShow(true)}>
 					<ButtonCreate/>
@@ -55,7 +78,7 @@ const MyProducts = () => {
 						<p>No data</p>
 					</div>
 				) : (
-					<Table striped borderless>
+					<Table striped borderless responsive="sm">
 					<thead>
 					<tr>
 						{tableMyProductTitles.map((title) => (

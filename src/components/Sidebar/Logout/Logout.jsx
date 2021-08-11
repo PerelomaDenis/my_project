@@ -6,6 +6,7 @@ import './Logout.scss';
 import log from '../../../assets/images/log.svg';
 
 const Logout = ({changeIsReg, changeIsLoin}) => {
+
 	return (
 		<NavLink className="sidebar__link" to="/" onClick={(e) => {
 			localStorage.setItem('isReg', JSON.stringify(false));

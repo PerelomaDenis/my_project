@@ -70,3 +70,26 @@
     }
   }
 }
+
+@media screen and (max-width: 1280px) {
+  .wrap .wrap__content .personal-form .button {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrap .wrap__content .personal-form .personal-form__row .personal-form__el:nth-child(5) {
+    margin-right: 33px;
+  }
+
+  .wrap .wrap__content .personal-form .personal-form__row {
+    justify-content: center;
+    display: flex;
+  }
+
+  .wrap .wrap__content .personal-form div:last-child {
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -80,3 +80,23 @@
   }
 }
 
+@media screen and (max-width: 1024px){
+  .wrap .wrap__content .graphs {
+    grid-template-areas:
+        'graph-1 graph-2'
+        'graph-3 graph-3';
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 3fr 2fr;
+  }
+}
+
+@media screen and (max-width: 720px){
+  .wrap .wrap__content .graphs {
+    grid-template-areas:
+        'graph-1'
+        'graph-2'
+        'graph-3';
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+}

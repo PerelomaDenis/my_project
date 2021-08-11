@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Modal, Table} from "react-bootstrap";
+import {Button, Modal, Offcanvas, Table} from "react-bootstrap";
 
 import ButtonCreate from "../ButtonCreate";
 import MyCreateModal from "../MyCreateModal";
@@ -9,6 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './MySales.scss';
 import {modalCreate, mySalesProps, tableMySalesTitles} from "../../services/mock";
 import {getCurrentDate} from "../MyProducts/MyProducts";
+import {ReactSVG} from "react-svg";
+import menu from "../../assets/images/menu.svg";
+import Sidebar from "../Sidebar";
 
 
 const MySales = () => {
@@ -18,10 +21,28 @@ const MySales = () => {
 	const getUser = getUsers.filter((user) => user.id === userId)[0]
 
 	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
-	
+	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = (e) => {
+		e.preventDefault();
+		setShow(true);
+	}
+
 	return (
 		<div className="wrap">
 			<div className="wrap__top">
+				<div className="wrap__top-mobile">
+					<ReactSVG className="" src={menu} onClick={handleShow}/>
+					<Offcanvas show={show} onHide={handleClose}>
+						<Offcanvas.Header closeButton>
+						</Offcanvas.Header>
+						<Offcanvas.Body>
+							<Sidebar />
+						</Offcanvas.Body>
+					</Offcanvas>
+				</div>
 				<MainTitle title={mySalesProps.title} description={mySalesProps.description}/>
 				<Button className="button" variant="primary" onClick={() => setModalCreateShow(true)}>
 					<ButtonCreate />
@@ -66,6 +87,7 @@ const MySales = () => {
 						info={modalCreate}
 						show={modalCreateShow}
 						onHide={() => setModalCreateShow(false)}
+						getProd={getProd}
 					/>
 				)}
 			</div>

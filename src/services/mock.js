@@ -140,6 +140,76 @@ export const modalEdit = {
 	]
 }
 
+export const registerFormFields = [
+	{
+		label: 'First name',
+		id: 'firstName',
+		placeholder: 'First name',
+		type: 'text',
+		valid: 'firstNameValid',
+		errorText: 'Min 4'
+	},
+	{
+		label: 'Last name',
+		id: 'lastName',
+		placeholder: 'Last name',
+		type: 'text',
+		valid: 'lastNameValid',
+		errorText: 'Min 6'
+	},
+	{
+		label: 'Company name',
+		id: 'company',
+		placeholder: 'Company name',
+		type: 'text',
+		valid: 'companyValid',
+		errorText: 'Min 6'
+	},
+	{
+		label: 'Email',
+		id: 'email',
+		placeholder: 'Email',
+		type: 'email',
+		valid: 'emailValid',
+		errorText: 'Wrong email'
+	},
+	{
+		label: 'Password',
+		id: 'password',
+		placeholder: 'Password',
+		type: 'password',
+		valid: 'passwordValid',
+		errorText: 'Min 6'
+	},
+	{
+		label: 'Repeat password',
+		id: 'repeatPassword',
+		placeholder: 'Repeat password',
+		type: 'password',
+		valid: 'confirmPasswordValid',
+		errorText: 'Min 6'
+	},
+]
+
+export const loginFormFields = [
+	{
+		label: 'Email',
+		id: 'email',
+		placeholder: 'Email',
+		type: 'email',
+		valid: 'emailValid',
+		errorText: 'Wrong email'
+	},
+	{
+		label: 'Password',
+		id: 'password',
+		placeholder: 'Password',
+		type: 'password',
+		valid: 'passwordValid',
+		errorText: 'Min 6'
+	}
+]
+
 export const personalFormFields = [
 	{
 		label: 'First name',

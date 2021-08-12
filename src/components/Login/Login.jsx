@@ -10,6 +10,7 @@ import {loginFormFields, registerFormFields} from "../../services/mock";
 
 
 const Login = ({changeIsLoin, changeUserId}) => {
+	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
 		emailValid: '',
 		passwordValid: '',
@@ -52,7 +53,7 @@ const Login = ({changeIsLoin, changeUserId}) => {
 							</div>
 						</div>
 					))}
-
+					{!isFormValid && (<div className="error__text">Email или пароль введены неверно</div>)}
 					<Button className="register-form__btn" onClick={(e) => {
 						let isEmail = false;
 						let isPassword = false;
@@ -78,8 +79,9 @@ const Login = ({changeIsLoin, changeUserId}) => {
 						if(isPassword && isEmail) {
 							let values = Object.values((isValid));
 							if(values.includes(false) || values.includes('')) {
-								alert('Неверно введена информация')
+								setFormIsValid(false)
 							} else {
+								setFormIsValid(true)
 								setIsLogin(true);
 								localStorage.setItem('isLogin', JSON.stringify(true));
 								changeIsLoin(true);
@@ -87,7 +89,7 @@ const Login = ({changeIsLoin, changeUserId}) => {
 								localStorage.setItem('userId', JSON.stringify(userId));
 							}
 						} else {
-							alert('Email или пароль введены неверно')
+							setFormIsValid(false)
 						}
 
 					}}>

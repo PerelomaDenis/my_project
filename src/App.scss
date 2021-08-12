@@ -76,6 +76,12 @@ th {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .page .main {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .page .main {
     padding: 30px 8px;

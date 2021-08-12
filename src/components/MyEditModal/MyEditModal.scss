@@ -118,3 +118,17 @@
     }
   }
 }
+
+@media screen and (max-width: 480px){
+  .modal-window .modal-dialog .modal-content .modal-body {
+    padding: 0 40px;
+  }
+
+  .modal-window .modal-dialog .modal-content {
+    width: 85%;
+  }
+
+  .modal-window .modal-dialog .modal-content .modal-header {
+    padding: 64px 40px 0;
+  }
+}

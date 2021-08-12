@@ -33,3 +33,19 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .wrap .wrap__top .button .button__wrap {
+    padding: 10px;
+  }
+
+  .wrap .wrap__top .button .button__wrap .button__text {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wrap .wrap__top .button .button__wrap .button__text {
+    display: none;
+  }
+}

@@ -14,10 +14,12 @@ const MySellModal = (
 		getProd,
 		setGetProd
 	}) => {
+	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
 		saleDateValid: true,
 		sellQuantityValid: true
 	})
+	
 	const newGetProd = getProd.filter((el) => el.id === productId.productId)[0]
 	const [sellForm, setSellFrom] = useState(newGetProd);
 	const [getSellProd, setGetSellProd] = useState(JSON.parse(localStorage.getItem('sellProducts')))
@@ -61,31 +63,43 @@ const MySellModal = (
 							{errorClass(isValid[input.errorValid]) && (<div className="error-text">{input.errorText}</div>)}
 						</div>
 					))}
+					{!isFormValid && (<div className="error__text">Введенное кол-во товаров выше, чем остаток на складе</div>)}
 				</Modal.Body>
 				<Modal.Footer>
 					<Button type="submit" className="modal__btn" onClick={(e) => {
 						e.preventDefault();
 						let values = Object.values((isValid));
-						if(values.includes(false) || values.includes('')) {
+						if (values.includes(false) || values.includes('')) {
 
 						} else {
-						getSellProd.push(sellForm);
-						localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
-						sellForm.quantity = sellForm.quantity - sellForm.sellQuantity;
-						if(sellForm.quantity === 0) {
-							const newProd = getProd.filter(el => el.id !== productId.productId)
-							setGetProd(newProd)
-							localStorage.setItem('products', JSON.stringify(newProd))
-						} else if (sellForm.quantity < 0) {
-							alert("Введенное кол-во товаров выше, чем остаток на складе")
-						} else {
-							const newChangedProd = getProd.map((prod) => {
-								if(prod.id === productId.productId) {
-									prod = {...sellForm}
+							setFormIsValid(true)
+
+							const dif = sellForm.quantity - sellForm.sellQuantity;
+							if (dif === 0) {
+								sellForm.quantity = dif;
+								setFormIsValid(true)
+								const newProd = getProd.filter(el => el.id !== productId.productId)
+								setGetProd(newProd)
+								localStorage.setItem('products', JSON.stringify(newProd))
+								getSellProd.push(sellForm);
+								localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
+								onHide()
+							}
+							if (dif < 0) {
+								setFormIsValid(false)
+							} 
+							if(dif > 0){
+								sellForm.quantity = dif;
+								getSellProd.push(sellForm);
+								localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
+								setFormIsValid(true)
+								const newChangedProd = getProd.map((prod) => {
+									if (prod.id === productId.productId) {
+										prod = {...sellForm}
+										return prod
+									}
 									return prod
-								}
-								return prod
-							})
+								})
 								onHide()
 								setGetProd(newChangedProd)
 								localStorage.setItem('products', JSON.stringify(newChangedProd))

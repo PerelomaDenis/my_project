@@ -56,7 +56,7 @@ const MySales = () => {
 						<p>No data</p>
 					</div>
 				) : (
-				<Table striped borderless>
+				<Table striped borderless responsive="md">
 					<thead>
 					<tr>
 						{tableMySalesTitles.map((title) => (

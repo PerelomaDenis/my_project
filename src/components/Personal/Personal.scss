@@ -31,6 +31,8 @@
           width: 32%;
           min-width: 380px;
           margin: 0 33px 33px 0;
+          display: flex;
+          flex-direction: column;
 
           .has-error,
           .has-error:focus-visible,
@@ -79,8 +81,12 @@
 }
 
 @media screen and (max-width: 768px) {
+  .wrap .wrap__content .personal-form .personal-form__row .personal-form__el {
+    margin-right: 0;
+  }
+
   .wrap .wrap__content .personal-form .personal-form__row .personal-form__el:nth-child(5) {
-    margin-right: 33px;
+    margin-right: 0px;
   }
 
   .wrap .wrap__content .personal-form .personal-form__row {
@@ -90,6 +96,14 @@
 
   .wrap .wrap__content .personal-form div:last-child {
     display: flex;
-    justify-content: center;
+  }
+
+  .wrap .wrap__content .personal-form .personal-form__row .personal-form__el {
+    margin: 0 20px 20px;
+    min-width: unset;
+    width: 100%;
+  }
+  .wrap .wrap__content .personal-form .personal-form__row .personal-form__el:nth-child(5) {
+    margin: 0 20px 20px;
   }
 }

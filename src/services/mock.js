@@ -187,7 +187,7 @@ export const registerFormFields = [
 		placeholder: 'Repeat password',
 		type: 'password',
 		valid: 'confirmPasswordValid',
-		errorText: 'Min 6'
+		errorText: 'Passwords are not similar'
 	},
 ]
 

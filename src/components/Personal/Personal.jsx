@@ -17,6 +17,7 @@ import Sidebar from "../Sidebar";
 
 const Personal = () => {
 	const userId = JSON.parse(localStorage.getItem('userId'));
+	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
 		productCategoryValid: true,
 		firstNameValid: true,
@@ -33,6 +34,7 @@ const Personal = () => {
 	const [personalForm, setPersonalForm] = useState(getUser);
 
 	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
+
 
 	const handleChange = (e, type) => {
 		const {value} = e.target
@@ -59,6 +61,9 @@ const Personal = () => {
 		e.preventDefault();
 		setShow(true);
 	}
+
+	if(personalForm.newPassword === '') isValid.newPasswordValid = true;
+	if(personalForm.oldPassword === '') isValid.oldPasswordValid = true;
 
 	return (
 		<div className="wrap">
@@ -100,6 +105,7 @@ const Personal = () => {
 							</div>
 						))}
 					</div>
+					{!isFormValid && (<div className="error__text">Неверно введена информация</div>)}
 					<div>
 						<Button className="button" variant="primary" onClick={(e) => {
 							e.preventDefault();
@@ -116,8 +122,9 @@ const Personal = () => {
 							})
 							let values = Object.values((isValid));
 							if (values.includes(false) || values.includes('')) {
-								alert('Неверно введена информация')
+								setFormIsValid(false)
 							} else {
+								setFormIsValid(true)
 								setGetUsers(newUsers)
 								localStorage.setItem('users', JSON.stringify(newUsers))
 								setNewPassword({oldPassword: '', newPassword: ''})

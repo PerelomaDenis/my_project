@@ -161,3 +161,10 @@
     display: none;
   }
 }
+
+@media screen and (max-width: 480px){
+  .wraps .wrap-left .register-form {
+    width: 90%;
+    max-width: 380px;
+  }
+}

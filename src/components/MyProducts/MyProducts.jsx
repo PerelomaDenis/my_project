@@ -78,7 +78,7 @@ const MyProducts = () => {
 						<p>No data</p>
 					</div>
 				) : (
-					<Table striped borderless responsive="sm">
+					<Table striped borderless responsive="md">
 					<thead>
 					<tr>
 						{tableMyProductTitles.map((title) => (

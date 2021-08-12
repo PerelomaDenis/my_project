@@ -20,3 +20,14 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .wrap .wrap__top .title .title__desc {
+    font-size: 12px;
+  }
+
+  .wrap .wrap__top .title .title__text {
+    font-size: 26px;
+    line-height: 26px;
+  }
+}

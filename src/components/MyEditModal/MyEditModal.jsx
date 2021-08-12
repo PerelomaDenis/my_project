@@ -14,6 +14,7 @@ const MyEditModal = (
 		getProd,
 		setGetProd
 	}) => {
+	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
 		storeNameValid: true,
 		priceValid: true,
@@ -65,6 +66,7 @@ const MyEditModal = (
 							{errorClass(isValid[input.errorValid]) && (<div className="error-text">{input.errorText}</div>)}
 						</div>
 					))}
+					{!isFormValid && (<div className="error__text">Не все поля заполнены</div>)}
 				</Modal.Body>
 				<Modal.Footer>
 					<Button type="submit" className="modal__btn" onClick={(e) => {
@@ -79,8 +81,9 @@ const MyEditModal = (
 						})
 						let values = Object.values((isValid));
 						if(values.includes(false) || values.includes('')) {
-
+							setFormIsValid(false )
 						} else {
+							setFormIsValid(true )
 							onHide()
 							setGetProd(newChangedProd)
 							localStorage.setItem('products', JSON.stringify(newChangedProd))

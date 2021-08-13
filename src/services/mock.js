@@ -251,6 +251,10 @@ export const personalFormFields = [
 		valid: 'addressValid',
 		errorText: 'Min 6'
 	},
+
+]
+
+export const personalFormPasswordFields = [
 	{
 		label: 'Enter old password',
 		id: 'oldPassword',

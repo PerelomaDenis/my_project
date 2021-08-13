@@ -53,7 +53,7 @@ const Login = ({changeIsLoin, changeUserId}) => {
 							</div>
 						</div>
 					))}
-					{!isFormValid && (<div className="error__text">Email или пароль введены неверно</div>)}
+					{!isFormValid && (<div className="error__text">Email or password entered wrong</div>)}
 					<Button className="register-form__btn" onClick={(e) => {
 						let isEmail = false;
 						let isPassword = false;

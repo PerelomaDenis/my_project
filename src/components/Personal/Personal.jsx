@@ -7,7 +7,7 @@ import MyCreateModal from "../MyCreateModal";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Personal.scss';
-import {modalCreate, personalFormFields, personalProps} from "../../services/mock";
+import {modalCreate, personalFormFields, personalFormPasswordFields, personalProps} from "../../services/mock";
 import FormInput from "../FormInput";
 import {errorClass, validateField} from "../../services/valid";
 import {ReactSVG} from "react-svg";
@@ -15,7 +15,7 @@ import menu from "../../assets/images/menu.svg";
 import Sidebar from "../Sidebar";
 
 
-const Personal = () => {
+const Personal = ({changeIsReg, changeIsLoin}) => {
 	const userId = JSON.parse(localStorage.getItem('userId'));
 	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
@@ -74,7 +74,7 @@ const Personal = () => {
 						<Offcanvas.Header closeButton>
 						</Offcanvas.Header>
 						<Offcanvas.Body>
-							<Sidebar/>
+							<Sidebar changeIsReg={changeIsReg} changeIsLoin={changeIsLoin}/>
 						</Offcanvas.Body>
 					</Offcanvas>
 				</div>
@@ -104,8 +104,25 @@ const Personal = () => {
 								{errorClass(isValid[field.valid]) && (<div className="error__text">{field.errorText}</div>)}
 							</div>
 						))}
+						{personalFormPasswordFields.map((field) => (
+							<div className="personal-form__el">
+								<div className="personal-form__item">
+									<label className="personal-form__item-title" htmlFor={field.id}>{field.label}</label>
+									<input
+										className={`personal-form__item-input ${errorClass(isValid[field.valid])}`}
+										type={field.type}
+										id={field.id}
+										name={field.id}
+										placeholder={field.placeholder}
+										value={newPassword[field.id]}
+										onChange={(e) => handleChangePassword(e, field.id)}
+									/>
+								</div>
+								{errorClass(isValid[field.valid]) && (<div className="error__text">{field.errorText}</div>)}
+							</div>
+						))}
 					</div>
-					{!isFormValid && (<div className="error__text">Неверно введена информация</div>)}
+					{!isFormValid && (<div className="error__text">Information entered wrong</div>)}
 					<div>
 						<Button className="button" variant="primary" onClick={(e) => {
 							e.preventDefault();

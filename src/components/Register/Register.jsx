@@ -9,7 +9,7 @@ import {registerFormFields} from "../../services/mock";
 
 
 const Register = ({changeIsReg}) => {
-	const [isFormValid, setFormIsValid] = useState({valid: true, errorText: 'Неверно введена информация'})
+	const [isFormValid, setFormIsValid] = useState({valid: true, errorText: 'Information entered wrong'})
 	const [isValid, setIsValid] = useState({
 		emailValid: '',
 		firstNameValid: '',
@@ -78,9 +78,9 @@ const Register = ({changeIsReg}) => {
 							if(!isEmail) {
 								let values = Object.values((isValid));
 								if(values.includes(false) || values.includes('')) {
-									setFormIsValid({valid: false, errorText: 'Неверно введена информация'})
+									setFormIsValid({valid: false, errorText: 'Information entered wrong'})
 								} else {
-									setFormIsValid({valid: true, errorText: 'Неверно введена информация'})
+									setFormIsValid({valid: true, errorText: 'Information entered wrong'})
 									getUsers.push(registerForm);
 									localStorage.setItem('users', JSON.stringify(getUsers));
 									setIsReg(true);
@@ -88,7 +88,7 @@ const Register = ({changeIsReg}) => {
 									changeIsReg(true)
 								}
 							} else {
-								setFormIsValid({valid: false, errorText: 'Такой email зарегистрирован'})
+								setFormIsValid({valid: false, errorText: 'This email is exist'})
 							}
 						}
 						}>

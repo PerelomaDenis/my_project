@@ -50,13 +50,16 @@ const App = () => {
 						</div>
 						<div className="main">
 							<Switch>
-								{routes.map((route) => (
-									<Route
-										component={route.component}
-										path={route.path}
-										exact={route.exact}
-									/>
-								))}
+								{routes.map((route) => {
+										const Main = route.component;
+										return <Route
+											render={() => <Main changeIsReg={changeIsReg} changeIsLoin={changeIsLoin}/>}
+											// component={route.component}
+											path={route.path}
+											exact={route.exact}
+										/>
+									}
+								)}
 							</Switch>
 						</div>
 					</div>

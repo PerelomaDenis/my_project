@@ -66,7 +66,7 @@ const MyCreateModal = (
 							{errorClass(isValid[input.errorValid]) && (<div className="error-text">{input.errorText}</div>)}
 						</div>
 					))}
-					{!isFormValid && (<div className="error__text">Не все поля заполнены</div>)}
+					{!isFormValid && (<div className="error__text">Not all fields are filled</div>)}
 				</Modal.Body>
 
 				<Modal.Footer>

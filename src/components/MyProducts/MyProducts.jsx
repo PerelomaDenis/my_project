@@ -29,7 +29,8 @@ export const getCurrentDate = (date) => {
 	return `${day}.${month}.${year}`
 }
 
-const MyProducts = () => {
+const MyProducts = ({changeIsReg, changeIsLoin}) => {
+	
 	const [modalCreateShow, setModalCreateShow] = useState(false);
 	const [modalShow, setModalShow] = useState(false);
 	const [modalId, setModalId] = useState({productId: ''});
@@ -62,7 +63,7 @@ const MyProducts = () => {
 						<Offcanvas.Header closeButton>
 						</Offcanvas.Header>
 						<Offcanvas.Body>
-							<Sidebar />
+							<Sidebar changeIsReg={changeIsReg} changeIsLoin={changeIsLoin}/>
 						</Offcanvas.Body>
 					</Offcanvas>
 				</div>

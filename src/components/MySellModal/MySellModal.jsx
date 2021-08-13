@@ -63,7 +63,7 @@ const MySellModal = (
 							{errorClass(isValid[input.errorValid]) && (<div className="error-text">{input.errorText}</div>)}
 						</div>
 					))}
-					{!isFormValid && (<div className="error__text">Введенное кол-во товаров выше, чем остаток на складе</div>)}
+					{!isFormValid && (<div className="error__text">The entered quantity of goods is higher than the stock balance</div>)}
 				</Modal.Body>
 				<Modal.Footer>
 					<Button type="submit" className="modal__btn" onClick={(e) => {

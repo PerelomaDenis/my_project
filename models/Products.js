@@ -29,6 +29,10 @@ const productsSchema = new Schema({
 	user: {
 		ref: 'users',
 		type: Schema.Types.ObjectId
+	},
+	createDate: {
+		type: Date,
+		default: Date.now()
 	}
 })
 

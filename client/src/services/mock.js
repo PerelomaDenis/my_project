@@ -13,7 +13,7 @@ export const modalCreate = {
 			value: '',
 			type: 'text',
 			placeholder: 'Store',
-			name: 'storeName',
+			name: 'store',
 			errorValid: 'storeNameValid',
 			errorText: 'Min 3'
 		},
@@ -93,7 +93,7 @@ export const modalEdit = {
 			value: '',
 			type: 'text',
 			placeholder: 'Store',
-			name: 'storeName',
+			name: 'store',
 			errorValid: 'storeNameValid',
 			errorText: 'Min 3'
 		},

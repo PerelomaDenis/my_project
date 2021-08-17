@@ -33,41 +33,44 @@ const Register = ({changeIsReg}) => {
 	}
 
 	const getApiCall = useCallback(
-		(data) => {
-			registration(data)
+		async (data) => {
+			try {
+				 registration(data)
+			} catch (e) {
+				console.log(e.message)
+			}
+
 		}, [])
 
 	const handleRegisterClick = (e) => {
-		let registerData = {...registerForm}
-		delete registerData.repeatPassword
-
 		getApiCall(registerForm)
-		let isEmail = false;
-		for(let i=0; i < getUsers.length; i++) {
-			for(let key in getUsers[i]) {
-				if(key === 'email') {
-					if(getUsers[i][key] === registerForm.email) {
-						isEmail = true;
-					}
-				}
-			}
-		}
-
-		if(!isEmail) {
-			let values = Object.values((isValid));
-			if(values.includes(false) || values.includes('')) {
-				setFormIsValid({valid: false, errorText: 'Information entered wrong'})
-			} else {
-				setFormIsValid({valid: true, errorText: 'Information entered wrong'})
-				getUsers.push(registerForm);
-				localStorage.setItem('users', JSON.stringify(getUsers));
-				setIsReg(true);
-				localStorage.setItem('isReg', JSON.stringify(true));
-				changeIsReg(true)
-			}
-		} else {
-			setFormIsValid({valid: false, errorText: 'This email is exist'})
-		}
+		// console.log('========>getApiCall(registerForm)', getApiCall(registerForm));
+		// let isEmail = false;
+		// for(let i=0; i < getUsers.length; i++) {
+		// 	for(let key in getUsers[i]) {
+		// 		if(key === 'email') {
+		// 			if(getUsers[i][key] === registerForm.email) {
+		// 				isEmail = true;
+		// 			}
+		// 		}
+		// 	}
+		// }
+		//
+		// if(!isEmail) {
+		// 	let values = Object.values((isValid));
+		// 	if(values.includes(false) || values.includes('')) {
+		// 		setFormIsValid({valid: false, errorText: 'Information entered wrong'})
+		// 	} else {
+		// 		setFormIsValid({valid: true, errorText: 'Information entered wrong'})
+		// 		getUsers.push(registerForm);
+		// 		localStorage.setItem('users', JSON.stringify(getUsers));
+		// 		setIsReg(true);
+		// 		localStorage.setItem('isReg', JSON.stringify(true));
+		// 		changeIsReg(true)
+		// 	}
+		// } else {
+		// 	setFormIsValid({valid: false, errorText: 'This email is exist'})
+		// }
 	}
 
 		return (

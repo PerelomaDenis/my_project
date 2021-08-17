@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Button, Offcanvas, Table} from "react-bootstrap";
 import {ReactSVG} from "react-svg";
 
@@ -8,7 +8,6 @@ import MyCreateModal from "../MyCreateModal";
 import MainTitle from "../MainTitle";
 import MySellModal from "../MySellModal";
 import MyEditModal from "../MyEditModal";
-import Logo from "../Sidebar/Logo";
 import Sidebar from "../Sidebar";
 
 import del from "../../assets/images/Delete.svg";
@@ -17,6 +16,7 @@ import menu from "../../assets/images/menu.svg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MyProducts.scss';
 import {modalCreate, modalEdit, modalSell, myProductsProps, tableMyProductTitles} from "../../services/mock";
+import {getAll, getById} from "../../services/ajaxUser";
 
 
 export const getCurrentDate = (date) => {
@@ -30,12 +30,15 @@ export const getCurrentDate = (date) => {
 }
 
 const MyProducts = ({changeIsReg, removeToken}) => {
-	
+	const [getProd, setGetProd] = useState(null)
+	const [getOneProd, setGetOneProd] = useState(null)
 	const [modalCreateShow, setModalCreateShow] = useState(false);
 	const [modalShow, setModalShow] = useState(false);
 	const [modalId, setModalId] = useState({productId: ''});
 	const [modalEditShow, setModalEditShow] = useState(false);
-	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
+
+	// const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
+
 	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
 	const userId = JSON.parse(localStorage.getItem('userId'));
 	const getUser = getUsers.filter((user) => user.id === userId)[0]
@@ -53,6 +56,28 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 		e.preventDefault();
 		setShow(true);
 	}
+
+	const getOneProduct = useCallback(
+		() => {
+			getById(modalId.productId)
+				.then(data => {
+					setGetOneProd(data)
+				})
+		}
+	)
+
+	const getProductsCall = useCallback(
+		() => {
+			getAll()
+				.then(data => {
+					setGetProd(data)
+				})
+		}, [])
+
+	useEffect(() => {
+		getProductsCall()
+		getOneProduct()
+	}, [])
 
 	return (
 		<div className="wrap">
@@ -74,7 +99,7 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 			</div>
 			<hr/>
 			<div className="wrap__content">
-				{getProd.length === 0 ? (
+				{getProd === null || getProd.length === 0 ? (
 					<div className="no-data">
 						<p>No data</p>
 					</div>
@@ -90,10 +115,10 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 					<tbody>
 					{
 						getProd.map((product) => (
-							<tr id={product.id}>
+							<tr id={product._id}>
 								<td>{product.productName}</td>
-								<td>{product.storeName}</td>
-								<td>{getUser.address}</td>
+								<td>{product.store}</td>
+								<td>{/*getUser.address*/}</td>
 								<td>{product.productCategory}</td>
 								<td>{getCurrentDate(product.createDate)}</td>
 								<td>{product.price}</td>
@@ -103,15 +128,18 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 									<div className="table__actions">
 										<button className="table__actions-sell" onClick={() => {
 											setModalShow(true)
-											setModalId({productId: product.id})
+											setModalId({productId: product._id})
+											// getOneProduct()
 										}}>Sell</button>
 										<button className="table__actions-edit" onClick={() => {
 											setModalEditShow(true)
-											setModalId({productId: product.id})
+											setModalId({productId: product._id})
+											getOneProduct()
+											console.log('========>getOneProd', getOneProd);
 										}}>
 											<ReactSVG className="" src={edit}/>
 										</button>
-										<ReactSVG className="table__actions-del" src={del} onClick={(e) => {removeProduct(product.id)}}/>
+										<ReactSVG className="table__actions-del" src={del} onClick={(e) => {removeProduct(product._id)}}/>
 									</div>
 								</td>
 							</tr>
@@ -137,7 +165,7 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 						onHide={() => setModalEditShow(false)}
 						productId={modalId}
 						setGetProd={setGetProd}
-						getProd={getProd}
+						getProd={getOneProd}
 					/>
 				)}
 

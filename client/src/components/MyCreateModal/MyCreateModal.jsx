@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {ReactSVG} from "react-svg";
 import {Button, Modal} from "react-bootstrap";
 
 import './MyCreateModal.scss';
 import {errorClass, validateField} from "../../services/valid";
+import {createProduct, registration} from "../../services/ajaxUser";
 
 const MyCreateModal = (
 	{
@@ -34,6 +35,11 @@ const MyCreateModal = (
 		}))
 		validateField(type, value, isValid, setIsValid, form)
 	}
+
+	const createNewProduct = useCallback(
+		 (data) => {
+				createProduct(data)
+		}, [])
 
 	return (
 		<Modal
@@ -72,6 +78,7 @@ const MyCreateModal = (
 				<Modal.Footer>
 					<Button type="submit" className="modal__btn" onClick={(e) => {
 						e.preventDefault();
+						createNewProduct(form)
 						let values = Object.values((isValid));
 						if(values.includes(false) || values.includes('')) {
 							setFormIsValid(false )

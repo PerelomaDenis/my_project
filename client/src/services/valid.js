@@ -50,7 +50,7 @@ export const validateField = (fieldName, value, isValid, setIsValid, form) => {
 				lastNameValid: lastNameValid
 			}))
 			break;
-		case 'storeName':
+		case 'store':
 			value.length > 2 ? storeNameValid = true : storeNameValid = false;
 			if(value === '') storeNameValid = '';
 			setIsValid((prevForm) => ({

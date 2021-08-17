@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {ReactSVG} from "react-svg";
 import {Button, Modal} from "react-bootstrap";
 
 import './MyEditModal.scss';
 import {errorClass, validateField} from "../../services/valid";
+import {updateProduct} from "../../services/ajaxUser";
 
 const MyEditModal = (
 	{
@@ -23,8 +24,7 @@ const MyEditModal = (
 		quantityValid: true,
 		weightValid: true,
 	})
-	const newGetProd = getProd.filter((el) => el.id === productId.productId)[0]
-	const [editForm, setEditFrom] = useState(newGetProd);
+	const [editForm, setEditFrom] = useState(getProd);
 
 	const handleChange = (e, type) => {
 		const {value} = e.target
@@ -34,6 +34,11 @@ const MyEditModal = (
 		}))
 		validateField(type, value, isValid, setIsValid, editForm)
 	}
+
+	const updateMyProduct = useCallback(
+		(id, data) => {
+			updateProduct(id, data)
+		}, [])
 
 	return (
 		<Modal
@@ -71,23 +76,26 @@ const MyEditModal = (
 				<Modal.Footer>
 					<Button type="submit" className="modal__btn" onClick={(e) => {
 						e.preventDefault();
+						// updateMyProduct(productId, editForm)
+						// setGetProd(editForm)
+						console.log('========>editForm', editForm);
+						// const newChangedProd = getProd.map((prod) => {
+						// 	if(prod.id === productId.productId) {
+						// 		prod = {...editForm}
+						// 		return prod
+						// 	}
+						// 	return prod
+						// })
 
-						const newChangedProd = getProd.map((prod) => {
-							if(prod.id === productId.productId) {
-								prod = {...editForm}
-								return prod
-							}
-							return prod
-						})
-						let values = Object.values((isValid));
-						if(values.includes(false) || values.includes('')) {
-							setFormIsValid(false )
-						} else {
-							setFormIsValid(true )
-							onHide()
-							setGetProd(newChangedProd)
-							localStorage.setItem('products', JSON.stringify(newChangedProd))
-						}
+						// let values = Object.values((isValid));
+						// if(values.includes(false) || values.includes('')) {
+						// 	setFormIsValid(false )
+						// } else {
+						// 	setFormIsValid(true )
+						// 	onHide()
+						// 	// setGetProd(newChangedProd)
+						// 	// localStorage.setItem('products', JSON.stringify(newChangedProd))
+						// }
 					}}>
 						<span className="modal__btn-text">{info.buttonText}</span>
 						<ReactSVG className="modal__btn-icon" src={info.buttonIcon}/>

@@ -10,10 +10,11 @@ import './App.scss';
 import "./assets/fonts/fonts.css";
 
 const App = () => {
+	const [isToken, setIsToken] = useState(localStorage.getItem('token') || '');
+
 	const [products, setProducts] = useState(JSON.parse(localStorage.getItem('products')) || [])
 	const [sellProducts, setSellProducts] = useState(JSON.parse(localStorage.getItem('sellProducts')) || [])
 	const [users, setUsers] = useState(JSON.parse(localStorage.getItem('users')) || [])
-	const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem('isLogin')) || false)
 	const [isReg, setIsReg] = useState(JSON.parse(localStorage.getItem('isReg')) || false)
 	const [userId, setUserId] = useState(JSON.parse(localStorage.getItem('userId')) || '')
 
@@ -22,12 +23,17 @@ const App = () => {
 		localStorage.setItem('sellProducts', JSON.stringify(sellProducts))
 		localStorage.setItem('users', JSON.stringify(users))
 		localStorage.setItem('isReg', JSON.stringify(isReg));
-		localStorage.setItem('isLogin', JSON.stringify(isLogin));
 		localStorage.setItem('userId', JSON.stringify(userId));
 	}, [])
 
-	const changeIsLoin = (value) => {
-		setIsLogin(value)
+	const removeToken = () => {
+		setIsToken('')
+		localStorage.setItem('token', JSON.stringify(''));
+	}
+
+	const createToken = (response) => {
+		setIsToken(response.token)
+		localStorage.setItem('token', response.token);
 	}
 
 	const changeIsReg = (value) => {
@@ -42,18 +48,18 @@ const App = () => {
 		<BrowserRouter>
 			{!isReg
 				? <Register changeIsReg={changeIsReg}/>
-				: !isLogin
-					? <Login changeIsLoin={changeIsLoin} changeUserId={changeUserId}/>
+				: isToken === ''
+					? <Login createToken={createToken} changeUserId={changeUserId}/>
 					: <div className="page">
 						<div className="sidebar">
-							<Sidebar changeIsReg={changeIsReg} changeIsLoin={changeIsLoin}/>
+							<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
 						</div>
 						<div className="main">
 							<Switch>
 								{routes.map((route) => {
 										const Main = route.component;
 										return <Route
-											render={() => <Main changeIsReg={changeIsReg} changeIsLoin={changeIsLoin}/>}
+											render={() => <Main changeIsReg={changeIsReg} removeToken={removeToken}/>}
 											// component={route.component}
 											path={route.path}
 											exact={route.exact}

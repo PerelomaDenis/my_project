@@ -14,7 +14,7 @@ import menu from "../../assets/images/menu.svg";
 import Sidebar from "../Sidebar";
 
 
-const MySales = ({changeIsReg, changeIsLoin}) => {
+const MySales = ({changeIsReg, removeToken}) => {
 	const [modalCreateShow, setModalCreateShow] = useState(false);
 	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
 	const userId = JSON.parse(localStorage.getItem('userId'));
@@ -39,7 +39,7 @@ const MySales = ({changeIsReg, changeIsLoin}) => {
 						<Offcanvas.Header closeButton>
 						</Offcanvas.Header>
 						<Offcanvas.Body>
-							<Sidebar changeIsReg={changeIsReg} changeIsLoin={changeIsLoin}/>
+							<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
 						</Offcanvas.Body>
 					</Offcanvas>
 				</div>

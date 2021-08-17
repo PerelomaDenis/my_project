@@ -15,7 +15,7 @@ import menu from "../../assets/images/menu.svg";
 import Sidebar from "../Sidebar";
 
 
-const Personal = ({changeIsReg, changeIsLoin}) => {
+const Personal = ({changeIsReg, removeToken}) => {
 	const userId = JSON.parse(localStorage.getItem('userId'));
 	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
@@ -74,7 +74,7 @@ const Personal = ({changeIsReg, changeIsLoin}) => {
 						<Offcanvas.Header closeButton>
 						</Offcanvas.Header>
 						<Offcanvas.Body>
-							<Sidebar changeIsReg={changeIsReg} changeIsLoin={changeIsLoin}/>
+							<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
 						</Offcanvas.Body>
 					</Offcanvas>
 				</div>

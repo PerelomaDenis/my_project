@@ -18,6 +18,10 @@ const userSchema = new Schema({
 		type: String,
 		default: 'Taganrog'
 	},
+	productCategory: {
+		type: String,
+		default: 'IT'
+	},
 	email: {
 		type: String,
 		required: true,

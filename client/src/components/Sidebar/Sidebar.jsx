@@ -8,7 +8,7 @@ import './Sidebar.scss';
 import {links} from "../../services/mock";
 
 
-const Sidebar = ({changeIsReg, changeIsLoin}) => {
+const Sidebar = ({changeIsReg, removeToken}) => {
 	// const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem('isLogin')) || false)
 	// const [isReg, setIsReg] = useState(JSON.parse(localStorage.getItem('isReg')) || false)
 	// const changeIsLoin = (value) => {
@@ -32,7 +32,7 @@ const Sidebar = ({changeIsReg, changeIsLoin}) => {
 				</li>
 				<li>
 					<hr/>
-					<Logout changeIsReg={changeIsReg} changeIsLoin={changeIsLoin}/>
+					<Logout changeIsReg={changeIsReg} removeToken={removeToken}/>
 				</li>
 			</ul>
 

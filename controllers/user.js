@@ -2,7 +2,6 @@ const User = require('../models/User')
 const errorHandler = require("../utils/errorHandler");
 
 module.exports.getById = async (req, res) => {
-	console.log(req.user)
 	try {
 		const candidate = await User.findOne({
 			_id: req.user.id

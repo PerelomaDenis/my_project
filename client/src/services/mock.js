@@ -159,7 +159,7 @@ export const registerFormFields = [
 	},
 	{
 		label: 'Company name',
-		id: 'company',
+		id: 'companyName',
 		placeholder: 'Company name',
 		type: 'text',
 		valid: 'companyValid',

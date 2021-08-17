@@ -17,7 +17,7 @@ import Sidebar from "../Sidebar";
 
 
 
-const MainPage = ({changeIsReg, changeIsLoin}) => {
+const MainPage = ({changeIsReg, removeToken}) => {
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
 	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
 	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
@@ -38,7 +38,7 @@ const MainPage = ({changeIsReg, changeIsLoin}) => {
 						<Offcanvas.Header closeButton>
 						</Offcanvas.Header>
 						<Offcanvas.Body>
-							<Sidebar changeIsReg={changeIsReg} changeIsLoin={changeIsLoin}/>
+							<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
 						</Offcanvas.Body>
 					</Offcanvas>
 				</div>

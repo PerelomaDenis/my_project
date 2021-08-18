@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Button, Offcanvas} from "react-bootstrap";
 
 import MainTitle from "../MainTitle";
@@ -13,13 +13,14 @@ import {errorClass, validateField} from "../../services/valid";
 import {ReactSVG} from "react-svg";
 import menu from "../../assets/images/menu.svg";
 import Sidebar from "../Sidebar";
+import {getAll, getOneUser, updateOneUser} from "../../services/ajaxUser";
 
 
 const Personal = ({changeIsReg, removeToken}) => {
-	const userId = JSON.parse(localStorage.getItem('userId'));
+	// const userId = JSON.parse(localStorage.getItem('userId'));
 	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
-		productCategoryValid: true,
+		emailValid: true,
 		firstNameValid: true,
 		lastNameValid: true,
 		companyValid: true,
@@ -28,9 +29,10 @@ const Personal = ({changeIsReg, removeToken}) => {
 		newPasswordValid: true,
 	})
 	const [newPassword, setNewPassword] = useState({})
-	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
+	// const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
-	const getUser = getUsers.filter((user) => user.id === userId)[0]
+	// const getUser = getUsers.filter((user) => user.id === userId)[0]
+	const [getUser, setGetUser] = useState({})
 	const [personalForm, setPersonalForm] = useState(getUser);
 
 	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
@@ -61,7 +63,23 @@ const Personal = ({changeIsReg, removeToken}) => {
 		e.preventDefault();
 		setShow(true);
 	}
+	
+	const getMyUser = useCallback(
+		() => {
+			getOneUser()
+				.then(data => {
+					setGetUser(data)
+					setPersonalForm(data)
+				})
+		}, [])
 
+
+	useEffect(() => {
+		getMyUser()
+	}, [])
+
+	console.log('========>getUser', getUser);
+	console.log('========>personalForm', personalForm);
 	if(personalForm.newPassword === '') isValid.newPasswordValid = true;
 	if(personalForm.oldPassword === '') isValid.oldPasswordValid = true;
 
@@ -126,26 +144,27 @@ const Personal = ({changeIsReg, removeToken}) => {
 					<div>
 						<Button className="button" variant="primary" onClick={(e) => {
 							e.preventDefault();
-							if (personalForm.password === newPassword.oldPassword
-								&& newPassword.oldPassword !== newPassword.newPassword) {
-								personalForm.password = newPassword.newPassword
-							}
-							const newUsers = getUsers.map((user) => {
-								if (user.email === getUser.email) {
-									user = {...personalForm}
-									return user
-								}
-								return user
-							})
-							let values = Object.values((isValid));
-							if (values.includes(false) || values.includes('')) {
-								setFormIsValid(false)
-							} else {
-								setFormIsValid(true)
-								setGetUsers(newUsers)
-								localStorage.setItem('users', JSON.stringify(newUsers))
-								setNewPassword({oldPassword: '', newPassword: ''})
-							}
+							updateOneUser(getUser._id, personalForm)
+							// if (personalForm.password === newPassword.oldPassword
+							// 	&& newPassword.oldPassword !== newPassword.newPassword) {
+							// 	personalForm.password = newPassword.newPassword
+							// }
+							// const newUsers = getUsers.map((user) => {
+							// 	if (user.email === getUser.email) {
+							// 		user = {...personalForm}
+							// 		return user
+							// 	}
+							// 	return user
+							// })
+							// let values = Object.values((isValid));
+							// if (values.includes(false) || values.includes('')) {
+							// 	setFormIsValid(false)
+							// } else {
+							// 	setFormIsValid(true)
+							// 	setGetUsers(newUsers)
+							// 	localStorage.setItem('users', JSON.stringify(newUsers))
+							// 	setNewPassword({oldPassword: '', newPassword: ''})
+							// }
 						}}>
 							<div className="personal-form__button">
 								<span className="personal-form__button-text">Save changes</span>

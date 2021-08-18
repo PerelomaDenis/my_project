@@ -54,3 +54,21 @@ export const createProduct = (data) => {
 		data
 	}).then(data => data.data)
 };
+
+export const getOneUser = (data) => {
+	const url = `${urls.USER}`;
+	return ajaxWrapper({
+		method: 'GET',
+		url,
+		data,
+	}).then(data => data.data)
+};
+
+export const updateOneUser = (id, data) => {
+	const url = `${urls.USER}/${id}`;
+	return ajaxWrapper({
+		method: 'PATCH',
+		url,
+		data
+	})
+};

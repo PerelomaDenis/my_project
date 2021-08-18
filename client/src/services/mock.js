@@ -229,19 +229,19 @@ export const personalFormFields = [
 	},
 	{
 		label: 'Company name',
-		id: 'company',
+		id: 'companyName',
 		placeholder: 'Enter your company name',
 		type: 'text',
 		valid: 'companyValid',
 		errorText: 'Min 6'
 	},
 	{
-		label: 'Product Category',
-		id: 'productCategory',
-		placeholder: 'Enter product category',
-		type: 'text',
-		valid: 'productCategoryValid',
-		errorText: 'Min 2'
+		label: 'Email',
+		id: 'email',
+		placeholder: 'Enter email',
+		type: 'email',
+		valid: 'emailValid',
+		errorText: 'Wrong email'
 	},
 	{
 		label: 'Address',

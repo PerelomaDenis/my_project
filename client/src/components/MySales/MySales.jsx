@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Button, Modal, Offcanvas, Table} from "react-bootstrap";
 
 import ButtonCreate from "../ButtonCreate";
@@ -12,16 +12,18 @@ import {getCurrentDate} from "../MyProducts/MyProducts";
 import {ReactSVG} from "react-svg";
 import menu from "../../assets/images/menu.svg";
 import Sidebar from "../Sidebar";
+import {getAllSales, getOneUser} from "../../services/ajaxUser";
 
 
 const MySales = ({changeIsReg, removeToken}) => {
 	const [modalCreateShow, setModalCreateShow] = useState(false);
-	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
-	const userId = JSON.parse(localStorage.getItem('userId'));
-	const getUser = getUsers.filter((user) => user.id === userId)[0]
+	// const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
+	// const userId = JSON.parse(localStorage.getItem('userId'));
+	// const getUser = getUsers.filter((user) => user.id === userId)[0]
 
-	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
-	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
+	// const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
+	const [getUser, setGetUser] = useState({})
+	const [getProd, setGetProd] = useState([])
 	const [show, setShow] = useState(false);
 
 	const handleClose = () => setShow(false);
@@ -30,6 +32,30 @@ const MySales = ({changeIsReg, removeToken}) => {
 		setShow(true);
 	}
 
+	const getMySales = useCallback(
+		() => {
+			getAllSales()
+				.then(data => {
+					setGetProd(data)
+				})
+		}, [])
+
+	const getMyUser = useCallback(
+		() => {
+			getOneUser()
+				.then(data => {
+					setGetUser(data)
+				})
+		}, [])
+
+
+	useEffect(() => {
+		getMySales()
+		getMyUser()
+	}, [])
+
+	console.log('========>getUser', getUser);
+	
 	return (
 		<div className="wrap">
 			<div className="wrap__top">
@@ -51,7 +77,7 @@ const MySales = ({changeIsReg, removeToken}) => {
 			</div>
 			<hr/>
 			<div className="wrap__content">
-				{getSellProd.length === 0 ? (
+				{getProd.length === 0 ? (
 					<div className="no-data">
 						<p>No data</p>
 					</div>
@@ -65,10 +91,10 @@ const MySales = ({changeIsReg, removeToken}) => {
 					</tr>
 					</thead>
 					<tbody>
-					{getSellProd.map((product) => (
+					{getProd.map((product) => (
 						<tr>
 							<td>{product.productName}</td>
-							<td>{product.storeName}</td>
+							<td>{product.store}</td>
 							<td>{getUser.address}</td>
 							<td>{product.productCategory}</td>
 							<td>{getCurrentDate(product.createDate)}</td>

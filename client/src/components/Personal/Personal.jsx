@@ -29,9 +29,7 @@ const Personal = ({changeIsReg, removeToken}) => {
 		newPasswordValid: true,
 	})
 	const [newPassword, setNewPassword] = useState({})
-	// const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
-	// const getUser = getUsers.filter((user) => user.id === userId)[0]
 	const [getUser, setGetUser] = useState({})
 	const [personalForm, setPersonalForm] = useState(getUser);
 
@@ -78,8 +76,6 @@ const Personal = ({changeIsReg, removeToken}) => {
 		getMyUser()
 	}, [])
 
-	console.log('========>getUser', getUser);
-	console.log('========>personalForm', personalForm);
 	if(personalForm.newPassword === '') isValid.newPasswordValid = true;
 	if(personalForm.oldPassword === '') isValid.oldPasswordValid = true;
 

@@ -30,28 +30,36 @@ module.exports.login = async (req, res) => {
 }
 
 module.exports.register = async (req, res) => {
-	const candidate = await User.findOne({email: req.body.email})
+	try{
+		const candidate = await User.findOne({email: req.body.email})
 
-	if(candidate) {
-		res.status(409).json({
-			message: 'This email is exist'
-		})
-	} else {
-		const salt = bcrypt.genSaltSync(10)
-		const password = req.body.password
-		const user = new User({
-			email: req.body.email,
-			password: bcrypt.hashSync(password, salt),
-			firstName: req.body.firstName,
-			lastName: req.body.lastName,
-			companyName: req.body.companyName,
-		})
+		if(candidate) {
+			res.status(409).json({
+				message: 'This email is exist'
+			})
+		} else {
+			const salt = bcrypt.genSaltSync(10)
+			const password = req.body.password
+			const user = new User({
+				email: req.body.email,
+				password: bcrypt.hashSync(password, salt),
+				firstName: req.body.firstName,
+				lastName: req.body.lastName,
+				companyName: req.body.companyName,
+			})
 
-		try {
-			await user.save()
-			res.status(201).json(user)
-		} catch (e) {
-			errorHandler(res, e)
+			try {
+				await user.save()
+				res.status(201).json(user)
+			} catch (e) {
+				errorHandler(res, e)
+			}
 		}
+	} catch (e) {
+		// console.log('========>e', e);
+		res.status(400).json({
+			message: e
+		})
 	}
+
 }

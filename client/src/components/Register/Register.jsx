@@ -33,12 +33,10 @@ const Register = ({changeIsReg}) => {
 	}
 
 	const getApiCall = useCallback(
-		async (data) => {
-			try {
-				 registration(data)
-			} catch (e) {
-				console.log(e.message)
-			}
+		(data) => {
+			 registration(data)
+				 .then((r)=>{console.log('========>r',r );})
+				 .catch((e)=>{console.log('========>e', e);})
 
 		}, [])
 

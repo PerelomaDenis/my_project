@@ -16,7 +16,7 @@ import menu from "../../assets/images/menu.svg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MyProducts.scss';
 import {modalCreate, modalEdit, modalSell, myProductsProps, tableMyProductTitles} from "../../services/mock";
-import {getAll, getById} from "../../services/ajaxUser";
+import {getAll, getById, getOneUser, removeProduct} from "../../services/ajaxUser";
 
 
 export const getCurrentDate = (date) => {
@@ -30,41 +30,20 @@ export const getCurrentDate = (date) => {
 }
 
 const MyProducts = ({changeIsReg, removeToken}) => {
-	const [getProd, setGetProd] = useState(null)
-	const [getOneProd, setGetOneProd] = useState(null)
+	const [getProd, setGetProd] = useState([])
 	const [modalCreateShow, setModalCreateShow] = useState(false);
 	const [modalShow, setModalShow] = useState(false);
-	const [modalId, setModalId] = useState({productId: ''});
+	const [modalId, setModalId] = useState('');
 	const [modalEditShow, setModalEditShow] = useState(false);
-
-	// const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
-
-	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
-	const userId = JSON.parse(localStorage.getItem('userId'));
-	const getUser = getUsers.filter((user) => user.id === userId)[0]
-
-	const removeProduct = (id) => {
-		const newProd = getProd.filter(el => el.id !== id)
-		setGetProd(newProd)
-		localStorage.setItem('products', JSON.stringify(newProd))
-	}
-
+	const [getUser, setGetUser] = useState({})
 	const [show, setShow] = useState(false);
 
 	const handleClose = () => setShow(false);
+
 	const handleShow = (e) => {
 		e.preventDefault();
 		setShow(true);
 	}
-
-	const getOneProduct = useCallback(
-		() => {
-			getById(modalId.productId)
-				.then(data => {
-					setGetOneProd(data)
-				})
-		}
-	)
 
 	const getProductsCall = useCallback(
 		() => {
@@ -74,10 +53,19 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 				})
 		}, [])
 
+	const getMyUser = useCallback(
+		() => {
+			getOneUser()
+				.then(data => {
+					setGetUser(data)
+				})
+		}, [])
+
 	useEffect(() => {
 		getProductsCall()
-		getOneProduct()
-	}, [])
+		getMyUser()
+	},[])
+
 
 	return (
 		<div className="wrap">
@@ -99,7 +87,7 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 			</div>
 			<hr/>
 			<div className="wrap__content">
-				{getProd === null || getProd.length === 0 ? (
+				{getProd.length === 0 ? (
 					<div className="no-data">
 						<p>No data</p>
 					</div>
@@ -118,7 +106,7 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 							<tr id={product._id}>
 								<td>{product.productName}</td>
 								<td>{product.store}</td>
-								<td>{/*getUser.address*/}</td>
+								<td>{getUser.address}</td>
 								<td>{product.productCategory}</td>
 								<td>{getCurrentDate(product.createDate)}</td>
 								<td>{product.price}</td>
@@ -127,19 +115,16 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 								<td>
 									<div className="table__actions">
 										<button className="table__actions-sell" onClick={() => {
+											setModalId(product._id)
 											setModalShow(true)
-											setModalId({productId: product._id})
-											// getOneProduct()
 										}}>Sell</button>
 										<button className="table__actions-edit" onClick={() => {
+											setModalId(product._id)
 											setModalEditShow(true)
-											setModalId({productId: product._id})
-											getOneProduct()
-											console.log('========>getOneProd', getOneProd);
 										}}>
-											<ReactSVG className="" src={edit}/>
+											<ReactSVG src={edit}/>
 										</button>
-										<ReactSVG className="table__actions-del" src={del} onClick={(e) => {removeProduct(product._id)}}/>
+										<ReactSVG className="table__actions-del" src={del} onClick={(e) => removeProduct(product._id)}/>
 									</div>
 								</td>
 							</tr>
@@ -165,7 +150,7 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 						onHide={() => setModalEditShow(false)}
 						productId={modalId}
 						setGetProd={setGetProd}
-						getProd={getOneProd}
+						getProd={getProd}
 					/>
 				)}
 

@@ -64,9 +64,8 @@ const ValueLabel = (props) => {
 	);
 };
 
-const ChartBar = () => {
-	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
-	const getChartLineData = getSellProd.map((prod, index) => {
+const ChartBar = ({getProd}) => {
+	const getChartLineData = getProd.map((prod, index) => {
 		return {
 			index: index,
 			productName: prod.productName,
@@ -74,7 +73,7 @@ const ChartBar = () => {
 		}
 	})
 
-	const getTotalPrice = getSellProd.reduce((prev, current) => {
+	const getTotalPrice = getProd.reduce((prev, current) => {
 		return prev + +current.price * +current.sellQuantity
 	}, 0)
 

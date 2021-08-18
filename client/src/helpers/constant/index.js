@@ -4,5 +4,6 @@ export const urls = {
 	API: api,
 	AUTH: `${api}auth`,
 	PRODUCTS: `${api}products`,
+	SALES: `${api}sales`,
 	USER: `${api}user`
 };

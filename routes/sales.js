@@ -1,0 +1,11 @@
+const express = require('express')
+const controller = require('../controllers/sales')
+const passport = require('passport')
+const router = express.Router()
+
+
+router.get('/', passport.authenticate('jwt', {session: false}), controller.getAll)
+router.post('/', passport.authenticate('jwt', {session: false}), controller.add)
+
+
+module.exports = router

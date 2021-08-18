@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {ReactSVG} from "react-svg";
 import {Button, Modal} from "react-bootstrap";
 
 import './MySellModal.scss';
 import {errorClass, validateField} from "../../services/valid";
+import {addSaleProduct, removeProduct, updateProduct} from "../../services/ajaxUser";
 
 const MySellModal = (
 	{
@@ -19,10 +20,10 @@ const MySellModal = (
 		saleDateValid: true,
 		sellQuantityValid: true
 	})
-	
-	const newGetProd = getProd.filter((el) => el.id === productId.productId)[0]
-	const [sellForm, setSellFrom] = useState(newGetProd);
-	const [getSellProd, setGetSellProd] = useState(JSON.parse(localStorage.getItem('sellProducts')))
+
+	const newGetProd = getProd.filter((el) => el._id === productId)
+	const [sellForm, setSellFrom] = useState(newGetProd[0]);
+	const [getSellProd, setGetSellProd] = useState([])
 	const handleChange = (e, type) => {
 		const {value} = e.target
 		setSellFrom((prevForm) => ({
@@ -32,6 +33,12 @@ const MySellModal = (
 		validateField(type, value, isValid, setIsValid, sellForm)
 	}
 
+	const updateMyProduct = useCallback(
+		(id, data) => {
+			updateProduct(id, data)
+		}, [])
+
+console.log('========>sellForm', sellForm);
 	return (
 		<Modal
 			onHide={onHide}
@@ -75,26 +82,34 @@ const MySellModal = (
 							setFormIsValid(true)
 
 							const dif = sellForm.quantity - sellForm.sellQuantity;
+							console.log('========>dif', dif);
 							if (dif === 0) {
+
 								sellForm.quantity = dif;
 								setFormIsValid(true)
-								const newProd = getProd.filter(el => el.id !== productId.productId)
-								setGetProd(newProd)
-								localStorage.setItem('products', JSON.stringify(newProd))
-								getSellProd.push(sellForm);
-								localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
+								const newProds = getProd.filter(el => el._id !== productId)
+								setGetProd(newProds)
+								console.log('========>newProds', newProds);
+								removeProduct(productId)
+								addSaleProduct(sellForm)
+								console.log('========>sellForm', sellForm);
+								// localStorage.setItem('products', JSON.stringify(newProd))
+								// getSellProd.push(sellForm);
+								// localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
 								onHide()
 							}
 							if (dif < 0) {
 								setFormIsValid(false)
-							} 
+							}
 							if(dif > 0){
 								sellForm.quantity = dif;
-								getSellProd.push(sellForm);
-								localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
+								// getSellProd.push(sellForm);
+								// localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
+								addSaleProduct(sellForm)
+								updateMyProduct(sellForm._id, {quantity: sellForm.quantity})
 								setFormIsValid(true)
 								const newChangedProd = getProd.map((prod) => {
-									if (prod.id === productId.productId) {
+									if (prod._id === productId) {
 										prod = {...sellForm}
 										return prod
 									}
@@ -102,7 +117,8 @@ const MySellModal = (
 								})
 								onHide()
 								setGetProd(newChangedProd)
-								localStorage.setItem('products', JSON.stringify(newChangedProd))
+
+								// localStorage.setItem('products', JSON.stringify(newChangedProd))
 							}
 						}
 

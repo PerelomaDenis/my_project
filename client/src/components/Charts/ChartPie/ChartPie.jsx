@@ -11,9 +11,9 @@ import {Animation} from '@devexpress/dx-react-chart';
 import './ChartPie.scss';
 
 
-const ChartLine = () => {
-	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
-	const getChartPieData = getSellProd.map((prod) => {
+const ChartLine = ({getProd}) => {
+	// const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
+	const getChartPieData = getProd.map((prod) => {
 		return {
 			productName: prod.productName,
 			sellQuantity: prod.sellQuantity,

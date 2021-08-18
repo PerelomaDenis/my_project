@@ -11,9 +11,9 @@ const MyEditModal = (
 		info,
 		onHide,
 		show,
-		productId,
 		getProd,
-		setGetProd
+		setGetProd,
+		productId
 	}) => {
 	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
@@ -24,7 +24,8 @@ const MyEditModal = (
 		quantityValid: true,
 		weightValid: true,
 	})
-	const [editForm, setEditFrom] = useState(getProd);
+	const getOneProduct = getProd.filter((item) => item._id === productId)
+	const [editForm, setEditFrom] = useState(getOneProduct[0]);
 
 	const handleChange = (e, type) => {
 		const {value} = e.target
@@ -76,26 +77,24 @@ const MyEditModal = (
 				<Modal.Footer>
 					<Button type="submit" className="modal__btn" onClick={(e) => {
 						e.preventDefault();
-						// updateMyProduct(productId, editForm)
-						// setGetProd(editForm)
-						console.log('========>editForm', editForm);
-						// const newChangedProd = getProd.map((prod) => {
-						// 	if(prod.id === productId.productId) {
-						// 		prod = {...editForm}
-						// 		return prod
-						// 	}
-						// 	return prod
-						// })
 
-						// let values = Object.values((isValid));
-						// if(values.includes(false) || values.includes('')) {
-						// 	setFormIsValid(false )
-						// } else {
-						// 	setFormIsValid(true )
-						// 	onHide()
-						// 	// setGetProd(newChangedProd)
-						// 	// localStorage.setItem('products', JSON.stringify(newChangedProd))
-						// }
+						const newChangedProd = getProd.map((prod) => {
+							if(prod._id === productId) {
+								prod = {...editForm}
+								return prod
+							}
+							return prod
+						})
+
+						let values = Object.values((isValid));
+						if(values.includes(false) || values.includes('')) {
+							setFormIsValid(false )
+						} else {
+							setFormIsValid(true )
+						onHide()
+							updateMyProduct(productId, editForm)
+							setGetProd(newChangedProd)
+						}
 					}}>
 						<span className="modal__btn-text">{info.buttonText}</span>
 						<ReactSVG className="modal__btn-icon" src={info.buttonIcon}/>

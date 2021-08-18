@@ -33,6 +33,7 @@ const Login = ({createToken, changeUserId}) => {
 	const getApiCall = useCallback((data) => {
 		login(data)
 			.then((response) => {
+				console.log('========>response', response);
 				createToken(response)
 			})
 	}, [])

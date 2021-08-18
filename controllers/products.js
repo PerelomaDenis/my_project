@@ -37,7 +37,6 @@ module.exports.create = async (req, res) => {
 	} catch (e) {
 		errorHandler(res, e)
 	}
-	console.log(req)
 }
 
 module.exports.update = async (req, res) => {

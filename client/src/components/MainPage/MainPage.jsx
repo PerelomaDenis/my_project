@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Button, Offcanvas} from "react-bootstrap";
 
 import ButtonCreate from "../ButtonCreate";
@@ -14,13 +14,13 @@ import {mainPageProps, modalCreate} from "../../services/mock";
 import {ReactSVG} from "react-svg";
 import menu from "../../assets/images/menu.svg";
 import Sidebar from "../Sidebar";
+import {getAllSales} from "../../services/ajaxUser";
 
 
 
 const MainPage = ({changeIsReg, removeToken}) => {
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
-	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
-	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
+	const [getProd, setGetProd] = useState([])
 	const [show, setShow] = useState(false);
 
 	const handleClose = () => setShow(false);
@@ -28,6 +28,18 @@ const MainPage = ({changeIsReg, removeToken}) => {
 		e.preventDefault();
 		setShow(true);
 	}
+
+	const getMySales = useCallback(
+		() => {
+			getAllSales()
+				.then(data => {
+					setGetProd(data)
+				})
+		}, [])
+
+	useEffect(() => {
+		getMySales()
+	}, [])
 
 	return (
 		<div className="wrap">
@@ -52,30 +64,30 @@ const MainPage = ({changeIsReg, removeToken}) => {
 			<div className="wrap__content">
 				<div className="graphs">
 					<div className="graph-1 graph">
-						{getSellProd.length === 0 ? (
+						{getProd.length === 0 ? (
 							<div className="no-data">
 								<p>No data</p>
 							</div>
 						) : (
-							<ChartPie/>
+							<ChartPie getProd={getProd}/>
 						)}
 					</div>
 					<div className="graph-2 graph">
-						{getSellProd.length === 0 ? (
+						{getProd.length === 0 ? (
 							<div className="no-data">
 								<p>No data</p>
 							</div>
 						) : (
-							<ChartLine/>
+							<ChartLine getProd={getProd}/>
 						)}
 					</div>
 					<div className="graph-3 graph">
-						{getSellProd.length === 0 ? (
+						{getProd.length === 0 ? (
 							<div className="no-data">
 								<p>No data</p>
 							</div>
 						) : (
-							<ChartBar/>
+							<ChartBar getProd={getProd}/>
 						)}
 					</div>
 				</div>
@@ -84,7 +96,6 @@ const MainPage = ({changeIsReg, removeToken}) => {
 						info={modalCreate}
 						show={modalCreateShow}
 						onHide={() => setModalCreateShow(false)}
-						getProd={getProd}
 					/>
 				)}
 			</div>

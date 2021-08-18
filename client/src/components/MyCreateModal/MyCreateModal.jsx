@@ -10,8 +10,7 @@ const MyCreateModal = (
 	{
 		info,
 		onHide,
-		show,
-		getProd
+		show
 	}) => {
 	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
@@ -78,15 +77,13 @@ const MyCreateModal = (
 				<Modal.Footer>
 					<Button type="submit" className="modal__btn" onClick={(e) => {
 						e.preventDefault();
-						createNewProduct(form)
 						let values = Object.values((isValid));
 						if(values.includes(false) || values.includes('')) {
 							setFormIsValid(false )
 						} else {
 							setFormIsValid(true)
 							onHide()
-							getProd.push(form);
-							localStorage.setItem('products', JSON.stringify(getProd))
+							createNewProduct(form)
 						}
 					}}>
 						<span className="modal__btn-text">{info.buttonText}</span>

@@ -32,6 +32,7 @@ const App = () => {
 	}
 
 	const createToken = (response) => {
+		console.log('========>response', response);
 		setIsToken(response.token)
 		localStorage.setItem('token', response.token);
 	}

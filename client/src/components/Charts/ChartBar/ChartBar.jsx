@@ -12,9 +12,7 @@ import {Animation} from '@devexpress/dx-react-chart';
 import './ChartBar.scss';
 
 
-const ChartBar = () => {
-	const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
-
+const ChartBar = ({getProd}) => {
 	const data = [
 		{day: 'Mon', total: 0},
 		{day: 'Tue', total: 0},
@@ -24,7 +22,7 @@ const ChartBar = () => {
 		{day: 'Sat', total: 0},
 		{day: 'Sun', total: 0},
 	];
-	getSellProd.forEach((el) => {
+	getProd.forEach((el) => {
 		data.push({day: el.saleDate, total: el.price})
 	})
 

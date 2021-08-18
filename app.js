@@ -7,6 +7,7 @@ const passport = require('passport')
 const authRoutes = require('./routes/auth')
 const productsRoutes = require('./routes/products')
 const userRoutes = require('./routes/user')
+const salesRoutes = require('./routes/sales')
 const keys = require('./config/keys')
 const app = express()
 
@@ -25,5 +26,6 @@ app.use(cors())
 app.use('/api/auth', authRoutes)
 app.use('/api/products', productsRoutes)
 app.use('/api/user', userRoutes)
+app.use('/api/sales', salesRoutes)
 
 module.exports = app

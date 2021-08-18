@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 
 import {routes} from "./routes/routes";
 import Sidebar from "./components/Sidebar";
@@ -8,23 +8,15 @@ import Login from "./components/Login";
 
 import './App.scss';
 import "./assets/fonts/fonts.css";
+import MainPage from "./components/MainPage";
+import MySales from "./components/MySales";
+import MyProducts from "./components/MyProducts";
+import Personal from "./components/Personal";
 
 const App = () => {
-	const [isToken, setIsToken] = useState(localStorage.getItem('token') || '');
+	const [isToken, setIsToken] = useState(localStorage.getItem('token') || null);
+	const [isReg, setIsReg] = useState(false)
 
-	const [products, setProducts] = useState(JSON.parse(localStorage.getItem('products')) || [])
-	const [sellProducts, setSellProducts] = useState(JSON.parse(localStorage.getItem('sellProducts')) || [])
-	const [users, setUsers] = useState(JSON.parse(localStorage.getItem('users')) || [])
-	const [isReg, setIsReg] = useState(JSON.parse(localStorage.getItem('isReg')) || false)
-	const [userId, setUserId] = useState(JSON.parse(localStorage.getItem('userId')) || '')
-
-	useEffect(() => {
-		localStorage.setItem('products', JSON.stringify(products))
-		localStorage.setItem('sellProducts', JSON.stringify(sellProducts))
-		localStorage.setItem('users', JSON.stringify(users))
-		localStorage.setItem('isReg', JSON.stringify(isReg));
-		localStorage.setItem('userId', JSON.stringify(userId));
-	}, [])
 
 	const removeToken = () => {
 		setIsToken('')
@@ -32,7 +24,6 @@ const App = () => {
 	}
 
 	const createToken = (response) => {
-		console.log('========>response', response);
 		setIsToken(response.token)
 		localStorage.setItem('token', response.token);
 	}
@@ -40,37 +31,64 @@ const App = () => {
 	const changeIsReg = (value) => {
 		setIsReg(value)
 	}
-
-	const changeUserId = (value) => {
-		setUserId(value)
-	}
-
+	console.log('========>isReg', isReg);
+	console.log('========>isToken', isToken);
 	return (
 		<BrowserRouter>
-			{!isReg
-				? <Register changeIsReg={changeIsReg}/>
-				: isToken === ''
-					? <Login createToken={createToken} changeUserId={changeUserId}/>
-					: <div className="page">
-						<div className="sidebar">
-							<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
-						</div>
-						<div className="main">
-							<Switch>
-								{routes.map((route) => {
-										const Main = route.component;
-										return <Route
-											render={() => <Main changeIsReg={changeIsReg} removeToken={removeToken}/>}
-											// component={route.component}
-											path={route.path}
-											exact={route.exact}
-										/>
-									}
-								)}
-							</Switch>
-						</div>
-					</div>
-			}
+			{/*// !isReg*/}
+			{/*// ? <Register changeIsReg={changeIsReg}/>*/}
+			{/*// : !isToken*/}
+			{/*// 	? <Login createToken={createToken}/>*/}
+			{/*// 	:*/}
+			{/*	// <Switch>*/}
+			{/*	// 	{routes.map((route) => {*/}
+			{/*	// 			const Main = route.component;*/}
+			{/*	// 			return <Route*/}
+			{/*	// 				render={() => <Main changeIsReg={changeIsReg} removeToken={removeToken}/>}*/}
+			{/*	// 				path={route.path}*/}
+			{/*	// 				exact={route.exact}*/}
+			{/*	// 			/>*/}
+			{/*	// 		}*/}
+			{/*	// 	)}*/}
+			{/*	// </Switch>*/}
+			<Route changeIsReg={changeIsReg} removeToken={removeToken}
+				// render={() => <MainPage changeIsReg={changeIsReg} removeToken={removeToken}/>}
+						 component={Register}
+						 path="/"
+						 exact="true"
+			/>
+			<Route changeIsReg={changeIsReg} removeToken={removeToken} createToken={createToken}
+				// render={() => <MainPage changeIsReg={changeIsReg} removeToken={removeToken}/>}
+						 component={Login}
+						 path="/"
+						 exact="true"
+			/>
+			<Route changeIsReg={changeIsReg} removeToken={removeToken}
+				 render={() => isToken ? <MainPage changeIsReg={changeIsReg} removeToken={removeToken} /> : <Redirect to="/register"/>}
+				// 		 component={MainPage}
+						 path="/"
+						 exact="true"
+			/>
+			<Route changeIsReg={changeIsReg} removeToken={removeToken}
+				 render={() => <MainPage changeIsReg={changeIsReg} removeToken={removeToken}/>}
+						 // component={MySales}
+						 path="/"
+						 exact="true"
+			/>
+			<Route changeIsReg={changeIsReg} removeToken={removeToken}
+				 render={() => <MainPage changeIsReg={changeIsReg} removeToken={removeToken}/>}
+						 // component={MyProducts}
+						 path="/"
+						 exact="true"
+			/>
+			<Route changeIsReg={changeIsReg} removeToken={removeToken}
+				 render={() => <MainPage changeIsReg={changeIsReg} removeToken={removeToken}/>}
+						 // component={Personal}
+						 path="/"
+						 exact="true"
+			/>
+
+
 		</BrowserRouter>
 	);
 }

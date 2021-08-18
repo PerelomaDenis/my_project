@@ -15,13 +15,13 @@ const Register = ({changeIsReg}) => {
 		emailValid: '',
 		firstNameValid: '',
 		lastNameValid: '',
-		companyValid: '',
+		companyValid: true,
 		passwordValid: '',
 		confirmPasswordValid: '',
 	})
-	const [isReg, setIsReg] = useState(JSON.parse(localStorage.getItem('isReg')))
-	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
+	const [isReg, setIsReg] = useState(false)
 	const [registerForm, setRegisterForm] = useState({});
+	const [registerError, setRegisterError] = useState('');
 
 	const handleChange = (e, type) => {
 		const {value} = e.target
@@ -35,14 +35,21 @@ const Register = ({changeIsReg}) => {
 	const getApiCall = useCallback(
 		(data) => {
 			 registration(data)
-				 .then((r)=>{console.log('========>r',r );})
-				 .catch((e)=>{console.log('========>e', e);})
+				 .then((r)=>{
+				 	 console.log('========>r',r );
+				 	 if(r.status === 201) {
+						 setIsReg(true)
+						 changeIsReg(true)
+					 }
+				 })
+				 .catch((e) => {
+					 	setRegisterError('This email is exist')
+				 })
 
 		}, [])
-
+	console.log('========>isReg', isReg);
 	const handleRegisterClick = (e) => {
-		getApiCall(registerForm)
-		// console.log('========>getApiCall(registerForm)', getApiCall(registerForm));
+
 		// let isEmail = false;
 		// for(let i=0; i < getUsers.length; i++) {
 		// 	for(let key in getUsers[i]) {
@@ -53,19 +60,16 @@ const Register = ({changeIsReg}) => {
 		// 		}
 		// 	}
 		// }
-		//
 		// if(!isEmail) {
-		// 	let values = Object.values((isValid));
-		// 	if(values.includes(false) || values.includes('')) {
-		// 		setFormIsValid({valid: false, errorText: 'Information entered wrong'})
-		// 	} else {
-		// 		setFormIsValid({valid: true, errorText: 'Information entered wrong'})
-		// 		getUsers.push(registerForm);
-		// 		localStorage.setItem('users', JSON.stringify(getUsers));
-		// 		setIsReg(true);
-		// 		localStorage.setItem('isReg', JSON.stringify(true));
-		// 		changeIsReg(true)
-		// 	}
+			let values = Object.values((isValid));
+			if(values.includes(false) || values.includes('')) {
+				setFormIsValid({valid: false, errorText: 'Information entered wrong'})
+			} else {
+				setFormIsValid({valid: true, errorText: 'Information entered wrong'})
+				// setIsReg(true);
+				getApiCall(registerForm)
+				// changeIsReg(true)
+			}
 		// } else {
 		// 	setFormIsValid({valid: false, errorText: 'This email is exist'})
 		// }
@@ -95,10 +99,12 @@ const Register = ({changeIsReg}) => {
 										/>
 									</div>
 									{errorClass(isValid[field.valid]) && (<div className="error__text">{field.errorText}</div>)}
+
 								</div>
 							</div>
 						))}
 						{!isFormValid.valid && (<div className="error__text">{isFormValid.errorText}</div>)}
+						{registerError && (<div className="error__text">{registerError}</div>)}
 						<Button className="register-form__btn" onClick={() => handleRegisterClick()}>
 							<div className="register-form__button">
 								<span className="register-form__btn-text">Create account</span>
@@ -109,7 +115,6 @@ const Register = ({changeIsReg}) => {
 						Already have an account?
 						<NavLink className="wrap-left__question-link" to="/login" onClick={(e) => {
 							setIsReg(true);
-							localStorage.setItem('isReg', JSON.stringify(true));
 							changeIsReg(true)
 						}}> Log in</NavLink>
 					</div>

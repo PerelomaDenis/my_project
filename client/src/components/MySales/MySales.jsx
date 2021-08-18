@@ -55,67 +55,74 @@ const MySales = ({changeIsReg, removeToken}) => {
 	}, [])
 
 	console.log('========>getUser', getUser);
-	
+
 	return (
-		<div className="wrap">
-			<div className="wrap__top">
-				<div className="wrap__top-mobile">
-					<ReactSVG className="" src={menu} onClick={handleShow}/>
-					<Offcanvas show={show} onHide={handleClose}>
-						<Offcanvas.Header closeButton>
-						</Offcanvas.Header>
-						<Offcanvas.Body>
-							<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
-						</Offcanvas.Body>
-					</Offcanvas>
-				</div>
-				<MainTitle title={mySalesProps.title} description={mySalesProps.description}/>
-				<Button className="button" variant="primary" onClick={() => setModalCreateShow(true)}>
-					<ButtonCreate />
-				</Button>
-
+		<div className="page">
+			<div className="sidebar">
+				<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
 			</div>
-			<hr/>
-			<div className="wrap__content">
-				{getProd.length === 0 ? (
-					<div className="no-data">
-						<p>No data</p>
-					</div>
-				) : (
-				<Table striped borderless responsive="md">
-					<thead>
-					<tr>
-						{tableMySalesTitles.map((title) => (
-							<th>{title}</th>
-						))}
-					</tr>
-					</thead>
-					<tbody>
-					{getProd.map((product) => (
-						<tr>
-							<td>{product.productName}</td>
-							<td>{product.store}</td>
-							<td>{getUser.address}</td>
-							<td>{product.productCategory}</td>
-							<td>{getCurrentDate(product.createDate)}</td>
-							<td>{product.price}</td>
-							<td>{product.sellQuantity}</td>
-							<td>{product.weight}</td>
-							<td>{product.saleDate}</td>
-						</tr>
-					))}
+			<div className="main">
+				<div className="wrap">
+					<div className="wrap__top">
+						<div className="wrap__top-mobile">
+							<ReactSVG className="" src={menu} onClick={handleShow}/>
+							<Offcanvas show={show} onHide={handleClose}>
+								<Offcanvas.Header closeButton>
+								</Offcanvas.Header>
+								<Offcanvas.Body>
+									<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
+								</Offcanvas.Body>
+							</Offcanvas>
+						</div>
+						<MainTitle title={mySalesProps.title} description={mySalesProps.description}/>
+						<Button className="button" variant="primary" onClick={() => setModalCreateShow(true)}>
+							<ButtonCreate/>
+						</Button>
 
-					</tbody>
-				</Table>
-				)}
-				{modalCreateShow && (
-					<MyCreateModal
-						info={modalCreate}
-						show={modalCreateShow}
-						onHide={() => setModalCreateShow(false)}
-						getProd={getProd}
-					/>
-				)}
+					</div>
+					<hr/>
+					<div className="wrap__content">
+						{getProd.length === 0 ? (
+							<div className="no-data">
+								<p>No data</p>
+							</div>
+						) : (
+							<Table striped borderless responsive="md">
+								<thead>
+								<tr>
+									{tableMySalesTitles.map((title) => (
+										<th>{title}</th>
+									))}
+								</tr>
+								</thead>
+								<tbody>
+								{getProd.map((product) => (
+									<tr>
+										<td>{product.productName}</td>
+										<td>{product.store}</td>
+										<td>{getUser.address}</td>
+										<td>{product.productCategory}</td>
+										<td>{getCurrentDate(product.createDate)}</td>
+										<td>{product.price}</td>
+										<td>{product.sellQuantity}</td>
+										<td>{product.weight}</td>
+										<td>{product.saleDate}</td>
+									</tr>
+								))}
+
+								</tbody>
+							</Table>
+						)}
+						{modalCreateShow && (
+							<MyCreateModal
+								info={modalCreate}
+								show={modalCreateShow}
+								onHide={() => setModalCreateShow(false)}
+								getProd={getProd}
+							/>
+						)}
+					</div>
+				</div>
 			</div>
 		</div>
 	)

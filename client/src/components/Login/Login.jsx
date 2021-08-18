@@ -10,13 +10,12 @@ import {loginFormFields} from "../../services/mock";
 import {login} from "../../services/ajaxUser";
 
 
-const Login = ({createToken, changeUserId}) => {
+const Login = ({createToken}) => {
 	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
 		emailValid: '',
 		passwordValid: '',
 	})
-	const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
 	const [loginForm, setLoginForm] = useState({});
 	const [isToken, setIsToken] = useState(localStorage.getItem('token'));
 
@@ -33,7 +32,6 @@ const Login = ({createToken, changeUserId}) => {
 	const getApiCall = useCallback((data) => {
 		login(data)
 			.then((response) => {
-				console.log('========>response', response);
 				createToken(response)
 			})
 	}, [])

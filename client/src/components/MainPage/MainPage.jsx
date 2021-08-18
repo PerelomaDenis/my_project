@@ -17,7 +17,6 @@ import Sidebar from "../Sidebar";
 import {getAllSales} from "../../services/ajaxUser";
 
 
-
 const MainPage = ({changeIsReg, removeToken}) => {
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
 	const [getProd, setGetProd] = useState([])
@@ -42,62 +41,69 @@ const MainPage = ({changeIsReg, removeToken}) => {
 	}, [])
 
 	return (
-		<div className="wrap">
-			<div className="wrap__top">
-				<div className="wrap__top-mobile">
-					<ReactSVG className="" src={menu} onClick={handleShow}/>
-					<Offcanvas show={show} onHide={handleClose}>
-						<Offcanvas.Header closeButton>
-						</Offcanvas.Header>
-						<Offcanvas.Body>
-							<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
-						</Offcanvas.Body>
-					</Offcanvas>
-				</div>
-				<MainTitle title={mainPageProps.title} description={mainPageProps.description}/>
-				<Button className="button" variant="primary" onClick={() => setModalCreateShow(true)}>
-					<ButtonCreate/>
-				</Button>
-
+		<div className="page">
+			<div className="sidebar">
+				<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
 			</div>
-			<hr/>
-			<div className="wrap__content">
-				<div className="graphs">
-					<div className="graph-1 graph">
-						{getProd.length === 0 ? (
-							<div className="no-data">
-								<p>No data</p>
-							</div>
-						) : (
-							<ChartPie getProd={getProd}/>
-						)}
+			<div className="main">
+				<div className="wrap">
+					<div className="wrap__top">
+						<div className="wrap__top-mobile">
+							<ReactSVG className="" src={menu} onClick={handleShow}/>
+							<Offcanvas show={show} onHide={handleClose}>
+								<Offcanvas.Header closeButton>
+								</Offcanvas.Header>
+								<Offcanvas.Body>
+									<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
+								</Offcanvas.Body>
+							</Offcanvas>
+						</div>
+						<MainTitle title={mainPageProps.title} description={mainPageProps.description}/>
+						<Button className="button" variant="primary" onClick={() => setModalCreateShow(true)}>
+							<ButtonCreate/>
+						</Button>
+
 					</div>
-					<div className="graph-2 graph">
-						{getProd.length === 0 ? (
-							<div className="no-data">
-								<p>No data</p>
+					<hr/>
+					<div className="wrap__content">
+						<div className="graphs">
+							<div className="graph-1 graph">
+								{getProd.length === 0 ? (
+									<div className="no-data">
+										<p>No data</p>
+									</div>
+								) : (
+									<ChartPie getProd={getProd}/>
+								)}
 							</div>
-						) : (
-							<ChartLine getProd={getProd}/>
-						)}
-					</div>
-					<div className="graph-3 graph">
-						{getProd.length === 0 ? (
-							<div className="no-data">
-								<p>No data</p>
+							<div className="graph-2 graph">
+								{getProd.length === 0 ? (
+									<div className="no-data">
+										<p>No data</p>
+									</div>
+								) : (
+									<ChartLine getProd={getProd}/>
+								)}
 							</div>
-						) : (
-							<ChartBar getProd={getProd}/>
+							<div className="graph-3 graph">
+								{getProd.length === 0 ? (
+									<div className="no-data">
+										<p>No data</p>
+									</div>
+								) : (
+									<ChartBar getProd={getProd}/>
+								)}
+							</div>
+						</div>
+						{modalCreateShow && (
+							<MyCreateModal
+								info={modalCreate}
+								show={modalCreateShow}
+								onHide={() => setModalCreateShow(false)}
+							/>
 						)}
 					</div>
 				</div>
-				{modalCreateShow && (
-					<MyCreateModal
-						info={modalCreate}
-						show={modalCreateShow}
-						onHide={() => setModalCreateShow(false)}
-					/>
-				)}
 			</div>
 		</div>
 	)

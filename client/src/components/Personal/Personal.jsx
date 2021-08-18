@@ -33,8 +33,6 @@ const Personal = ({changeIsReg, removeToken}) => {
 	const [getUser, setGetUser] = useState({})
 	const [personalForm, setPersonalForm] = useState(getUser);
 
-	const [getProd, setGetProd] = useState(JSON.parse(localStorage.getItem('products')))
-
 
 	const handleChange = (e, type) => {
 		const {value} = e.target
@@ -61,7 +59,7 @@ const Personal = ({changeIsReg, removeToken}) => {
 		e.preventDefault();
 		setShow(true);
 	}
-	
+
 	const getMyUser = useCallback(
 		() => {
 			getOneUser()
@@ -75,107 +73,96 @@ const Personal = ({changeIsReg, removeToken}) => {
 	useEffect(() => {
 		getMyUser()
 	}, [])
-
-	if(personalForm.newPassword === '') isValid.newPasswordValid = true;
-	if(personalForm.oldPassword === '') isValid.oldPasswordValid = true;
+	console.log('========>personalForm', personalForm);
+	if (personalForm.newPassword === '') isValid.newPasswordValid = true;
+	if (personalForm.oldPassword === '') isValid.oldPasswordValid = true;
 
 	return (
-		<div className="wrap">
-			<div className="wrap__top">
-				<div className="wrap__top-mobile">
-					<ReactSVG className="" src={menu} onClick={handleShow}/>
-					<Offcanvas show={show} onHide={handleClose}>
-						<Offcanvas.Header closeButton>
-						</Offcanvas.Header>
-						<Offcanvas.Body>
-							<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
-						</Offcanvas.Body>
-					</Offcanvas>
-				</div>
-				<MainTitle title={personalProps.title} description={personalProps.description}/>
-				<Button className="button" variant="primary" onClick={() => setModalCreateShow(true)}>
-					<ButtonCreate/>
-				</Button>
+		<div className="page">
+			<div className="sidebar">
+				<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
 			</div>
-			<hr/>
-			<div className="wrap__content">
-				<form className="personal-form">
-					<div className="personal-form__row">
-						{personalFormFields.map((field) => (
-							<div className="personal-form__el">
-								<div className="personal-form__item">
-									<label className="personal-form__item-title" htmlFor={field.id}>{field.label}</label>
-									<input
-										className={`personal-form__item-input ${errorClass(isValid[field.valid])}`}
-										type={field.type}
-										id={field.id}
-										name={field.id}
-										placeholder={field.placeholder}
-										value={personalForm[field.id]}
-										onChange={(e) => handleChange(e, field.id)}
-									/>
-								</div>
-								{errorClass(isValid[field.valid]) && (<div className="error__text">{field.errorText}</div>)}
-							</div>
-						))}
-						{personalFormPasswordFields.map((field) => (
-							<div className="personal-form__el">
-								<div className="personal-form__item">
-									<label className="personal-form__item-title" htmlFor={field.id}>{field.label}</label>
-									<input
-										className={`personal-form__item-input ${errorClass(isValid[field.valid])}`}
-										type={field.type}
-										id={field.id}
-										name={field.id}
-										placeholder={field.placeholder}
-										value={newPassword[field.id]}
-										onChange={(e) => handleChangePassword(e, field.id)}
-									/>
-								</div>
-								{errorClass(isValid[field.valid]) && (<div className="error__text">{field.errorText}</div>)}
-							</div>
-						))}
-					</div>
-					{!isFormValid && (<div className="error__text">Information entered wrong</div>)}
-					<div>
-						<Button className="button" variant="primary" onClick={(e) => {
-							e.preventDefault();
-							updateOneUser(getUser._id, personalForm)
-							// if (personalForm.password === newPassword.oldPassword
-							// 	&& newPassword.oldPassword !== newPassword.newPassword) {
-							// 	personalForm.password = newPassword.newPassword
-							// }
-							// const newUsers = getUsers.map((user) => {
-							// 	if (user.email === getUser.email) {
-							// 		user = {...personalForm}
-							// 		return user
-							// 	}
-							// 	return user
-							// })
-							// let values = Object.values((isValid));
-							// if (values.includes(false) || values.includes('')) {
-							// 	setFormIsValid(false)
-							// } else {
-							// 	setFormIsValid(true)
-							// 	setGetUsers(newUsers)
-							// 	localStorage.setItem('users', JSON.stringify(newUsers))
-							// 	setNewPassword({oldPassword: '', newPassword: ''})
-							// }
-						}}>
-							<div className="personal-form__button">
-								<span className="personal-form__button-text">Save changes</span>
-							</div>
+			<div className="main">
+				<div className="wrap">
+					<div className="wrap__top">
+						<div className="wrap__top-mobile">
+							<ReactSVG className="" src={menu} onClick={handleShow}/>
+							<Offcanvas show={show} onHide={handleClose}>
+								<Offcanvas.Header closeButton>
+								</Offcanvas.Header>
+								<Offcanvas.Body>
+									<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
+								</Offcanvas.Body>
+							</Offcanvas>
+						</div>
+						<MainTitle title={personalProps.title} description={personalProps.description}/>
+						<Button className="button" variant="primary" onClick={() => setModalCreateShow(true)}>
+							<ButtonCreate/>
 						</Button>
 					</div>
-				</form>
-				{modalCreateShow && (
-					<MyCreateModal
-						info={modalCreate}
-						show={modalCreateShow}
-						onHide={() => setModalCreateShow(false)}
-						getProd={getProd}
-					/>
-				)}
+					<hr/>
+					<div className="wrap__content">
+						<form className="personal-form">
+							<div className="personal-form__row">
+								{personalFormFields.map((field) => (
+									<div className="personal-form__el">
+										<div className="personal-form__item">
+											<label className="personal-form__item-title" htmlFor={field.id}>{field.label}</label>
+											<input
+												className={`personal-form__item-input ${errorClass(isValid[field.valid])}`}
+												type={field.type}
+												id={field.id}
+												name={field.id}
+												placeholder={field.placeholder}
+												value={personalForm[field.id]}
+												onChange={(e) => handleChange(e, field.id)}
+											/>
+										</div>
+										{errorClass(isValid[field.valid]) && (<div className="error__text">{field.errorText}</div>)}
+									</div>
+								))}
+							</div>
+							{!isFormValid && (<div className="error__text">Information entered wrong</div>)}
+							<div>
+								<Button className="button" variant="primary" onClick={(e) => {
+									e.preventDefault();
+
+									if (personalForm.password === newPassword.oldPassword
+										&& newPassword.oldPassword !== newPassword.newPassword) {
+										personalForm.password = newPassword.newPassword
+									}
+									// const newUsers = getUsers.map((user) => {
+									// 	if (user.email === getUser.email) {
+									// 		user = {...personalForm}
+									// 		return user
+									// 	}
+									// 	return user
+									// })
+									let values = Object.values((isValid));
+									if (values.includes(false) || values.includes('')) {
+										setFormIsValid(false)
+									} else {
+										setFormIsValid(true)
+										// setGetUsers(newUsers)
+										updateOneUser(getUser._id, personalForm)
+										setPersonalForm({...personalForm, oldPassword: '', newPassword: ''})
+									}
+								}}>
+									<div className="personal-form__button">
+										<span className="personal-form__button-text">Save changes</span>
+									</div>
+								</Button>
+							</div>
+						</form>
+						{modalCreateShow && (
+							<MyCreateModal
+								info={modalCreate}
+								show={modalCreateShow}
+								onHide={() => setModalCreateShow(false)}
+							/>
+						)}
+					</div>
+				</div>
 			</div>
 		</div>
 	)

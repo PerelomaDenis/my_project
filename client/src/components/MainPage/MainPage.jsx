@@ -17,7 +17,7 @@ import Sidebar from "../Sidebar";
 import {getAllSales} from "../../services/ajaxUser";
 
 
-const MainPage = ({changeIsReg, removeToken}) => {
+const MainPage = ({changeIsReg, removeToken, getUser, setGetUser}) => {
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
 	const [getProd, setGetProd] = useState([])
 	const [show, setShow] = useState(false);
@@ -27,6 +27,7 @@ const MainPage = ({changeIsReg, removeToken}) => {
 		e.preventDefault();
 		setShow(true);
 	}
+
 
 	const getMySales = useCallback(
 		() => {

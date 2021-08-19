@@ -10,14 +10,15 @@ import {loginFormFields} from "../../services/mock";
 import {login} from "../../services/ajaxUser";
 
 
-const Login = ({createToken}) => {
+const Login = ({createToken, isToken}) => {
+
 	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
 		emailValid: '',
 		passwordValid: '',
 	})
 	const [loginForm, setLoginForm] = useState({});
-	const [isToken, setIsToken] = useState(localStorage.getItem('token'));
+	const [loginError, setLoginError] = useState('');
 
 
 	const handleChange = (e, type) => {
@@ -29,10 +30,18 @@ const Login = ({createToken}) => {
 		validateField(type, value, isValid, setIsValid, loginForm)
 	}
 
+	const redirect = () => {
+		return <Redirect to="/"/>
+	}
+
 	const getApiCall = useCallback((data) => {
 		login(data)
 			.then((response) => {
 				createToken(response)
+				redirect()
+			})
+			.catch((e) => {
+				setLoginError('Email or password wrong')
 			})
 	}, [])
 
@@ -78,7 +87,7 @@ const Login = ({createToken}) => {
 
 	return (
 		<div className="wraps">
-			{isToken && <Redirect to={'/'}/>}
+			{isToken.length > 0 && <Redirect to={'/'}/>}
 			<div className="wrap-left">
 				<h1>Sign in</h1>
 				<form className="register-form">
@@ -102,7 +111,10 @@ const Login = ({createToken}) => {
 						</div>
 					))}
 					{!isFormValid && (<div className="error__text">Email or password entered wrong</div>)}
-					<Button className="register-form__btn" onClick={() => handleLoginClick()}>
+					{loginError && (<div className="error__text">{loginError}</div>)}
+					<Button className="register-form__btn" onClick={() => {
+						handleLoginClick()
+					}}>
 						<div className="register-form__button">
 							<span className="register-form__btn-text">Log in</span>
 						</div>

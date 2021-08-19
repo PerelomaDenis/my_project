@@ -13,7 +13,8 @@ const MySellModal = (
 		show,
 		productId,
 		getProd,
-		setGetProd
+		setGetProd,
+		getProductsCall
 	}) => {
 	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
@@ -36,6 +37,7 @@ const MySellModal = (
 	const updateMyProduct = useCallback(
 		(id, data) => {
 			updateProduct(id, data)
+				.then(() => getProductsCall())
 		}, [])
 
 console.log('========>sellForm', sellForm);

@@ -4,13 +4,14 @@ import {Button, Modal} from "react-bootstrap";
 
 import './MyCreateModal.scss';
 import {errorClass, validateField} from "../../services/valid";
-import {createProduct, registration} from "../../services/ajaxUser";
+import {createProduct, getAllSales, registration} from "../../services/ajaxUser";
 
 const MyCreateModal = (
 	{
 		info,
 		onHide,
-		show
+		show,
+		getProductsCall
 	}) => {
 	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
@@ -38,6 +39,9 @@ const MyCreateModal = (
 	const createNewProduct = useCallback(
 		 (data) => {
 				createProduct(data)
+					.then(() => {
+						if(getProductsCall) getProductsCall()
+					})
 		}, [])
 
 	return (

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 
 import {routes} from "./routes/routes";
@@ -12,11 +12,13 @@ import MainPage from "./components/MainPage";
 import MySales from "./components/MySales";
 import MyProducts from "./components/MyProducts";
 import Personal from "./components/Personal";
+import {getAll, getAllSales, getOneUser} from "./services/ajaxUser";
 
 const App = () => {
-	const [isToken, setIsToken] = useState(localStorage.getItem('token') || null);
-	const [isReg, setIsReg] = useState(false)
-
+	const [isToken, setIsToken] = useState(JSON.parse(localStorage.getItem('token')) || '');
+	const [getUser, setGetUser] = useState({})
+	const [getProd, setGetProd] = useState([])
+	const [getSaleProd, setGetSaleProd] = useState([])
 
 	const removeToken = () => {
 		setIsToken('')
@@ -25,70 +27,104 @@ const App = () => {
 
 	const createToken = (response) => {
 		setIsToken(response.token)
-		localStorage.setItem('token', response.token);
+		localStorage.setItem('token', JSON.stringify(response.token));
 	}
 
-	const changeIsReg = (value) => {
-		setIsReg(value)
-	}
-	console.log('========>isReg', isReg);
-	console.log('========>isToken', isToken);
+	// const getProductsCall = useCallback(
+	// 	() => {
+	// 		getAll()
+	// 			.then(data => {
+	// 				setGetProd(data)
+	// 			})
+	// 	}, [])
+	//
+	// const getMyUser = useCallback(
+	// 	() => {
+	// 		getOneUser()
+	// 			.then(data => {
+	// 				setGetUser(data)
+	// 			})
+	// 	}, [])
+	//
+	const getMySales = useCallback(
+		() => {
+			getAllSales()
+				.then(data => {
+					setGetSaleProd(data)
+				})
+		}, [])
+
+	useEffect(() => {
+
+		getMySales()
+	}, [isToken])
+
+
 	return (
 		<BrowserRouter>
-			{/*// !isReg*/}
-			{/*// ? <Register changeIsReg={changeIsReg}/>*/}
-			{/*// : !isToken*/}
-			{/*// 	? <Login createToken={createToken}/>*/}
-			{/*// 	:*/}
-			{/*	// <Switch>*/}
-			{/*	// 	{routes.map((route) => {*/}
-			{/*	// 			const Main = route.component;*/}
-			{/*	// 			return <Route*/}
-			{/*	// 				render={() => <Main changeIsReg={changeIsReg} removeToken={removeToken}/>}*/}
-			{/*	// 				path={route.path}*/}
-			{/*	// 				exact={route.exact}*/}
-			{/*	// 			/>*/}
-			{/*	// 		}*/}
-			{/*	// 	)}*/}
-			{/*	// </Switch>*/}
-			<Route changeIsReg={changeIsReg} removeToken={removeToken}
-				// render={() => <MainPage changeIsReg={changeIsReg} removeToken={removeToken}/>}
-						 component={Register}
-						 path="/"
-						 exact="true"
+			<Route
+				render={() => <Register removeToken={removeToken}/>}
+				path="/register"
+				exact="true"
 			/>
-			<Route changeIsReg={changeIsReg} removeToken={removeToken} createToken={createToken}
-				// render={() => <MainPage changeIsReg={changeIsReg} removeToken={removeToken}/>}
-						 component={Login}
-						 path="/"
-						 exact="true"
+			<Route
+				render={() => <Login removeToken={removeToken} createToken={createToken} isToken={isToken}/>}
+				path="/login"
+				exact="true"
 			/>
-			<Route changeIsReg={changeIsReg} removeToken={removeToken}
-				 render={() => isToken ? <MainPage changeIsReg={changeIsReg} removeToken={removeToken} /> : <Redirect to="/register"/>}
-				// 		 component={MainPage}
-						 path="/"
-						 exact="true"
+			<Route
+				render={() => isToken
+					? <MainPage
+						getUser={getUser}
+						getProd={getSaleProd}
+						setGetProd={setGetSaleProd}
+						setGetUser={setGetUser}
+						removeToken={removeToken}
+					/>
+					: <Redirect to="/register"/>
+				}
+				path="/"
+				exact="true"
 			/>
-			<Route changeIsReg={changeIsReg} removeToken={removeToken}
-				 render={() => <MainPage changeIsReg={changeIsReg} removeToken={removeToken}/>}
-						 // component={MySales}
-						 path="/"
-						 exact="true"
+			<Route
+				render={() => isToken
+					? <MySales
+						getUser={getUser}
+						getProd={getSaleProd}
+						setGetProd={setGetSaleProd}
+						setGetUser={setGetUser}
+						removeToken={removeToken}
+					/>
+					: <Redirect to="/register"/>}
+				path="/my-sales"
+				exact="true"
 			/>
-			<Route changeIsReg={changeIsReg} removeToken={removeToken}
-				 render={() => <MainPage changeIsReg={changeIsReg} removeToken={removeToken}/>}
-						 // component={MyProducts}
-						 path="/"
-						 exact="true"
+			<Route
+				render={() => isToken
+					? <MyProducts
+						getUser={getUser}
+						getProd={getProd}
+						setGetProd={setGetProd}
+						setGetUser={setGetUser}
+						removeToken={removeToken}
+					/>
+					: <Redirect to="/register"/>}
+				path="/my-products"
+				exact="true"
 			/>
-			<Route changeIsReg={changeIsReg} removeToken={removeToken}
-				 render={() => <MainPage changeIsReg={changeIsReg} removeToken={removeToken}/>}
-						 // component={Personal}
-						 path="/"
-						 exact="true"
+			<Route
+				render={() => isToken
+					? <Personal
+						getUser={getUser}
+						getProd={getProd}
+						setGetProd={setGetProd}
+						setGetUser={setGetUser}
+						removeToken={removeToken}
+					/>
+					: <Redirect to="/register"/>}
+				path="/personal"
+				exact="true"
 			/>
-
-
 		</BrowserRouter>
 	);
 }

@@ -17,7 +17,6 @@ import {getAll, getOneUser, updateOneUser} from "../../services/ajaxUser";
 
 
 const Personal = ({changeIsReg, removeToken}) => {
-	// const userId = JSON.parse(localStorage.getItem('userId'));
 	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
 		emailValid: true,
@@ -73,7 +72,7 @@ const Personal = ({changeIsReg, removeToken}) => {
 	useEffect(() => {
 		getMyUser()
 	}, [])
-	console.log('========>personalForm', personalForm);
+
 	if (personalForm.newPassword === '') isValid.newPasswordValid = true;
 	if (personalForm.oldPassword === '') isValid.oldPasswordValid = true;
 

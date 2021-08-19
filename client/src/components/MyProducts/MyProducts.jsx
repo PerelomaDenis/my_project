@@ -45,6 +45,7 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 		setShow(true);
 	}
 
+
 	const getProductsCall = useCallback(
 		() => {
 			getAll()
@@ -131,7 +132,10 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 														<ReactSVG src={edit}/>
 													</button>
 													<ReactSVG className="table__actions-del" src={del}
-																		onClick={(e) => removeProduct(product._id)}/>
+																		onClick={(e) => {
+																			removeProduct(product._id)
+																			getProductsCall()
+																		}}/>
 												</div>
 											</td>
 										</tr>
@@ -146,7 +150,9 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 								onHide={() => setModalShow(false)}
 								productId={modalId}
 								setGetProd={setGetProd}
+								setGetMyProd={setGetProd}
 								getProd={getProd}
+								getProductsCall={getProductsCall}
 							/>
 						)}
 
@@ -157,6 +163,7 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 								onHide={() => setModalEditShow(false)}
 								productId={modalId}
 								setGetProd={setGetProd}
+								setGetMyProd={setGetProd}
 								getProd={getProd}
 							/>
 						)}
@@ -167,6 +174,7 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 								show={modalCreateShow}
 								onHide={() => setModalCreateShow(false)}
 								getProd={getProd}
+								getProductsCall={getProductsCall}
 							/>
 						)}
 					</div>

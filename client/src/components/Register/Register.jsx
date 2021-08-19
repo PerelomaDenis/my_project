@@ -9,7 +9,7 @@ import {registerFormFields} from "../../services/mock";
 import {registration} from "../../services/ajaxUser";
 
 
-const Register = ({changeIsReg}) => {
+const Register = () => {
 	const [isFormValid, setFormIsValid] = useState({valid: true, errorText: 'Information entered wrong'})
 	const [isValid, setIsValid] = useState({
 		emailValid: '',
@@ -19,9 +19,9 @@ const Register = ({changeIsReg}) => {
 		passwordValid: '',
 		confirmPasswordValid: '',
 	})
-	const [isReg, setIsReg] = useState(false)
 	const [registerForm, setRegisterForm] = useState({});
 	const [registerError, setRegisterError] = useState('');
+	const [isReg, setIsReg] = useState(false);
 
 	const handleChange = (e, type) => {
 		const {value} = e.target
@@ -32,52 +32,35 @@ const Register = ({changeIsReg}) => {
 		validateField(type, value, isValid, setIsValid, registerForm)
 	}
 
+	const redirect = () => <Redirect to="/login"/>
+
 	const getApiCall = useCallback(
 		(data) => {
-			 registration(data)
-				 .then((r)=>{
-				 	 console.log('========>r',r );
-				 	 if(r.status === 201) {
-						 setIsReg(true)
-						 changeIsReg(true)
-					 }
-				 })
-				 .catch((e) => {
-					 	setRegisterError('This email is exist')
-				 })
+			registration(data)
+				.then((r) => {
+					console.log('========>r', r);
+					// redirect()
+					setIsReg(true)
+				})
+				.catch((e) => {
+					setRegisterError('This email is exist')
+				})
 
 		}, [])
-	console.log('========>isReg', isReg);
 	const handleRegisterClick = (e) => {
-
-		// let isEmail = false;
-		// for(let i=0; i < getUsers.length; i++) {
-		// 	for(let key in getUsers[i]) {
-		// 		if(key === 'email') {
-		// 			if(getUsers[i][key] === registerForm.email) {
-		// 				isEmail = true;
-		// 			}
-		// 		}
-		// 	}
-		// }
-		// if(!isEmail) {
-			let values = Object.values((isValid));
-			if(values.includes(false) || values.includes('')) {
-				setFormIsValid({valid: false, errorText: 'Information entered wrong'})
-			} else {
-				setFormIsValid({valid: true, errorText: 'Information entered wrong'})
-				// setIsReg(true);
-				getApiCall(registerForm)
-				// changeIsReg(true)
-			}
-		// } else {
-		// 	setFormIsValid({valid: false, errorText: 'This email is exist'})
-		// }
+		let values = Object.values((isValid));
+		if (values.includes(false) || values.includes('')) {
+			setFormIsValid({valid: false, errorText: 'Information entered wrong'})
+		} else {
+			setFormIsValid({valid: true, errorText: 'Information entered wrong'})
+			getApiCall(registerForm)
+		}
 	}
 
-		return (
+	return (
+
 		<div className="wraps">
-			{isReg && <Redirect to={'/login'}/>}
+			{isReg && <Redirect to="/login"/>}
 			{
 				<div className="wrap-left">
 					<h1>Create an account</h1>
@@ -105,7 +88,9 @@ const Register = ({changeIsReg}) => {
 						))}
 						{!isFormValid.valid && (<div className="error__text">{isFormValid.errorText}</div>)}
 						{registerError && (<div className="error__text">{registerError}</div>)}
-						<Button className="register-form__btn" onClick={() => handleRegisterClick()}>
+						<Button className="register-form__btn" onClick={() => {
+							handleRegisterClick()
+						}}>
 							<div className="register-form__button">
 								<span className="register-form__btn-text">Create account</span>
 							</div>
@@ -113,10 +98,7 @@ const Register = ({changeIsReg}) => {
 					</form>
 					<div className="wrap-left__question">
 						Already have an account?
-						<NavLink className="wrap-left__question-link" to="/login" onClick={(e) => {
-							setIsReg(true);
-							changeIsReg(true)
-						}}> Log in</NavLink>
+						<NavLink className="wrap-left__question-link" to="/login"> Log in</NavLink>
 					</div>
 				</div>
 			}

@@ -15,23 +15,33 @@ module.exports.getById = async (req, res) => {
 
 module.exports.update = async (req, res) => {
 	try {
-		const user = await User.findOne({email: req.body.email})
-		const passwordResult = bcrypt.compareSync(req.body.oldPassword, user.password)
-		if(passwordResult) {
-			const salt = bcrypt.genSaltSync(10)
-			req.body.password = bcrypt.hashSync(req.body.password, salt)
-			console.log(req.body.password);
+		// console.log('========>req', req);
+		if(req.body.oldPassword && req.body.newPassword) {
+			
+			const passwordResult = bcrypt.compareSync(req.body.oldPassword, req.body.password)
+			if(passwordResult) {
+				const salt = bcrypt.genSaltSync(10)
+				req.body.password = bcrypt.hashSync(req.body.newPassword, salt)
+				const candidate = await User.findOneAndUpdate(
+					{_id: req.params.id},
+					{$set: req.body},
+					{new: true}
+				)
+				res.status(200).json(candidate)
+			} else {
+				res.status(401).json({
+					message: 'Passwords are not similar'
+				})
+			}
+		} else {
 			const candidate = await User.findOneAndUpdate(
 				{_id: req.params.id},
 				{$set: req.body},
 				{new: true}
 			)
 			res.status(200).json(candidate)
-		} else {
-			res.status(401).json({
-				message: 'Passwords are not similar'
-			})
 		}
+
 	} catch (e) {
 		errorHandler(res, e)
 	}

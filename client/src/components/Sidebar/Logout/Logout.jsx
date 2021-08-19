@@ -5,15 +5,11 @@ import {ReactSVG} from "react-svg";
 import './Logout.scss';
 import log from '../../../assets/images/log.svg';
 
-const Logout = ({changeIsReg, removeToken}) => {
+const Logout = ({removeToken}) => {
 
 	return (
 		<NavLink className="sidebar__link" to="/" onClick={(e) => {
-
-			localStorage.setItem('isReg', JSON.stringify(false));
-			changeIsReg(false);
 			removeToken()
-			localStorage.setItem('userId', JSON.stringify(''));
 		}}>
 			<li className="sidebar__links-item">
 				<ReactSVG className="sidebar__links-icon" src={log} />

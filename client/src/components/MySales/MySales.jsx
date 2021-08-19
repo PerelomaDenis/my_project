@@ -17,11 +17,6 @@ import {getAllSales, getOneUser} from "../../services/ajaxUser";
 
 const MySales = ({changeIsReg, removeToken}) => {
 	const [modalCreateShow, setModalCreateShow] = useState(false);
-	// const [getUsers, setGetUsers] = useState(JSON.parse(localStorage.getItem('users')))
-	// const userId = JSON.parse(localStorage.getItem('userId'));
-	// const getUser = getUsers.filter((user) => user.id === userId)[0]
-
-	// const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
 	const [getUser, setGetUser] = useState({})
 	const [getProd, setGetProd] = useState([])
 	const [show, setShow] = useState(false);
@@ -53,8 +48,6 @@ const MySales = ({changeIsReg, removeToken}) => {
 		getMySales()
 		getMyUser()
 	}, [])
-
-	console.log('========>getUser', getUser);
 
 	return (
 		<div className="page">

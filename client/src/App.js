@@ -30,22 +30,6 @@ const App = () => {
 		localStorage.setItem('token', JSON.stringify(response.token));
 	}
 
-	// const getProductsCall = useCallback(
-	// 	() => {
-	// 		getAll()
-	// 			.then(data => {
-	// 				setGetProd(data)
-	// 			})
-	// 	}, [])
-	//
-	// const getMyUser = useCallback(
-	// 	() => {
-	// 		getOneUser()
-	// 			.then(data => {
-	// 				setGetUser(data)
-	// 			})
-	// 	}, [])
-	//
 	const getMySales = useCallback(
 		() => {
 			getAllSales()
@@ -72,59 +56,17 @@ const App = () => {
 				path="/login"
 				exact="true"
 			/>
-			<Route
-				render={() => isToken
-					? <MainPage
-						getUser={getUser}
-						getProd={getSaleProd}
-						setGetProd={setGetSaleProd}
-						setGetUser={setGetUser}
-						removeToken={removeToken}
+			{routes.map((route) => {
+					const Main = route.component;
+					return <Route
+						render={() => isToken
+							? <Main removeToken={removeToken}/>
+							: <Redirect to="/register"/>}
+						path={route.path}
+						exact={route.exact}
 					/>
-					: <Redirect to="/register"/>
 				}
-				path="/"
-				exact="true"
-			/>
-			<Route
-				render={() => isToken
-					? <MySales
-						getUser={getUser}
-						getProd={getSaleProd}
-						setGetProd={setGetSaleProd}
-						setGetUser={setGetUser}
-						removeToken={removeToken}
-					/>
-					: <Redirect to="/register"/>}
-				path="/my-sales"
-				exact="true"
-			/>
-			<Route
-				render={() => isToken
-					? <MyProducts
-						getUser={getUser}
-						getProd={getProd}
-						setGetProd={setGetProd}
-						setGetUser={setGetUser}
-						removeToken={removeToken}
-					/>
-					: <Redirect to="/register"/>}
-				path="/my-products"
-				exact="true"
-			/>
-			<Route
-				render={() => isToken
-					? <Personal
-						getUser={getUser}
-						getProd={getProd}
-						setGetProd={setGetProd}
-						setGetUser={setGetUser}
-						removeToken={removeToken}
-					/>
-					: <Redirect to="/register"/>}
-				path="/personal"
-				exact="true"
-			/>
+			)}
 		</BrowserRouter>
 	);
 }

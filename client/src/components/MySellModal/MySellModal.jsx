@@ -40,7 +40,6 @@ const MySellModal = (
 				.then(() => getProductsCall())
 		}, [])
 
-console.log('========>sellForm', sellForm);
 	return (
 		<Modal
 			onHide={onHide}
@@ -82,22 +81,14 @@ console.log('========>sellForm', sellForm);
 
 						} else {
 							setFormIsValid(true)
-
 							const dif = sellForm.quantity - sellForm.sellQuantity;
-							console.log('========>dif', dif);
 							if (dif === 0) {
-
 								sellForm.quantity = dif;
 								setFormIsValid(true)
 								const newProds = getProd.filter(el => el._id !== productId)
 								setGetProd(newProds)
-								console.log('========>newProds', newProds);
 								removeProduct(productId)
 								addSaleProduct(sellForm)
-								console.log('========>sellForm', sellForm);
-								// localStorage.setItem('products', JSON.stringify(newProd))
-								// getSellProd.push(sellForm);
-								// localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
 								onHide()
 							}
 							if (dif < 0) {
@@ -105,8 +96,6 @@ console.log('========>sellForm', sellForm);
 							}
 							if(dif > 0){
 								sellForm.quantity = dif;
-								// getSellProd.push(sellForm);
-								// localStorage.setItem('sellProducts', JSON.stringify(getSellProd))
 								addSaleProduct(sellForm)
 								updateMyProduct(sellForm._id, {quantity: sellForm.quantity})
 								setFormIsValid(true)
@@ -119,8 +108,6 @@ console.log('========>sellForm', sellForm);
 								})
 								onHide()
 								setGetProd(newChangedProd)
-
-								// localStorage.setItem('products', JSON.stringify(newChangedProd))
 							}
 						}
 

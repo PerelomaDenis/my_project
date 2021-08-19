@@ -38,8 +38,6 @@ const Register = () => {
 		(data) => {
 			registration(data)
 				.then((r) => {
-					console.log('========>r', r);
-					// redirect()
 					setIsReg(true)
 				})
 				.catch((e) => {

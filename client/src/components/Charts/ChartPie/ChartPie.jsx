@@ -3,8 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import {
 	Chart,
 	PieSeries,
-	Legend,
-	Title,
+	Legend
 } from '@devexpress/dx-react-chart-material-ui';
 import {Animation} from '@devexpress/dx-react-chart';
 
@@ -12,7 +11,6 @@ import './ChartPie.scss';
 
 
 const ChartLine = ({getProd}) => {
-	// const getSellProd = JSON.parse(localStorage.getItem('sellProducts'))
 	const getChartPieData = getProd.map((prod) => {
 		return {
 			productName: prod.productName,

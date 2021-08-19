@@ -4,7 +4,7 @@ import {Button, Modal} from "react-bootstrap";
 
 import './MyCreateModal.scss';
 import {errorClass, validateField} from "../../services/valid";
-import {createProduct, getAllSales, registration} from "../../services/ajaxUser";
+import {createProduct} from "../../services/ajaxUser";
 
 const MyCreateModal = (
 	{

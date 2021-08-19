@@ -25,15 +25,5 @@ export const routes = [
 		path: '/personal',
 		exact: true,
 		component: Personal,
-	},
-	{
-		path: '/login',
-		exact: true,
-		component: Login,
-	},
-	{
-		path: '/reg',
-		exact: true,
-		component: Register,
 	}
 ]

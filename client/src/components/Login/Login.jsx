@@ -47,42 +47,6 @@ const Login = ({createToken, isToken}) => {
 
 	const handleLoginClick = (e) => {
 		getApiCall(loginForm)
-		// let isEmail = false;
-		// let isPassword = false;
-		// let userId;
-		//
-		// for (let i = 0; i < getUsers.length; i++) {
-		// 	for (let key in getUsers[i]) {
-		// 		if (key === 'email') {
-		// 			if (getUsers[i][key] === loginForm.email) {
-		// 				isEmail = true;
-		// 				userId = getUsers[i]['id'];
-		// 			}
-		// 		}
-		//
-		// 		if (key === 'password') {
-		// 			if (getUsers[i][key] === loginForm.password) {
-		// 				isPassword = true;
-		// 			}
-		// 		}
-		// 	}
-		// }
-		//
-		// if (isPassword && isEmail) {
-		// 	let values = Object.values((isValid));
-		// 	if (values.includes(false) || values.includes('')) {
-		// 		setFormIsValid(false)
-		// 	} else {
-		// 		setFormIsValid(true)
-		// 		setIsLogin(true);
-		// 		localStorage.setItem('isLogin', JSON.stringify(true));
-		// 		changeIsLoin(true);
-		// 		changeUserId(userId);
-		// 		localStorage.setItem('userId', JSON.stringify(userId));
-		// 	}
-		// } else {
-		// 	setFormIsValid(false)
-		// }
 	}
 
 	return (

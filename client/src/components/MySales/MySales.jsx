@@ -15,7 +15,7 @@ import Sidebar from "../Sidebar";
 import {getAllSales, getOneUser} from "../../services/ajaxUser";
 
 
-const MySales = ({changeIsReg, removeToken}) => {
+const MySales = ({removeToken}) => {
 	const [modalCreateShow, setModalCreateShow] = useState(false);
 	const [getUser, setGetUser] = useState({})
 	const [getProd, setGetProd] = useState([])
@@ -52,7 +52,7 @@ const MySales = ({changeIsReg, removeToken}) => {
 	return (
 		<div className="page">
 			<div className="sidebar">
-				<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
+				<Sidebar removeToken={removeToken}/>
 			</div>
 			<div className="main">
 				<div className="wrap">
@@ -63,7 +63,7 @@ const MySales = ({changeIsReg, removeToken}) => {
 								<Offcanvas.Header closeButton>
 								</Offcanvas.Header>
 								<Offcanvas.Body>
-									<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
+									<Sidebar removeToken={removeToken}/>
 								</Offcanvas.Body>
 							</Offcanvas>
 						</div>

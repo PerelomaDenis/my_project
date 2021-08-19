@@ -8,17 +8,7 @@ import './Sidebar.scss';
 import {links} from "../../services/mock";
 
 
-const Sidebar = ({changeIsReg, removeToken}) => {
-	// const [isLogin, setIsLogin] = useState(JSON.parse(localStorage.getItem('isLogin')) || false)
-	// const [isReg, setIsReg] = useState(JSON.parse(localStorage.getItem('isReg')) || false)
-	// const changeIsLoin = (value) => {
-	// 	setIsLogin(value)
-	// }
-	//
-	// const changeIsReg = (value) => {
-	// 	setIsReg(value)
-	// }
-
+const Sidebar = ({ removeToken}) => {
 	return (
 		<div className="sidebar__content">
 			<Logo />
@@ -32,7 +22,7 @@ const Sidebar = ({changeIsReg, removeToken}) => {
 				</li>
 				<li>
 					<hr/>
-					<Logout changeIsReg={changeIsReg} removeToken={removeToken}/>
+					<Logout removeToken={removeToken}/>
 				</li>
 			</ul>
 

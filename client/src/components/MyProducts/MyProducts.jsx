@@ -29,7 +29,7 @@ export const getCurrentDate = (date) => {
 	return `${day}.${month}.${year}`
 }
 
-const MyProducts = ({changeIsReg, removeToken}) => {
+const MyProducts = ({removeToken}) => {
 	const [getProd, setGetProd] = useState([])
 	const [modalCreateShow, setModalCreateShow] = useState(false);
 	const [modalShow, setModalShow] = useState(false);
@@ -71,7 +71,7 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 	return (
 		<div className="page">
 			<div className="sidebar">
-				<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
+				<Sidebar removeToken={removeToken}/>
 			</div>
 			<div className="main">
 				<div className="wrap">
@@ -82,7 +82,7 @@ const MyProducts = ({changeIsReg, removeToken}) => {
 								<Offcanvas.Header closeButton>
 								</Offcanvas.Header>
 								<Offcanvas.Body>
-									<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
+									<Sidebar removeToken={removeToken}/>
 								</Offcanvas.Body>
 							</Offcanvas>
 						</div>

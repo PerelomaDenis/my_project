@@ -17,7 +17,7 @@ import Sidebar from "../Sidebar";
 import {getAllSales} from "../../services/ajaxUser";
 
 
-const MainPage = ({changeIsReg, removeToken, getUser, setGetUser}) => {
+const MainPage = ({removeToken}) => {
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
 	const [getProd, setGetProd] = useState([])
 	const [show, setShow] = useState(false);
@@ -27,7 +27,6 @@ const MainPage = ({changeIsReg, removeToken, getUser, setGetUser}) => {
 		e.preventDefault();
 		setShow(true);
 	}
-
 
 	const getMySales = useCallback(
 		() => {
@@ -44,7 +43,7 @@ const MainPage = ({changeIsReg, removeToken, getUser, setGetUser}) => {
 	return (
 		<div className="page">
 			<div className="sidebar">
-				<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
+				<Sidebar removeToken={removeToken}/>
 			</div>
 			<div className="main">
 				<div className="wrap">
@@ -55,7 +54,7 @@ const MainPage = ({changeIsReg, removeToken, getUser, setGetUser}) => {
 								<Offcanvas.Header closeButton>
 								</Offcanvas.Header>
 								<Offcanvas.Body>
-									<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
+									<Sidebar removeToken={removeToken}/>
 								</Offcanvas.Body>
 							</Offcanvas>
 						</div>

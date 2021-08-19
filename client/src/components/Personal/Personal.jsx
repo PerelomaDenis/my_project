@@ -13,10 +13,10 @@ import {errorClass, validateField} from "../../services/valid";
 import {ReactSVG} from "react-svg";
 import menu from "../../assets/images/menu.svg";
 import Sidebar from "../Sidebar";
-import {getAll, getOneUser, updateOneUser} from "../../services/ajaxUser";
+import {getOneUser, updateOneUser} from "../../services/ajaxUser";
 
 
-const Personal = ({changeIsReg, removeToken}) => {
+const Personal = ({removeToken}) => {
 	const [isFormValid, setFormIsValid] = useState(true)
 	const [isValid, setIsValid] = useState({
 		emailValid: true,
@@ -79,7 +79,7 @@ const Personal = ({changeIsReg, removeToken}) => {
 	return (
 		<div className="page">
 			<div className="sidebar">
-				<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
+				<Sidebar removeToken={removeToken}/>
 			</div>
 			<div className="main">
 				<div className="wrap">
@@ -90,7 +90,7 @@ const Personal = ({changeIsReg, removeToken}) => {
 								<Offcanvas.Header closeButton>
 								</Offcanvas.Header>
 								<Offcanvas.Body>
-									<Sidebar changeIsReg={changeIsReg} removeToken={removeToken}/>
+									<Sidebar removeToken={removeToken}/>
 								</Offcanvas.Body>
 							</Offcanvas>
 						</div>
@@ -125,24 +125,15 @@ const Personal = ({changeIsReg, removeToken}) => {
 							<div>
 								<Button className="button" variant="primary" onClick={(e) => {
 									e.preventDefault();
-
 									if (personalForm.password === newPassword.oldPassword
 										&& newPassword.oldPassword !== newPassword.newPassword) {
 										personalForm.password = newPassword.newPassword
 									}
-									// const newUsers = getUsers.map((user) => {
-									// 	if (user.email === getUser.email) {
-									// 		user = {...personalForm}
-									// 		return user
-									// 	}
-									// 	return user
-									// })
 									let values = Object.values((isValid));
 									if (values.includes(false) || values.includes('')) {
 										setFormIsValid(false)
 									} else {
 										setFormIsValid(true)
-										// setGetUsers(newUsers)
 										updateOneUser(getUser._id, personalForm)
 										setPersonalForm({...personalForm, oldPassword: '', newPassword: ''})
 									}

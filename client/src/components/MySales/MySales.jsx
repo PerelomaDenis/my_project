@@ -45,8 +45,8 @@ const MySales = ({removeToken}) => {
 
 
 	useEffect(() => {
-		getMySales()
-		getMyUser()
+			getMySales()
+			getMyUser()
 	}, [])
 
 	return (

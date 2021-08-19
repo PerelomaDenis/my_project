@@ -25,7 +25,7 @@ const ChartLine = ({getProd}) => {
 			<Paper>
 				<Chart
 					data={getChartPieData}
-					width="200"
+					width="380"
 					height="200"
 					rotated='true'
 				>

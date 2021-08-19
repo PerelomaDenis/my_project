@@ -1,14 +1,41 @@
-.MuiPaper-elevation1.MuiPaper-root {
-  box-shadow: unset;
-  margin-top: 37px;
-  position: relative;
+.graph-1 {
+  .MuiPaper-elevation1.MuiPaper-root {
+    box-shadow: unset;
+    margin-top: 37px;
+    position: relative;
+    display: flex;
+    justify-content: center;
 
-  .Component-root-1 {
-    padding: 0;
+    .Component-root-1 {
+      padding: 0;
+    }
+
+    .LegendRoot-root-2 {
+      width: 180px;
+    }
   }
+}
 
-  .LegendRoot-root-2 {
-    position: absolute;
-    right: 0;
+@media screen and (max-width: 480px){
+  .graph-1 {
+    #center-container {
+      flex-direction: column !important;
+      align-items: center;
+
+      #center-center {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        width: 200px;
+        height: 200px;
+      }
+    }
+
+    .MuiPaper-elevation1.MuiPaper-root {
+      .Component-root-1 {
+        width: 100% !important;
+        height: auto !important;
+      }
+    }
   }
 }

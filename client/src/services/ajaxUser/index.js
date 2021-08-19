@@ -28,13 +28,12 @@ export const getAll = (data) => {
 	}).then(data => data.data)
 };
 
-export const getAllSales = (data) => {
+export const getAllSales = (token) => {
 	const url = `${urls.SALES}`;
 	return ajaxWrapper({
 		method: 'GET',
 		url,
-		data,
-	}).then(data => data.data)
+	}, token).then(data => data.data)
 };
 
 export const getById = (id) => {

@@ -16,11 +16,10 @@ import {getAll, getAllSales, getOneUser} from "./services/ajaxUser";
 
 const App = () => {
 	const [isToken, setIsToken] = useState(JSON.parse(localStorage.getItem('token')) || '');
-	const [getUser, setGetUser] = useState({})
-	const [getProd, setGetProd] = useState([])
 	const [getSaleProd, setGetSaleProd] = useState([])
 
 	const removeToken = () => {
+		console.log('========>1', 1);
 		setIsToken('')
 		localStorage.setItem('token', JSON.stringify(''));
 	}
@@ -31,18 +30,18 @@ const App = () => {
 	}
 
 	const getMySales = useCallback(
-		() => {
-			getAllSales()
+		(token) => {
+			getAllSales(token)
 				.then(data => {
 					setGetSaleProd(data)
 				})
 		}, [])
 
 	useEffect(() => {
-
-		getMySales()
+		if (isToken) {
+			getMySales(isToken)
+		}
 	}, [isToken])
-
 
 	return (
 		<BrowserRouter>

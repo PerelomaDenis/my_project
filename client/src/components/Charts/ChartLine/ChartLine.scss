@@ -11,4 +11,14 @@
   .Component-root-6 {
     display: none;
   }
+
+  .MuiPaper-elevation1.MuiPaper-root {
+    box-shadow: unset;
+    margin-top: 37px;
+    position: relative;
+
+    .Component-root-1 {
+      padding: 0;
+    }
+  }
 }

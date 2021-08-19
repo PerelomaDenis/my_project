@@ -45,9 +45,6 @@ const Login = ({createToken, isToken}) => {
 			})
 	}, [])
 
-	const handleLoginClick = (e) => {
-		getApiCall(loginForm)
-	}
 
 	return (
 		<div className="wraps">
@@ -76,9 +73,7 @@ const Login = ({createToken, isToken}) => {
 					))}
 					{!isFormValid && (<div className="error__text">Email or password entered wrong</div>)}
 					{loginError && (<div className="error__text">{loginError}</div>)}
-					<Button className="register-form__btn" onClick={() => {
-						handleLoginClick()
-					}}>
+					<Button className="register-form__btn" onClick={() => getApiCall(loginForm)}>
 						<div className="register-form__button">
 							<span className="register-form__btn-text">Log in</span>
 						</div>

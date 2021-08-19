@@ -1,0 +1,24 @@
+.modal-backdrop.show {
+  opacity: .7;
+}
+
+.wrap {
+  hr {
+    margin: 0;
+    border-color: rgba(60, 78, 96, 0.08);
+  }
+
+  .wrap__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+
+  .wrap__content {
+    margin-top: 50px;
+
+
+  }
+}
+

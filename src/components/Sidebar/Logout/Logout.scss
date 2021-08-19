@@ -1,0 +1,35 @@
+.sidebar__links-item {
+  display: flex;
+  align-items: center;
+  padding: 17px 40px;
+
+  .sidebar__links-icon {
+    //width: 20px;
+  }
+
+  .sidebar__links-icon path {
+    stroke: #2B3844;
+  }
+
+  .sidebar__links-text {
+    margin-left: 10px;
+    font-family: Inter-Bold;
+    font-size: 14px;
+    line-height: 14px;
+    color: #2B3844;
+    text-decoration: none;
+  }
+}
+
+.sidebar__links-item:hover {
+  border-right: 2px solid #5382E7;
+
+  .sidebar__links-icon path {
+    stroke: #5382E7;
+  }
+
+  .sidebar__links-text {
+    color: #5382E7;
+  }
+}
+

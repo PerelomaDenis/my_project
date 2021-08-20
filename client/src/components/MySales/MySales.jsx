@@ -29,6 +29,7 @@ const MySales = ({removeToken}) => {
 
 	const getMySales = useCallback(
 		() => {
+
 			getAllSales()
 				.then(data => {
 					setGetProd(data)

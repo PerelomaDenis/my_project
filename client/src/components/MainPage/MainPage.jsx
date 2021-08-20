@@ -17,8 +17,7 @@ import Sidebar from "../Sidebar";
 import {getAllSales} from "../../services/ajaxUser";
 
 
-const MainPage = ({removeToken}) => {
-	const token = JSON.parse(localStorage.getItem('token'))
+const MainPage = ({removeToken, isToken}) => {
 	const [modalCreateShow, setModalCreateShow] = React.useState(false);
 	const [getProd, setGetProd] = useState([])
 	const [show, setShow] = useState(false);
@@ -30,18 +29,18 @@ const MainPage = ({removeToken}) => {
 	}
 
 	const getMySales = useCallback(
-		(token) => {
-			getAllSales(token)
+		(isToken) => {
+			getAllSales(isToken)
 				.then(data => {
 					setGetProd(data)
 				})
 		}, [])
 
 	useEffect(() => {
-		if (token) {
-			getMySales(token)
+		if (isToken) {
+			getMySales(isToken)
 		}
-	}, [token])
+	}, [isToken])
 
 	return (
 		<div className="page">

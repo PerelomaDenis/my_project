@@ -19,7 +19,6 @@ const App = () => {
 	const [getSaleProd, setGetSaleProd] = useState([])
 
 	const removeToken = () => {
-		console.log('========>1', 1);
 		setIsToken('')
 		localStorage.setItem('token', JSON.stringify(''));
 	}
@@ -29,29 +28,15 @@ const App = () => {
 		localStorage.setItem('token', JSON.stringify(response.token));
 	}
 
-	const getMySales = useCallback(
-		(token) => {
-			getAllSales(token)
-				.then(data => {
-					setGetSaleProd(data)
-				})
-		}, [])
-
-	useEffect(() => {
-		if (isToken) {
-			getMySales(isToken)
-		}
-	}, [isToken])
-
 	return (
 		<BrowserRouter>
 			<Route
-				render={() => <Register removeToken={removeToken}/>}
+				render={() => <Register/>}
 				path="/register"
 				exact="true"
 			/>
 			<Route
-				render={() => <Login removeToken={removeToken} createToken={createToken} isToken={isToken}/>}
+				render={() => <Login createToken={createToken} isToken={isToken}/>}
 				path="/login"
 				exact="true"
 			/>
@@ -59,7 +44,7 @@ const App = () => {
 					const Main = route.component;
 					return <Route
 						render={() => isToken
-							? <Main removeToken={removeToken}/>
+							? <Main isToken={isToken} removeToken={removeToken}/>
 							: <Redirect to="/register"/>}
 						path={route.path}
 						exact={route.exact}
